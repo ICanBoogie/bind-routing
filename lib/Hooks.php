@@ -12,9 +12,12 @@
 namespace ICanBoogie\Binding\Routing;
 
 use ICanBoogie\Core;
+use ICanBoogie\HTTP\Dispatcher;
+use ICanBoogie\HTTP\WeightedDispatcher;
 use ICanBoogie\Routing\ControllerNotDefined;
+use ICanBoogie\Routing\Dispatcher as RoutingDispatcher;
 use ICanBoogie\Routing\PatternNotDefined;
-use ICanBoogie\Routing\Routes;
+use ICanBoogie\Routing\RouteCollection;
 
 class Hooks
 {
@@ -69,11 +72,22 @@ class Hooks
 	}
 
 	/**
+	 * Adds the `routing` dispatcher.
+	 *
+	 * @param Dispatcher\AlterEvent $event
+	 * @param Dispatcher $target
+	 */
+	static public function alter_dispatcher(Dispatcher\AlterEvent $event, Dispatcher $target)
+	{
+		$target['routing'] = new WeightedDispatcher(RoutingDispatcher::class, WeightedDispatcher::WEIGHT_TOP);
+	}
+
+	/**
 	 * Returns the route collection.
 	 *
 	 * @param Core $app
 	 *
-	 * @return Routes
+	 * @return RouteCollection
 	 */
 	static public function get_routes(Core $app)
 	{
@@ -81,7 +95,7 @@ class Hooks
 
 		if (!$routes)
 		{
-			$routes = new Routes((array) $app->configs['routes']);
+			$routes = new RouteCollection($app->configs['routes'] ?: []);
 		}
 
 		return $routes;

@@ -15,9 +15,15 @@ $hooks = __NAMESPACE__ . '\Hooks::';
 
 return [
 
+	'events' => [
+
+		'ICanBoogie\HTTP\Dispatcher::alter' => $hooks . 'alter_dispatcher'
+
+	],
+
 	'prototypes' => [
 
-		'ICanBoogie\Core::get_routes' => $hooks . 'get_routes'
+		'ICanBoogie\Core::lazy_get_routes' => $hooks . 'get_routes'
 
 	]
 

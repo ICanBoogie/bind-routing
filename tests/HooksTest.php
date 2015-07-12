@@ -11,6 +11,9 @@
 
 namespace ICanBoogie\Binding\Routing;
 
+use ICanBoogie\HTTP\Dispatcher;
+use ICanBoogie\Routing\RouteCollection;
+
 class HooksTest extends \PHPUnit_Framework_TestCase
 {
 	/**
@@ -69,11 +72,35 @@ class HooksTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($fragment, $config);
 	}
 
+	public function test_alter_dispatcher()
+	{
+		$event = $this
+			->getMockBuilder(Dispatcher\AlterEvent::class)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$dispatcher = $this
+			->getMockBuilder(Dispatcher::class)
+			->disableOriginalConstructor()
+			->setMethods([ 'offsetSet' ])
+			->getMock();
+		$dispatcher
+			->expects($this->once())
+			->method('offsetSet')
+			->with('routing');
+
+		/* @var $event Dispatcher\AlterEvent */
+		/* @var $dispatcher Dispatcher */
+
+		Hooks::alter_dispatcher($event, $dispatcher);
+	}
+
 	public function test_get_routes()
 	{
+		/* @var $app Application */
 		$app = \ICanBoogie\app();
 		$routes = Hooks::get_routes($app);
-		$this->assertInstanceOf('ICanBoogie\Routing\Routes', $routes);
+		$this->assertInstanceOf(RouteCollection::class, $routes);
 		$this->assertSame($routes, Hooks::get_routes($app));
 		$this->assertSame($routes, $app->routes);
 	}

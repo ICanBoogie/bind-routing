@@ -1,0 +1,32 @@
+<?php
+
+/*
+ * This file is part of the ICanBoogie package.
+ *
+ * (c) Olivier Laviale <olivier.laviale@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace ICanBoogie\Binding\Routing;
+
+use ICanBoogie\Routing\RouteCollection;
+
+class CoreBindingsTest extends \PHPUnit_Framework_TestCase
+{
+	/**
+	 * @var Application
+	 */
+	static private $app;
+
+	static public function setupBeforeClass()
+	{
+		self::$app = \ICanBoogie\app();
+	}
+
+	public function test_get_routes()
+	{
+		$this->assertInstanceOf(RouteCollection::class, self::$app->routes);
+	}
+}

@@ -1,7 +1,7 @@
 {
 	"name": "icanboogie/bind-routing",
 	"type": "library",
-	"description": "Binds Routing to ICanBoogie.",
+	"description": "Binds icanboogie/routing to ICanBoogie.",
 	"keywords": [ "routing", "icanboogie" ],
 	"homepage": "http://icanboogie.org/",
 	"license": "BSD-3-Clause",
@@ -19,9 +19,10 @@
 	},
 
 	"require": {
-		"php": ">=5.4.0",
-		"icanboogie/icanboogie": ">=2.3.0",
-		"icanboogie/routing": ">=2.3.0"
+		"php": ">=5.5.0",
+		"icanboogie/icanboogie": "2.4.x-dev",
+		"icanboogie/http": "2.5.x-dev",
+		"icanboogie/routing": "2.5.x-dev"
 	},
 
 	"autoload": {

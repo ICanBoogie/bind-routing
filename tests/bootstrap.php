@@ -9,8 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace ICanBoogie;
+namespace ICanBoogie\Binding\Routing;
 
-require __DIR__ . '/../vendor/autoload.php';
+use ICanBoogie\Core;
 
-(new Core(get_autoconfig()))->boot();
+$loader = require __DIR__ . '/../vendor/autoload.php';
+$loader->addPsr4('ICanBoogie\\Binding\\Routing\\ControllerTest\\', __DIR__ . '/ControllerTest');
+
+class Application extends Core
+{
+	use CoreBindings;
+}
+
+(new Application(\ICanBoogie\get_autoconfig()))->boot();

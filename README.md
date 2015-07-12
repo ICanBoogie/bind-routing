@@ -17,7 +17,7 @@ namespace ICanBoogie;
 $app = boot();
 
 $routes_configuration = $app->configs['routes'];
-echo get_class($app->routes); // ICanBoogie\Routes
+echo get_class($app->routes); // ICanBoogie\RouteCollection
 ```
 
 
@@ -28,69 +28,35 @@ echo get_class($app->routes); // ICanBoogie\Routes
 
 The most efficient way to define routes is through `routes` configuration fragments, because it doesn't require application logic (additional code) and the synthesized configuration can be cached.
 
+The following example demonstrates how to define routes, resource routes. The pattern of the `articles:show` route is overridden to use _year_, _month_ and _slug_.
+
 ```php
 <?php
 
 // config/routes.php
 
-use ICanBoogie\HTTP\Request;
+namespace App;
+
+use ICanBoogie\Routing\RoutesMaker as Make;
 
 return [
 
 	'home' => [
 
 		'pattern' => '/',
-		'controller' => 'App\PagesController#index'
-
-	],
-
-	'articles' => [
-
-		'pattern' => '/articles',
-		'controller' => 'App\ArticlesController#list'
-
-	],
-
-	'articles:show' => [
-
-		'pattern' => '/articles/:year-:month-:slug.html',
-		'controller' => 'App\ArticlesController#show'
-
-	],
-
-	'articles:new' => [
-
-		'pattern' => '/articles/new',
-		'controller' => 'App\ArticlesController#new',
-		'via' => Request::METHOD_GET
-
-	],
-
-	'articles:create' => [
-
-		'pattern' => '/articles',
-		'controller' => 'App\ArticlesController#create',
-		'via' => [ Request::METHOD_POST, Request::METHOD_PUT ]
-
-	],
-	
-	'articles:update' => [
-
-		'pattern' => '/articles',
-		'controller' => 'App\ArticlesController#update',
-		'via' => [ Request::METHOD_POST, Request::METHOD_PATCH ]
-
-	],
-
-	'articles:delete' => [
-
-		'pattern' => '/articles/<nid:\d+>',
-		'controller' => 'App\ArticlesController#delete',
-		'via' => Request::METHOD_DELETE
+		'controller' => PagesController::class . '#index'
 
 	]
+	
+] + \ICanBoogie\array_merge_recursive(Make::resource('articles', ArticlesController::class), [
 
-];
+	'articles:show' => [
+	
+		'pattern' => '/articles/:year-:month-:slug.html'
+	
+	]
+
+]);
 ```
 
 The following code demonstrates how the synthesized `routes` configuration can be obtained:
@@ -149,7 +115,7 @@ The `routing.synthesize_routes` event of class [SynthesizeRoutesEvent][] is fire
 
 ## Requirements
 
-The package requires PHP 5.4 or later.
+The package requires PHP 5.5 or later.
 
 
 
