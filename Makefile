@@ -1,7 +1,7 @@
 # customization
 
 PACKAGE_NAME = icanboogie/bind-routing
-PACKAGE_VERSION = 0.2.0
+PACKAGE_VERSION = 0.2.x-dev
 
 # do not edit the following lines
 
@@ -9,10 +9,10 @@ usage:
 	@echo "test:  Runs the test suite.\ndoc:   Creates the documentation.\nclean: Removes the documentation, the dependencies and the Composer files."
 
 vendor:
-	@composer install
+	@COMPOSER_ROOT_VERSION=$(PACKAGE_VERSION) composer install
 
 update:
-	@composer update
+	@COMPOSER_ROOT_VERSION=$(PACKAGE_VERSION) composer update
 
 autoload: vendor
 	@composer dump-autoload

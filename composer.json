@@ -18,10 +18,11 @@
 		"source": "https://github.com/ICanBoogie/bind-routing"
 	},
 
+	"minimum-stability": "dev",
+
 	"require": {
 		"php": ">=5.5.0",
 		"icanboogie/icanboogie": "2.4.x-dev",
-		"icanboogie/http": "2.5.x-dev",
 		"icanboogie/routing": "2.5.x-dev"
 	},
 

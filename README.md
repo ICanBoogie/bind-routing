@@ -7,7 +7,9 @@
 [![Code Coverage](https://img.shields.io/coveralls/ICanBoogie/bind-routing/master.svg)](https://coveralls.io/r/ICanBoogie/bind-routing)
 [![Packagist](https://img.shields.io/packagist/dt/icanboogie/bind-routing.svg)](https://packagist.org/packages/icanboogie/bind-routing)
 
-The **icanboogie/bind-routing** package binds [icanboogie/routing][] to [ICanBoogie][], using its autoconfig feature. It adds the getter `routes` to the [Core][] instance and a synthesizer for the `routes` configuration fragments.
+The **icanboogie/bind-routing** package binds [icanboogie/routing][] to [ICanBoogie][], using
+its autoconfig feature. It adds the getter `routes` to the [Core][] instance and a synthesizer
+for the `routes` configuration fragments.
 
 ```php
 <?php
@@ -26,9 +28,12 @@ echo get_class($app->routes); // ICanBoogie\RouteCollection
 
 ## Defining routes using configuration fragments
 
-The most efficient way to define routes is through `routes` configuration fragments, because it doesn't require application logic (additional code) and the synthesized configuration can be cached.
+The most efficient way to define routes is through `routes` configuration fragments, because it
+doesn't require application logic (additional code) and the synthesized configuration can be
+cached.
 
-The following example demonstrates how to define routes, resource routes. The pattern of the `articles:show` route is overridden to use _year_, _month_ and _slug_.
+The following example demonstrates how to define routes, resource routes. The pattern of the
+`articles:show` route is overridden to use _year_, _month_ and _slug_.
 
 ```php
 <?php
@@ -73,9 +78,12 @@ $routes_config = $app->configs['routes'];
 
 ### Before the configuration is synthesized
 
-The `routing.synthesize_routes:before` event of class [BeforeSynthesizeRoutesEvent][] is fired before the configuration is synthesized. Event hooks may use this event to alter the configuration fragments before they are synthesized.
+The `routing.synthesize_routes:before` event of class [BeforeSynthesizeRoutesEvent][] is fired
+before the configuration is synthesized. Event hooks may use this event to alter the configuration
+fragments before they are synthesized.
 
-The following example demonstrates how the `routing.synthesize_routes:before` event can be used to alter the patterns of the route definitions before they synthesized:
+The following example demonstrates how the `routing.synthesize_routes:before` event can be used
+to alter the patterns of the route definitions before they synthesized:
 
 ```php
 <?php
@@ -101,7 +109,9 @@ $app->events->attach('routing.synthesize_routes:before', function(BeforeSynthesi
 
 ### The configuration is synthesized
 
-The `routing.synthesize_routes` event of class [SynthesizeRoutesEvent][] is fired when the configuration is synthesized. Event hooks may use this event to alter the synthesized configuration before it is returned by the synthesizer.
+The `routing.synthesize_routes` event of class [SynthesizeRoutesEvent][] is fired when the
+configuration is synthesized. Event hooks may use this event to alter the synthesized configuration
+before it is returned by the synthesizer.
 
 
 
@@ -129,7 +139,8 @@ The recommended way to install this package is through [Composer](http://getcomp
 $ composer require icanboogie/bind-routing
 ```
 
-The package only specifies a minimum version while requiring [icanboogie/icanboogie][] and [icanboogie/routing], you might want to specify which version to use in your "composer.json" file.
+The package only specifies a minimum version while requiring [icanboogie/icanboogie][] and
+[icanboogie/routing], you might want to specify which version to use in your "composer.json" file.
 
 
 
@@ -137,7 +148,8 @@ The package only specifies a minimum version while requiring [icanboogie/icanboo
 
 ### Cloning the repository
 
-The package is [available on GitHub](https://github.com/ICanBoogie/bind-routing), its repository can be cloned with the following command line:
+The package is [available on GitHub](https://github.com/ICanBoogie/bind-routing), its repository
+can be cloned with the following command line:
 
 	$ git clone https://github.com/ICanBoogie/bind-routing.git
 
@@ -148,7 +160,10 @@ The package is [available on GitHub](https://github.com/ICanBoogie/bind-routing)
 ## Documentation
 
 The package is documented as part of the [ICanBoogie][] framework
-[documentation](http://icanboogie.org/docs/). You can generate the documentation for the package and its dependencies with the `make doc` command. The documentation is generated in the `build/docs` directory. [ApiGen](http://apigen.org/) is required. The directory can later be cleaned with the `make clean` command.
+[documentation](http://icanboogie.org/docs/). You can generate the documentation for the package
+and its dependencies with the `make doc` command. The documentation is generated in the
+`build/docs` directory. [ApiGen](http://apigen.org/) is required. The directory can later be
+cleaned with the `make clean` command.
 
 
 
@@ -156,7 +171,11 @@ The package is documented as part of the [ICanBoogie][] framework
 
 ## Testing
 
-The test suite is ran with the `make test` command. [PHPUnit](https://phpunit.de/) and [Composer](http://getcomposer.org/) need to be globally available to run the suite. The command installs dependencies as required. The `make test-coverage` command runs test suite and also creates an HTML coverage report in "build/coverage". The directory can later be cleaned with the `make clean` command.
+The test suite is ran with the `make test` command. [PHPUnit](https://phpunit.de/) and
+[Composer](http://getcomposer.org/) need to be globally available to run the suite. The command
+installs dependencies as required. The `make test-coverage` command runs test suite and also
+creates an HTML coverage report in "build/coverage". The directory can later be cleaned with
+the `make clean` command.
 
 The package is continuously tested by [Travis CI](http://about.travis-ci.org/).
 

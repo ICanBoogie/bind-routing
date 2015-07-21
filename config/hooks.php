@@ -17,7 +17,7 @@ return [
 
 	'events' => [
 
-		'ICanBoogie\HTTP\Dispatcher::alter' => $hooks . 'alter_dispatcher'
+		'ICanBoogie\HTTP\RequestDispatcher::alter' => $hooks . 'alter_dispatcher'
 
 	],
 
