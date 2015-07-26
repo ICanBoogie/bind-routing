@@ -42,7 +42,7 @@ The following example demonstrates how to define routes, resource routes. The pa
 
 namespace App;
 
-use ICanBoogie\Routing\RoutesMaker as Make;
+use ICanBoogie\Routing\RouteMaker as Make;
 
 return [
 
