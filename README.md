@@ -72,6 +72,8 @@ The following code demonstrates how the synthesized `routes` configuration can b
 $routes_config = $app->configs['routes'];
 ```
 
+**Note:** To make it easy for you to find where routes are defined, the pathname to the configuration fragment is set as `__ORIGIN__` in the route definition.
+
 
 
 

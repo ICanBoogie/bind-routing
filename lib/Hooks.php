@@ -62,7 +62,7 @@ class Hooks
 					]));
 				}
 
-				$routes[$id] = $route;
+				$routes[$id] = [ '__ORIGIN__' => $pathname ] + $route;
 			}
 		}
 

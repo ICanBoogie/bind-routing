@@ -68,9 +68,15 @@ class HooksTest extends \PHPUnit_Framework_TestCase
 
 		];
 
-		$config = Hooks::synthesize_routes_config([ $fragment ]);
+		$config = Hooks::synthesize_routes_config([ __FILE__ => $fragment ]);
 
-		$this->assertEquals($fragment, $config);
+		$this->assertEquals([ 'one' => [
+
+			'__ORIGIN__' => __FILE__,
+			'pattern' => '/',
+			'location' => '/en/',
+
+		] ], $config);
 	}
 
 	public function test_alter_dispatcher()
