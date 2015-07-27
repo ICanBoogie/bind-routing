@@ -20,13 +20,5 @@ use ICanBoogie\Routing\RouteCollection;
  */
 trait CoreBindings
 {
-	/**
-	 * @return RouteCollection
-	 *
-	 * @see Hooks::get_routes
-	 */
-	protected function lazy_get_routes()
-	{
-		return parent::lazy_get_routes();
-	}
+
 }
