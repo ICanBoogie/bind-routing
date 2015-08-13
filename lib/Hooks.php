@@ -15,12 +15,17 @@ use ICanBoogie\Core;
 use ICanBoogie\HTTP\RequestDispatcher;
 use ICanBoogie\HTTP\WeightedDispatcher;
 use ICanBoogie\Routing\ControllerNotDefined;
+use ICanBoogie\Routing\Route;
 use ICanBoogie\Routing\RouteDispatcher;
 use ICanBoogie\Routing\PatternNotDefined;
 use ICanBoogie\Routing\RouteCollection;
 
 class Hooks
 {
+	/*
+	 * Events
+	 */
+
 	/**
 	 * Synthesize the `routes` config from `routes` fragments.
 	 *
@@ -84,10 +89,14 @@ class Hooks
 		$target['routing'] = new WeightedDispatcher($dispatcher, WeightedDispatcher::WEIGHT_TOP);
 	}
 
+	/*
+	 * Prototypes
+	 */
+
 	/**
 	 * Returns the route collection.
 	 *
-	 * @param Core $app
+	 * @param Core|CoreBindings $app
 	 *
 	 * @return RouteCollection
 	 */
@@ -102,6 +111,31 @@ class Hooks
 
 		return $routes;
 	}
+
+	/**
+	 * Returns the contextualized URL of a route.
+	 *
+	 * @param Core|CoreBindings $app
+	 * @param string|Route $route
+	 * @param array|object|null $values
+	 *
+	 * @return string
+	 */
+	static public function url_for(Core $app, $route, $values = null)
+	{
+		if (!$route instanceof Route)
+		{
+			$route = $app->routes[$route];
+		}
+
+		$url = $route->format($values);
+
+		return \ICanBoogie\Routing\contextualize($url);
+	}
+
+	/*
+	 * Support
+	 */
 
 	/**
 	 * @return Core|CoreBindings

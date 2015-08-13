@@ -16,7 +16,12 @@ use ICanBoogie\Routing\RouteCollection;
 /**
  * {@link \ICanBoogie\Core} bindings.
  *
+ * @method string url_for($route_or_route_id, $values = null) Returns the contextualized URL of a route.
+ *
  * @property RouteCollection $routes
+ *
+ * @see \ICanBoogie\Binding\Routing\Hooks::url_for()
+ * @see \ICanBoogie\Binding\Routing\Hooks::get_routes()
  */
 trait CoreBindings
 {

@@ -8,7 +8,7 @@
 [![Packagist](https://img.shields.io/packagist/dt/icanboogie/bind-routing.svg)](https://packagist.org/packages/icanboogie/bind-routing)
 
 The **icanboogie/bind-routing** package binds [icanboogie/routing][] to [ICanBoogie][], using
-its autoconfig feature. It adds the getter `routes` to the [Core][] instance and a synthesizer
+its autoconfig feature. It adds the getter `routes` to the [Core][] instance, a `url_for()` method that creates URLs, and a synthesizer
 for the `routes` configuration fragments.
 
 ```php
@@ -16,10 +16,21 @@ for the `routes` configuration fragments.
 
 namespace ICanBoogie;
 
+use ICanBoogie\Routing\RouteDispatcher;
+
 $app = boot();
 
-$routes_configuration = $app->configs['routes'];
-echo get_class($app->routes); // ICanBoogie\RouteCollection
+$config = $app->configs['routes'];
+
+$app->routes->get('/hello', function(Request $request) {
+
+	return "Hello {$request['name']}!";
+
+}, [ 'as' => 'hello' ]);
+
+// …
+
+echo $app->url_for("articles:show", $app->models['articles']->one);
 ```
 
 
@@ -162,7 +173,7 @@ can be cloned with the following command line:
 ## Documentation
 
 The package is documented as part of the [ICanBoogie][] framework
-[documentation](http://icanboogie.org/docs/). You can generate the documentation for the package
+[documentation][]. You can generate the documentation for the package
 and its dependencies with the `make doc` command. The documentation is generated in the
 `build/docs` directory. [ApiGen](http://apigen.org/) is required. The directory can later be
 cleaned with the `make clean` command.
@@ -196,9 +207,10 @@ The package is continuously tested by [Travis CI](http://about.travis-ci.org/).
 
 
 
-[icanboogie/icanboogie]: https://github.com/ICanBoogie/ICanBoogie
-[icanboogie/routing]: https://github.com/ICanBoogie/Routing
-[ICanBoogie]: https://github.com/ICanBoogie/ICanBoogie
-[Core]: http://icanboogie.org/docs/class-ICanBoogie.Core.html
-[BeforeSynthesizeRoutesEvent]: http://icanboogie.org/docs/class-ICanBoogie.Binding.Routing.BeforeSynthesizeRoutesEvent.html
-[SynthesizeRoutesEvent]: http://icanboogie.org/docs/class-ICanBoogie.Binding.Routing.SynthesizeRoutesEvent.html
+[icanboogie/icanboogie]:       https://github.com/ICanBoogie/ICanBoogie
+[icanboogie/routing]:          https://github.com/ICanBoogie/Routing
+[ICanBoogie]:                  https://github.com/ICanBoogie/ICanBoogie
+[Core]:                        http://api.icanboogie.org/icanboogie/2.4/class-ICanBoogie.Core.html
+[documentation]:               http://api.icanboogie.org/bind-routing/0.2/
+[BeforeSynthesizeRoutesEvent]: http://api.icanboogie.org/bind-routing/0.2/class-ICanBoogie.Binding.Routing.BeforeSynthesizeRoutesEvent.html
+[SynthesizeRoutesEvent]:       http://api.icanboogie.org/bind-routing/0.2/class-ICanBoogie.Binding.Routing.SynthesizeRoutesEvent.html

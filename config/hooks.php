@@ -11,7 +11,7 @@
 
 namespace ICanBoogie\Binding\Routing;
 
-$hooks = __NAMESPACE__ . '\Hooks::';
+$hooks = Hooks::class . '::';
 
 return [
 
@@ -23,7 +23,8 @@ return [
 
 	'prototypes' => [
 
-		'ICanBoogie\Core::lazy_get_routes' => $hooks . 'get_routes'
+		'ICanBoogie\Core::lazy_get_routes' => $hooks . 'get_routes',
+		'ICanBoogie\Core::url_for' => $hooks . 'url_for'
 
 	]
 
