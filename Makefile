@@ -1,7 +1,7 @@
 # customization
 
 PACKAGE_NAME = icanboogie/bind-routing
-PACKAGE_VERSION = 0.2.x-dev
+PACKAGE_VERSION = 1.0.0
 
 # do not edit the following lines
 
