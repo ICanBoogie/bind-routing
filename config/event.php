@@ -11,14 +11,12 @@
 
 namespace ICanBoogie\Binding\Routing;
 
+use ICanBoogie;
+
 $hooks = Hooks::class . '::';
 
 return [
 
-	'events' => [
-
-		'ICanBoogie\HTTP\RequestDispatcher::alter' => $hooks . 'alter_dispatcher'
-
-	]
+	ICanBoogie\HTTP\RequestDispatcher::class . '::alter' => $hooks . 'alter_dispatcher'
 
 ];
