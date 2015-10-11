@@ -23,7 +23,7 @@
 	"require": {
 		"php": ">=5.5.0",
 		"icanboogie/icanboogie": "^3.0.0",
-		"icanboogie/routing": "^2.5.0"
+		"icanboogie/routing": "^2.5.0|^3.0.0"
 	},
 
 	"autoload": {
