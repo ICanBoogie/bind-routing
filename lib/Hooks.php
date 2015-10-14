@@ -16,6 +16,7 @@ use ICanBoogie\HTTP\RequestDispatcher;
 use ICanBoogie\HTTP\WeightedDispatcher;
 use ICanBoogie\Routing\ControllerNotDefined;
 use ICanBoogie\Routing\Route;
+use ICanBoogie\Routing\RouteDefinition;
 use ICanBoogie\Routing\RouteDispatcher;
 use ICanBoogie\Routing\PatternNotDefined;
 use ICanBoogie\Routing\RouteCollection;
@@ -45,29 +46,12 @@ class Hooks
 
 		foreach ($fragments as $pathname => $fragment)
 		{
-			foreach ($fragment as $id => $route)
+			foreach ($fragment as $id => $definition)
 			{
-				if (empty($route['pattern']))
-				{
-					throw new PatternNotDefined(\ICanBoogie\format("Pattern is not defined for route %id in %pathname.", [
+				RouteDefinition::assert_is_valid($definition);
+				RouteDefinition::normalize($definition);
 
-						'id' => $id,
-						'pathname' => $pathname
-
-					]));
-				}
-
-				if (empty($route['controller']) && empty($route['location']))
-				{
-					throw new ControllerNotDefined(\ICanBoogie\format("Controller is not defined for route %id in %pathname.", [
-
-						'id' => $id,
-						'pathname' => $pathname
-
-					]));
-				}
-
-				$routes[$id] = [ '__ORIGIN__' => $pathname ] + $route;
+				$routes[$id] = [ '__ORIGIN__' => $pathname ] + $definition;
 			}
 		}
 
@@ -104,12 +88,8 @@ class Hooks
 	{
 		static $routes;
 
-		if (!$routes)
-		{
-			$routes = new RouteCollection($app->configs['routes'] ?: []);
-		}
-
-		return $routes;
+		return $routes
+			?: $routes = new RouteCollection($app->configs['routes'] ?: [], RouteCollection::TRUSTED_DEFINITIONS);
 	}
 
 	/**

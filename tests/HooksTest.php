@@ -11,8 +11,10 @@
 
 namespace ICanBoogie\Binding\Routing;
 
+use ICanBoogie\HTTP\Request;
 use ICanBoogie\HTTP\RequestDispatcher;
 use ICanBoogie\Routing\RouteCollection;
+use ICanBoogie\Routing\RouteDefinition;
 use ICanBoogie\Routing\RouteDispatcher;
 
 class HooksTest extends \PHPUnit_Framework_TestCase
@@ -27,7 +29,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase
 			[
 				'one' => [
 
-					'controller' => function() {}
+					RouteDefinition::CONTROLLER => function() {}
 
 				]
 
@@ -46,7 +48,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase
 			[
 				'one' => [
 
-					'pattern' => '/'
+					RouteDefinition::PATTERN => '/'
 
 				]
 
@@ -61,8 +63,8 @@ class HooksTest extends \PHPUnit_Framework_TestCase
 
 			'one' => [
 
-				'pattern' => '/',
-				'location' => '/en/'
+				RouteDefinition::PATTERN => '/',
+				RouteDefinition::LOCATION => '/en/'
 
 			]
 
@@ -73,8 +75,9 @@ class HooksTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals([ 'one' => [
 
 			'__ORIGIN__' => __FILE__,
-			'pattern' => '/',
-			'location' => '/en/',
+			RouteDefinition::PATTERN => '/',
+			RouteDefinition::LOCATION => '/en/',
+			RouteDefinition::VIA => Request::METHOD_ANY
 
 		] ], $config);
 	}
