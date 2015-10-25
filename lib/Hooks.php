@@ -15,6 +15,7 @@ use ICanBoogie\Core;
 use ICanBoogie\HTTP\RequestDispatcher;
 use ICanBoogie\HTTP\WeightedDispatcher;
 use ICanBoogie\Routing\ControllerNotDefined;
+use ICanBoogie\Routing\Pattern;
 use ICanBoogie\Routing\Route;
 use ICanBoogie\Routing\RouteDefinition;
 use ICanBoogie\Routing\RouteDispatcher;
@@ -51,7 +52,12 @@ class Hooks
 				RouteDefinition::assert_is_valid($definition);
 				RouteDefinition::normalize($definition);
 
-				$routes[$id] = [ '__ORIGIN__' => $pathname ] + $definition;
+				$routes[$id] = $definition + [
+
+					'__ORIGIN__' => $pathname,
+					'__PARSED_PATTERN__' => Pattern::parse($definition[RouteDefinition::PATTERN])
+
+				];
 			}
 		}
 
@@ -89,7 +95,7 @@ class Hooks
 		static $routes;
 
 		return $routes
-			?: $routes = new RouteCollection($app->configs['routes'] ?: [], RouteCollection::TRUSTED_DEFINITIONS);
+			?: $routes = new RouteCollection(self::get_routes_config($app) ?: [], RouteCollection::TRUSTED_DEFINITIONS);
 	}
 
 	/**
@@ -123,5 +129,14 @@ class Hooks
 	static private function app()
 	{
 		return \ICanBoogie\app();
+	}
+
+	static private function get_routes_config(Core $app)
+	{
+		$routes = $app->configs['routes'];
+
+		WarmPatterns::warm_from_config($routes);
+
+		return $routes;
 	}
 }
