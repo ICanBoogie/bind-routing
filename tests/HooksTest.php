@@ -20,6 +20,16 @@ use ICanBoogie\Routing\RouteDispatcher;
 class HooksTest extends \PHPUnit_Framework_TestCase
 {
 	/**
+	 * @var \ICanBoogie\Core|CoreBindings
+	 */
+	static private $app;
+
+	static public function setUpBeforeClass()
+	{
+		self::$app = \ICanBoogie\app();
+	}
+
+	/**
 	 * @expectedException \ICanBoogie\Routing\PatternNotDefined
 	 */
 	public function test_should_throw_exception_on_empty_pattern()
@@ -114,11 +124,27 @@ class HooksTest extends \PHPUnit_Framework_TestCase
 
 	public function test_get_routes()
 	{
-		/* @var $app Application */
-		$app = \ICanBoogie\app();
+		$app = self::$app;
 		$routes = Hooks::get_routes($app);
 		$this->assertInstanceOf(RouteCollection::class, $routes);
 		$this->assertSame($routes, Hooks::get_routes($app));
 		$this->assertSame($routes, $app->routes);
+	}
+
+	public function test_url_for()
+	{
+		$route_id = 'test:route:' . uniqid();
+		$pattern = '/pattern/' . uniqid();
+
+		$app = self::$app;
+		$app->routes[$route_id] = [
+
+			RouteDefinition::PATTERN => $pattern,
+			RouteDefinition::CONTROLLER => function() {},
+
+		];
+
+		$this->assertEquals($pattern, Hooks::url_for($app, $route_id));
+		$this->assertEquals($pattern, Hooks::url_for($app, $app->routes[$route_id]));
 	}
 }
