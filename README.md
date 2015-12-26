@@ -211,6 +211,6 @@ The package is continuously tested by [Travis CI](http://about.travis-ci.org/).
 [icanboogie/routing]:          https://github.com/ICanBoogie/Routing
 [ICanBoogie]:                  https://github.com/ICanBoogie/ICanBoogie
 [Core]:                        http://api.icanboogie.org/icanboogie/2.4/class-ICanBoogie.Core.html
-[documentation]:               http://api.icanboogie.org/bind-routing/0.2/
-[BeforeSynthesizeRoutesEvent]: http://api.icanboogie.org/bind-routing/0.2/class-ICanBoogie.Binding.Routing.BeforeSynthesizeRoutesEvent.html
-[SynthesizeRoutesEvent]:       http://api.icanboogie.org/bind-routing/0.2/class-ICanBoogie.Binding.Routing.SynthesizeRoutesEvent.html
+[documentation]:               http://api.icanboogie.org/bind-routing/3.0/
+[BeforeSynthesizeRoutesEvent]: http://api.icanboogie.org/bind-routing/3.0/class-ICanBoogie.Binding.Routing.BeforeSynthesizeRoutesEvent.html
+[SynthesizeRoutesEvent]:       http://api.icanboogie.org/bind-routing/3.0/class-ICanBoogie.Binding.Routing.SynthesizeRoutesEvent.html
