@@ -11,12 +11,19 @@
 
 namespace ICanBoogie\Binding\Routing;
 
-use ICanBoogie;
-
-$hooks = Hooks::class . '::';
+use ICanBoogie\Binding\HTTP\DispatcherConfig;
 
 return [
 
-	ICanBoogie\HTTP\RequestDispatcher::class . '::alter' => $hooks . 'alter_dispatcher'
+	'dispatchers' => [
+
+		'routing' => [
+
+			DispatcherConfig::CONSTRUCTOR => RouteDispatcherConstructor::class,
+			DispatcherConfig::WEIGHT => DispatcherConfig::WEIGHT_TOP
+
+		]
+
+	]
 
 ];

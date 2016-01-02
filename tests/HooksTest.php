@@ -92,29 +92,6 @@ class HooksTest extends \PHPUnit_Framework_TestCase
 		] ], $config);
 	}
 
-	public function test_alter_dispatcher()
-	{
-		$event = $this
-			->getMockBuilder(RequestDispatcher\AlterEvent::class)
-			->disableOriginalConstructor()
-			->getMock();
-
-		$dispatcher = $this
-			->getMockBuilder(RequestDispatcher::class)
-			->disableOriginalConstructor()
-			->setMethods([ 'offsetSet' ])
-			->getMock();
-		$dispatcher
-			->expects($this->once())
-			->method('offsetSet')
-			->with('routing');
-
-		/* @var $event RequestDispatcher\AlterEvent */
-		/* @var $dispatcher RequestDispatcher */
-
-		Hooks::alter_dispatcher($event, $dispatcher);
-	}
-
 	public function test_route_dispatcher_registration()
 	{
 		$dispatcher = \ICanBoogie\HTTP\get_dispatcher();

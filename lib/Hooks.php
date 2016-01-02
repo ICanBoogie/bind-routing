@@ -13,7 +13,6 @@ namespace ICanBoogie\Binding\Routing;
 
 use ICanBoogie\Core;
 use ICanBoogie\HTTP\RequestDispatcher;
-use ICanBoogie\HTTP\WeightedDispatcher;
 use ICanBoogie\Routing\ControllerNotDefined;
 use ICanBoogie\Routing\Route;
 use ICanBoogie\Routing\RouteDefinition;
@@ -60,19 +59,6 @@ class Hooks
 		return $routes;
 	}
 
-	/**
-	 * Adds the `routing` dispatcher.
-	 *
-	 * @param RequestDispatcher\AlterEvent $event
-	 * @param RequestDispatcher $target
-	 */
-	static public function alter_dispatcher(RequestDispatcher\AlterEvent $event, RequestDispatcher $target)
-	{
-		$dispatcher = new RouteDispatcher(self::app()->routes);
-
-		$target['routing'] = new WeightedDispatcher($dispatcher, WeightedDispatcher::WEIGHT_TOP);
-	}
-
 	/*
 	 * Prototypes
 	 */
@@ -111,17 +97,5 @@ class Hooks
 		$url = $route->format($values);
 
 		return \ICanBoogie\Routing\contextualize($url);
-	}
-
-	/*
-	 * Support
-	 */
-
-	/**
-	 * @return Core|CoreBindings
-	 */
-	static private function app()
-	{
-		return \ICanBoogie\app();
 	}
 }
