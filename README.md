@@ -7,30 +7,45 @@
 [![Code Coverage](https://img.shields.io/coveralls/ICanBoogie/bind-routing/master.svg)](https://coveralls.io/r/ICanBoogie/bind-routing)
 [![Packagist](https://img.shields.io/packagist/dt/icanboogie/bind-routing.svg)](https://packagist.org/packages/icanboogie/bind-routing)
 
-The **icanboogie/bind-routing** package binds [icanboogie/routing][] to [ICanBoogie][], using
-its autoconfig feature. It adds the getter `routes` to the [Core][] instance, a `url_for()` method that creates URLs, and a synthesizer
-for the `routes` configuration fragments.
+The **icanboogie/bind-routing** package binds [icanboogie/routing][] to [ICanBoogie][].
+
+The package adds the getter `routes` to the [Core][] instance, a `url_for()` method that creates
+URLs, and a synthesizer for the `routes` configuration fragments.
 
 ```php
 <?php
 
 namespace ICanBoogie;
 
-use ICanBoogie\Routing\RouteDispatcher;
+require 'vendor/autoload.php';
 
 $app = boot();
 
+#
+# Get routes configuration
+#
+
 $config = $app->configs['routes'];
+
+#
+# Get the route collection and add a new route
+#
+
+use ICanBoogie\Routing\RouteDefinition;
 
 $app->routes->get('/hello', function(Request $request) {
 
-	return "Hello {$request['name']}!";
+	$who = $request['name'] ?: 'world';
 
-}, [ 'as' => 'hello' ]);
+	return "Hello $who!";
 
-// …
+}, [ RouteDefinition::ID => 'hello' ]);
 
-echo $app->url_for("articles:show", $app->models['articles']->one);
+#
+# Obtain de URL of an article
+#
+
+echo $app->url_for('articles:show', $app->models['articles']->one);
 ```
 
 
@@ -40,8 +55,7 @@ echo $app->url_for("articles:show", $app->models['articles']->one);
 ## Defining routes using configuration fragments
 
 The most efficient way to define routes is through `routes` configuration fragments, because it
-doesn't require application logic (additional code) and the synthesized configuration can be
-cached.
+doesn't require application logic (additional code) and the synthesized configuration may be cached.
 
 The following example demonstrates how to define routes, resource routes. The pattern of the
 `articles:show` route is overridden to use _year_, _month_ and _slug_.
@@ -53,22 +67,24 @@ The following example demonstrates how to define routes, resource routes. The pa
 
 namespace App;
 
+use ICanBoogie\Routing\RouteDefinition;
 use ICanBoogie\Routing\RouteMaker as Make;
 
 return [
 
 	'home' => [
 
-		'pattern' => '/',
-		'controller' => PagesController::class . '#index'
+		RouteDefinition::PATTERN => '/',
+		RouteDefinition::CONTROLLER => PagesController::class,
+		RouteDefinition::ACTION => Make::ACTION_INDEX
 
 	]
 	
-] + \ICanBoogie\array_merge_recursive(Make::resource('articles', ArticlesController::class), [
+] + array_replace_recursive(Make::resource('articles', ArticlesController::class), [
 
 	'articles:show' => [
 	
-		'pattern' => '/articles/:year-:month-:slug.html'
+		RouteDefinition::PATTERN => '/articles/:year-:month-:slug.html'
 	
 	]
 
@@ -83,7 +99,8 @@ The following code demonstrates how the synthesized `routes` configuration can b
 $routes_config = $app->configs['routes'];
 ```
 
-**Note:** To make it easy for you to find where routes are defined, the pathname to the configuration fragment is set as `__ORIGIN__` in the route definition.
+> **Note:** To make it easy for you to find where routes are defined, the pathname to the
+configuration fragment is set as `__ORIGIN__` in the route definition.
 
 
 
@@ -95,13 +112,14 @@ The `routing.synthesize_routes:before` event of class [BeforeSynthesizeRoutesEve
 before the configuration is synthesized. Event hooks may use this event to alter the configuration
 fragments before they are synthesized.
 
-The following example demonstrates how the `routing.synthesize_routes:before` event can be used
-to alter the patterns of the route definitions before they synthesized:
+The following example demonstrates how the `routing.synthesize_routes:before` event can be used to
+alter the patterns of the route definitions before they synthesized:
 
 ```php
 <?php
 
 use ICanBoogie\Binding\Routing\BeforeSynthesizeRoutesEvent;
+use ICanBoogie\Routing\RouteDefinition;
 
 $app->events->attach('routing.synthesize_routes:before', function(BeforeSynthesizeRoutesEvent $event) {
 
@@ -109,7 +127,7 @@ $app->events->attach('routing.synthesize_routes:before', function(BeforeSynthesi
 	{
 		foreach ($fragment as &$definition)
 		{
-			$definition['pattern'] = '/en' . $definition['pattern'];
+			$definition[RouteDefinition::PATTERN] = '/en' . $definition[RouteDefinition::PATTERN];
 		}
 	}
 
@@ -172,11 +190,10 @@ can be cloned with the following command line:
 
 ## Documentation
 
-The package is documented as part of the [ICanBoogie][] framework
-[documentation][]. You can generate the documentation for the package
-and its dependencies with the `make doc` command. The documentation is generated in the
-`build/docs` directory. [ApiGen](http://apigen.org/) is required. The directory can later be
-cleaned with the `make clean` command.
+The package is documented as part of the [ICanBoogie][] framework [documentation][]. You can
+generate the documentation for the package and its dependencies with the `make doc` command. The
+documentation is generated in the `build/docs` directory. [ApiGen](http://apigen.org/) is required.
+The directory can later be cleaned with the `make clean` command.
 
 
 
@@ -186,9 +203,9 @@ cleaned with the `make clean` command.
 
 The test suite is ran with the `make test` command. [PHPUnit](https://phpunit.de/) and
 [Composer](http://getcomposer.org/) need to be globally available to run the suite. The command
-installs dependencies as required. The `make test-coverage` command runs test suite and also
-creates an HTML coverage report in "build/coverage". The directory can later be cleaned with
-the `make clean` command.
+installs dependencies as required. The `make test-coverage` command runs test suite and also creates
+an HTML coverage report in "build/coverage". The directory can later be cleaned with the `make
+clean` command.
 
 The package is continuously tested by [Travis CI](http://about.travis-ci.org/).
 
