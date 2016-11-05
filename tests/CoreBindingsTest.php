@@ -13,6 +13,8 @@ namespace ICanBoogie\Binding\Routing;
 
 use ICanBoogie\Routing\RouteCollection;
 
+use function ICanBoogie\app;
+
 class CoreBindingsTest extends \PHPUnit_Framework_TestCase
 {
 	/**
@@ -22,7 +24,7 @@ class CoreBindingsTest extends \PHPUnit_Framework_TestCase
 
 	static public function setupBeforeClass()
 	{
-		self::$app = \ICanBoogie\app();
+		self::$app = app();
 	}
 
 	public function test_get_routes()

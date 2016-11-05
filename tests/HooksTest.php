@@ -17,6 +17,9 @@ use ICanBoogie\Routing\RouteCollection;
 use ICanBoogie\Routing\RouteDefinition;
 use ICanBoogie\Routing\RouteDispatcher;
 
+use function ICanBoogie\app;
+use function ICanBoogie\HTTP\get_dispatcher;
+
 class HooksTest extends \PHPUnit_Framework_TestCase
 {
 	/**
@@ -26,7 +29,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase
 
 	static public function setUpBeforeClass()
 	{
-		self::$app = \ICanBoogie\app();
+		self::$app = app();
 	}
 
 	/**
@@ -94,7 +97,7 @@ class HooksTest extends \PHPUnit_Framework_TestCase
 
 	public function test_route_dispatcher_registration()
 	{
-		$dispatcher = \ICanBoogie\HTTP\get_dispatcher();
+		$dispatcher = get_dispatcher();
 
 		$this->assertInstanceOf(RouteDispatcher::class, $dispatcher['routing']);
 	}

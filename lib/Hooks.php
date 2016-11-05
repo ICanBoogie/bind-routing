@@ -20,6 +20,8 @@ use ICanBoogie\Routing\RouteDispatcher;
 use ICanBoogie\Routing\PatternNotDefined;
 use ICanBoogie\Routing\RouteCollection;
 
+use function ICanBoogie\Routing\contextualize;
+
 class Hooks
 {
 	/*
@@ -96,6 +98,6 @@ class Hooks
 
 		$url = $route->format($values);
 
-		return \ICanBoogie\Routing\contextualize($url);
+		return contextualize($url);
 	}
 }

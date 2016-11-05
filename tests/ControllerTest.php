@@ -14,13 +14,15 @@ namespace ICanBoogie\Binding\Routing;
 use ICanBoogie\PropertyNotDefined;
 use ICanBoogie\Binding\Routing\ControllerTest\BoundController as Controller;
 
+use function ICanBoogie\app;
+
 class ControllerTest extends \PHPUnit_Framework_TestCase
 {
 	static private $app;
 
 	static public function setupBeforeClass()
 	{
-		self::$app = \ICanBoogie\app();
+		self::$app = app();
 	}
 
 	public function test_get_application_property()

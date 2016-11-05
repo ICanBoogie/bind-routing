@@ -156,7 +156,7 @@ before it is returned by the synthesizer.
 
 ## Requirements
 
-The package requires PHP 5.5 or later.
+The package requires PHP 5.6 or later.
 
 
 
@@ -227,7 +227,7 @@ The package is continuously tested by [Travis CI](http://about.travis-ci.org/).
 [icanboogie/icanboogie]:       https://github.com/ICanBoogie/ICanBoogie
 [icanboogie/routing]:          https://github.com/ICanBoogie/Routing
 [ICanBoogie]:                  https://github.com/ICanBoogie/ICanBoogie
-[Core]:                        http://api.icanboogie.org/icanboogie/3.0/class-ICanBoogie.Core.html
-[documentation]:               http://api.icanboogie.org/bind-routing/3.0/
-[BeforeSynthesizeRoutesEvent]: http://api.icanboogie.org/bind-routing/3.0/class-ICanBoogie.Binding.Routing.BeforeSynthesizeRoutesEvent.html
-[SynthesizeRoutesEvent]:       http://api.icanboogie.org/bind-routing/3.0/class-ICanBoogie.Binding.Routing.SynthesizeRoutesEvent.html
+[Core]:                        http://api.icanboogie.org/icanboogie/4.0/class-ICanBoogie.Core.html
+[documentation]:               http://api.icanboogie.org/bind-routing/4.0/
+[BeforeSynthesizeRoutesEvent]: http://api.icanboogie.org/bind-routing/4.0/class-ICanBoogie.Binding.Routing.BeforeSynthesizeRoutesEvent.html
+[SynthesizeRoutesEvent]:       http://api.icanboogie.org/bind-routing/4.0/class-ICanBoogie.Binding.Routing.SynthesizeRoutesEvent.html
