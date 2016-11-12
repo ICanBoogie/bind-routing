@@ -1,8 +1,17 @@
 <?php
 
+/*
+ * This file is part of the ICanBoogie package.
+ *
+ * (c) Olivier Laviale <olivier.laviale@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace ICanBoogie\Binding\Routing;
 
-use ICanBoogie\Core;
+use ICanBoogie\Application;
 use ICanBoogie\PropertyNotDefined;
 use ICanBoogie\Routing\RouteCollection;
 
@@ -12,7 +21,7 @@ use ICanBoogie\Routing\RouteCollection;
  * **Note:** This trait is to be used by classes extending
  * {@link \ICanBoogie\Accessor\AccessorTrait}.
  *
- * @property Core $app
+ * @property Application $app
  * @property-read RouteCollection $routes
  */
 trait ForwardUndefinedPropertiesToApplication

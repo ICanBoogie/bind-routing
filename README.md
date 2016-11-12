@@ -9,8 +9,8 @@
 
 The **icanboogie/bind-routing** package binds [icanboogie/routing][] to [ICanBoogie][].
 
-The package adds the getter `routes` to the [Core][] instance, a `url_for()` method that creates
-URLs, and a synthesizer for the `routes` configuration fragments.
+The package adds the getter `routes` to the [Application][] instance, a `url_for()` method that
+creates URLs, and a synthesizer for the `routes` configuration fragments.
 
 ```php
 <?php
@@ -31,6 +31,7 @@ $config = $app->configs['routes'];
 # Get the route collection and add a new route
 #
 
+use ICanBoogie\HTTP\Request;
 use ICanBoogie\Routing\RouteDefinition;
 
 $app->routes->get('/hello', function(Request $request) {
@@ -227,7 +228,7 @@ The package is continuously tested by [Travis CI](http://about.travis-ci.org/).
 [icanboogie/icanboogie]:       https://github.com/ICanBoogie/ICanBoogie
 [icanboogie/routing]:          https://github.com/ICanBoogie/Routing
 [ICanBoogie]:                  https://github.com/ICanBoogie/ICanBoogie
-[Core]:                        http://api.icanboogie.org/icanboogie/4.0/class-ICanBoogie.Core.html
+[Application]:                 http://api.icanboogie.org/icanboogie/4.0/class-ICanBoogie.Core.html
 [documentation]:               http://api.icanboogie.org/bind-routing/4.0/
 [BeforeSynthesizeRoutesEvent]: http://api.icanboogie.org/bind-routing/4.0/class-ICanBoogie.Binding.Routing.BeforeSynthesizeRoutesEvent.html
 [SynthesizeRoutesEvent]:       http://api.icanboogie.org/bind-routing/4.0/class-ICanBoogie.Binding.Routing.SynthesizeRoutesEvent.html

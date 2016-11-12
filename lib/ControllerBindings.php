@@ -11,12 +11,12 @@
 
 namespace ICanBoogie\Binding\Routing;
 
-use ICanBoogie\Core;
+use ICanBoogie\Application;
 
 /**
  * {@link \ICanBoogie\Routing\Controller} prototype bindings.
  *
- * @property-read Core $app
+ * @property-read Application $app
  */
 trait ControllerBindings
 {

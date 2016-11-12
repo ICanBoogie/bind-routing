@@ -11,11 +11,12 @@
 
 namespace ICanBoogie\Binding\Routing;
 
+use ICanBoogie\Application;
 use ICanBoogie\Routing\RouteCollection;
 
 use function ICanBoogie\app;
 
-class CoreBindingsTest extends \PHPUnit_Framework_TestCase
+class ApplicationBindingsTest extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * @var Application

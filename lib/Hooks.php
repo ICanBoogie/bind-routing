@@ -11,12 +11,10 @@
 
 namespace ICanBoogie\Binding\Routing;
 
-use ICanBoogie\Core;
-use ICanBoogie\HTTP\RequestDispatcher;
+use ICanBoogie\Application;
 use ICanBoogie\Routing\ControllerNotDefined;
 use ICanBoogie\Routing\Route;
 use ICanBoogie\Routing\RouteDefinition;
-use ICanBoogie\Routing\RouteDispatcher;
 use ICanBoogie\Routing\PatternNotDefined;
 use ICanBoogie\Routing\RouteCollection;
 
@@ -68,11 +66,11 @@ class Hooks
 	/**
 	 * Returns the route collection.
 	 *
-	 * @param Core|CoreBindings $app
+	 * @param Application $app
 	 *
 	 * @return RouteCollection
 	 */
-	static public function get_routes(Core $app)
+	static public function get_routes(Application $app)
 	{
 		static $routes;
 
@@ -83,13 +81,13 @@ class Hooks
 	/**
 	 * Returns the contextualized URL of a route.
 	 *
-	 * @param Core|CoreBindings $app
+	 * @param Application $app
 	 * @param string|Route $route
 	 * @param array|object|null $values
 	 *
 	 * @return string
 	 */
-	static public function url_for(Core $app, $route, $values = null)
+	static public function url_for(Application $app, $route, $values = null)
 	{
 		if (!$route instanceof Route)
 		{

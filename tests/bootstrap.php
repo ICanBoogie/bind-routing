@@ -13,4 +13,9 @@ namespace ICanBoogie;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+class Application extends Core
+{
+
+}
+
 boot();

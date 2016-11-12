@@ -11,7 +11,7 @@
 
 namespace ICanBoogie\Binding\Routing;
 
-use ICanBoogie\Core;
+use ICanBoogie\Application;
 use ICanBoogie\Routing\RouteCollection;
 use ICanBoogie\Routing\RouteDispatcher;
 
@@ -27,11 +27,11 @@ class RoutingDispatcherConstructorTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @return Core
+	 * @return Application
 	 */
 	private function mockApp()
 	{
-		$app = $this->getMockBuilder(Core::class)
+		$app = $this->getMockBuilder(Application::class)
 			->disableOriginalConstructor()
 			->setMethods([ 'get_routes' ])
 			->getMock();

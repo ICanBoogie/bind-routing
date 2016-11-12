@@ -11,8 +11,8 @@
 
 namespace ICanBoogie\Binding\Routing;
 
+use ICanBoogie\Application;
 use ICanBoogie\HTTP\Request;
-use ICanBoogie\HTTP\RequestDispatcher;
 use ICanBoogie\Routing\RouteCollection;
 use ICanBoogie\Routing\RouteDefinition;
 use ICanBoogie\Routing\RouteDispatcher;
@@ -23,7 +23,7 @@ use function ICanBoogie\HTTP\get_dispatcher;
 class HooksTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var \ICanBoogie\Core|CoreBindings
+	 * @var Application
 	 */
 	static private $app;
 

@@ -11,8 +11,8 @@
 
 namespace ICanBoogie\Binding\Routing;
 
+use ICanBoogie\Application;
 use ICanBoogie\Binding\HTTP\AbstractDispatcherConstructor;
-use ICanBoogie\Core;
 use ICanBoogie\Routing\RouteDispatcher;
 
 /**
@@ -21,7 +21,7 @@ use ICanBoogie\Routing\RouteDispatcher;
 class RouteDispatcherConstructor extends AbstractDispatcherConstructor
 {
 	/**
-	 * @var Core|CoreBindings
+	 * @var Application
 	 */
 	protected $app;
 

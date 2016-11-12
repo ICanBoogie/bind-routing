@@ -14,7 +14,7 @@ namespace ICanBoogie\Binding\Routing;
 use ICanBoogie\Routing\RouteCollection;
 
 /**
- * {@link \ICanBoogie\Core} bindings.
+ * {@link \ICanBoogie\Application} bindings.
  *
  * @method string url_for($route_or_route_id, $values = null) Returns the contextualized URL of a route.
  *
@@ -23,7 +23,7 @@ use ICanBoogie\Routing\RouteCollection;
  * @see \ICanBoogie\Binding\Routing\Hooks::url_for()
  * @see \ICanBoogie\Binding\Routing\Hooks::get_routes()
  */
-trait CoreBindings
+trait ApplicationBindings
 {
 
 }
