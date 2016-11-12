@@ -11,7 +11,6 @@
 
 namespace ICanBoogie;
 
-$loader = require __DIR__ . '/../vendor/autoload.php';
-$loader->addPsr4('ICanBoogie\\Binding\\Routing\\ControllerTest\\', __DIR__ . '/ControllerTest');
+require __DIR__ . '/../vendor/autoload.php';
 
 boot();

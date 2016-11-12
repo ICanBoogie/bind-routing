@@ -32,6 +32,12 @@
 		}
 	},
 
+	"autoload-dev": {
+		"psr-4": {
+			"ICanBoogie\\Binding\\Routing\\": "tests/"
+		}
+	},
+
 	"scripts": {
 		"post-autoload-dump": "ICanBoogie\\Autoconfig\\Hooks::on_autoload_dump"
 	},
