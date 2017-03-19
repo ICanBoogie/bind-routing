@@ -2,7 +2,6 @@
 
 [![Release](https://img.shields.io/packagist/v/icanboogie/bind-routing.svg)](https://packagist.org/packages/icanboogie/bind-routing)
 [![Build Status](https://img.shields.io/travis/ICanBoogie/bind-routing.svg)](http://travis-ci.org/ICanBoogie/bind-routing)
-[![HHVM](https://img.shields.io/hhvm/icanboogie/bind-routing.svg)](http://hhvm.h4cc.de/package/icanboogie/bind-routing)
 [![Code Quality](https://img.shields.io/scrutinizer/g/ICanBoogie/bind-routing.svg)](https://scrutinizer-ci.com/g/ICanBoogie/bind-routing)
 [![Code Coverage](https://img.shields.io/coveralls/ICanBoogie/bind-routing.svg)](https://coveralls.io/r/ICanBoogie/bind-routing)
 [![Packagist](https://img.shields.io/packagist/dt/icanboogie/bind-routing.svg)](https://packagist.org/packages/icanboogie/bind-routing)
