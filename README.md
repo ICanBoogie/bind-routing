@@ -1,10 +1,10 @@
 # bind-routing
 
 [![Release](https://img.shields.io/packagist/v/icanboogie/bind-routing.svg)](https://packagist.org/packages/icanboogie/bind-routing)
-[![Build Status](https://img.shields.io/travis/ICanBoogie/bind-routing/master.svg)](http://travis-ci.org/ICanBoogie/bind-routing)
+[![Build Status](https://img.shields.io/travis/ICanBoogie/bind-routing.svg)](http://travis-ci.org/ICanBoogie/bind-routing)
 [![HHVM](https://img.shields.io/hhvm/icanboogie/bind-routing.svg)](http://hhvm.h4cc.de/package/icanboogie/bind-routing)
-[![Code Quality](https://img.shields.io/scrutinizer/g/ICanBoogie/bind-routing/master.svg)](https://scrutinizer-ci.com/g/ICanBoogie/bind-routing)
-[![Code Coverage](https://img.shields.io/coveralls/ICanBoogie/bind-routing/master.svg)](https://coveralls.io/r/ICanBoogie/bind-routing)
+[![Code Quality](https://img.shields.io/scrutinizer/g/ICanBoogie/bind-routing.svg)](https://scrutinizer-ci.com/g/ICanBoogie/bind-routing)
+[![Code Coverage](https://img.shields.io/coveralls/ICanBoogie/bind-routing.svg)](https://coveralls.io/r/ICanBoogie/bind-routing)
 [![Packagist](https://img.shields.io/packagist/dt/icanboogie/bind-routing.svg)](https://packagist.org/packages/icanboogie/bind-routing)
 
 The **icanboogie/bind-routing** package binds [icanboogie/routing][] to [ICanBoogie][].
@@ -228,7 +228,7 @@ The package is continuously tested by [Travis CI](http://about.travis-ci.org/).
 [icanboogie/icanboogie]:       https://github.com/ICanBoogie/ICanBoogie
 [icanboogie/routing]:          https://github.com/ICanBoogie/Routing
 [ICanBoogie]:                  https://github.com/ICanBoogie/ICanBoogie
-[Application]:                 http://api.icanboogie.org/icanboogie/4.0/class-ICanBoogie.Core.html
-[documentation]:               http://api.icanboogie.org/bind-routing/4.0/
-[BeforeSynthesizeRoutesEvent]: http://api.icanboogie.org/bind-routing/4.0/class-ICanBoogie.Binding.Routing.BeforeSynthesizeRoutesEvent.html
-[SynthesizeRoutesEvent]:       http://api.icanboogie.org/bind-routing/4.0/class-ICanBoogie.Binding.Routing.SynthesizeRoutesEvent.html
+[Application]:                 https://icanboogie.org/api/icanboogie/4.0/class-ICanBoogie.Core.html
+[documentation]:               https://icanboogie.org/api/bind-routing/4.0/
+[BeforeSynthesizeRoutesEvent]: https://icanboogie.org/api/bind-routing/4.0/class-ICanBoogie.Binding.Routing.BeforeSynthesizeRoutesEvent.html
+[SynthesizeRoutesEvent]:       https://icanboogie.org/api/bind-routing/4.0/class-ICanBoogie.Binding.Routing.SynthesizeRoutesEvent.html
