@@ -2,7 +2,10 @@
 	"name": "icanboogie/bind-routing",
 	"type": "library",
 	"description": "Binds icanboogie/routing to ICanBoogie.",
-	"keywords": [ "routing", "icanboogie" ],
+	"keywords": [
+		"routing",
+		"icanboogie"
+	],
 	"homepage": "https://icanboogie.org/",
 	"license": "BSD-3-Clause",
 	"authors": [
@@ -10,38 +13,40 @@
 			"name": "Olivier Laviale",
 			"email": "olivier.laviale@gmail.com",
 			"homepage": "https://olvlvl.com/",
-			"role" : "Developer"
+			"role": "Developer"
 		}
 	],
 	"support": {
 		"issues": "https://github.com/ICanBoogie/bind-routing/issues",
 		"source": "https://github.com/ICanBoogie/bind-routing"
 	},
-
 	"minimum-stability": "dev",
-
+	"prefer-stable": true,
+	"prefer-dist": true,
 	"require": {
 		"php": ">=5.6",
 		"icanboogie/icanboogie": "^4.0",
 		"icanboogie/routing": "^4.0"
 	},
-
+	"require-dev": {
+		"phpunit/phpunit": "^5.7"
+	},
 	"autoload": {
 		"psr-4": {
 			"ICanBoogie\\Binding\\Routing\\": "lib/"
 		}
 	},
-
 	"autoload-dev": {
 		"psr-4": {
-			"ICanBoogie\\Binding\\Routing\\": "tests/"
-		}
+			"ICanBoogie\\Binding\\Routing\\": "tests/lib"
+		},
+		"classmap": [
+			"tests/Application.php"
+		]
 	},
-
 	"scripts": {
 		"post-autoload-dump": "ICanBoogie\\Autoconfig\\Hooks::on_autoload_dump"
 	},
-
 	"extra": {
 		"icanboogie": {
 			"config-path": "config",

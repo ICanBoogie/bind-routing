@@ -13,7 +13,7 @@
 >
 	<testsuites>
 		<testsuite name="icanboogie/bind-routing">
-			<directory>./tests</directory>
+			<directory>./tests/lib</directory>
 		</testsuite>
 	</testsuites>
 

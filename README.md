@@ -228,7 +228,7 @@ The package is continuously tested by [Travis CI](http://about.travis-ci.org/).
 [icanboogie/icanboogie]:       https://github.com/ICanBoogie/ICanBoogie
 [icanboogie/routing]:          https://github.com/ICanBoogie/Routing
 [ICanBoogie]:                  https://github.com/ICanBoogie/ICanBoogie
-[Application]:                 https://icanboogie.org/api/icanboogie/4.0/class-ICanBoogie.Core.html
+[Application]:                 https://icanboogie.org/docs/4.0/the-application-class
 [documentation]:               https://icanboogie.org/api/bind-routing/4.0/
 [BeforeSynthesizeRoutesEvent]: https://icanboogie.org/api/bind-routing/4.0/class-ICanBoogie.Binding.Routing.BeforeSynthesizeRoutesEvent.html
 [SynthesizeRoutesEvent]:       https://icanboogie.org/api/bind-routing/4.0/class-ICanBoogie.Binding.Routing.SynthesizeRoutesEvent.html

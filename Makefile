@@ -2,6 +2,7 @@
 
 PACKAGE_NAME = icanboogie/bind-routing
 PACKAGE_VERSION = 4.0
+PHPUNIT = vendor/bin/phpunit
 
 # do not edit the following lines
 
@@ -9,20 +10,20 @@ usage:
 	@echo "test:  Runs the test suite.\ndoc:   Creates the documentation.\nclean: Removes the documentation, the dependencies and the Composer files."
 
 vendor:
-	@COMPOSER_ROOT_VERSION=$(PACKAGE_VERSION) composer install --prefer-dist
+	@COMPOSER_ROOT_VERSION=$(PACKAGE_VERSION) composer install
 
 update:
-	@COMPOSER_ROOT_VERSION=$(PACKAGE_VERSION) composer update --prefer-dist
+	@COMPOSER_ROOT_VERSION=$(PACKAGE_VERSION) composer update
 
 autoload: vendor
 	@composer dump-autoload
 
 test: vendor
-	@phpunit
+	@$(PHPUNIT)
 
 test-coverage: vendor
 	@mkdir -p build/coverage
-	@phpunit --coverage-html build/coverage
+	@$(PHPUNIT) --coverage-html ../build/coverage
 
 doc: vendor
 	@mkdir -p build/docs
