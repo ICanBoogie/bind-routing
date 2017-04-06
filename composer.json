@@ -29,9 +29,6 @@
 		"icanboogie/bind-http": "^3.0",
 		"icanboogie/routing": "^4.0"
 	},
-	"require-dev": {
-		"phpunit/phpunit": "^5.7"
-	},
 	"autoload": {
 		"psr-4": {
 			"ICanBoogie\\Binding\\Routing\\": "lib/"
