@@ -37,7 +37,7 @@ class Hooks
 	 * @throws ControllerNotDefined if a controller is missing from a route definition and no
 	 * location is defined.
 	 */
-	static public function synthesize_routes_config(array $fragments)
+	static public function synthesize_routes_config(array $fragments): array
 	{
 		new BeforeSynthesizeRoutesEvent($fragments);
 
@@ -70,7 +70,7 @@ class Hooks
 	 *
 	 * @return RouteCollection
 	 */
-	static public function get_routes(Application $app)
+	static public function get_routes(Application $app): RouteCollection
 	{
 		static $routes;
 
@@ -87,7 +87,7 @@ class Hooks
 	 *
 	 * @return string
 	 */
-	static public function url_for(Application $app, $route, $values = null)
+	static public function url_for(Application $app, $route, $values = null): string
 	{
 		if (!$route instanceof Route)
 		{

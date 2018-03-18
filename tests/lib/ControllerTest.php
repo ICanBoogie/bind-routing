@@ -16,7 +16,7 @@ use ICanBoogie\Binding\Routing\ControllerTest\BoundController as Controller;
 
 use function ICanBoogie\app;
 
-class ControllerTest extends \PHPUnit_Framework_TestCase
+class ControllerTest extends \PHPUnit\Framework\TestCase
 {
 	static private $app;
 

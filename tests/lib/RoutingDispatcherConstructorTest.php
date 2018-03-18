@@ -15,7 +15,7 @@ use ICanBoogie\Application;
 use ICanBoogie\Routing\RouteCollection;
 use ICanBoogie\Routing\RouteDispatcher;
 
-class RoutingDispatcherConstructorTest extends \PHPUnit_Framework_TestCase
+class RoutingDispatcherConstructorTest extends \PHPUnit\Framework\TestCase
 {
 	public function test_construct()
 	{

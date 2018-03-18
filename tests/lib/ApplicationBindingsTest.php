@@ -16,7 +16,7 @@ use ICanBoogie\Routing\RouteCollection;
 
 use function ICanBoogie\app;
 
-class ApplicationBindingsTest extends \PHPUnit_Framework_TestCase
+class ApplicationBindingsTest extends \PHPUnit\Framework\TestCase
 {
 	/**
 	 * @var Application

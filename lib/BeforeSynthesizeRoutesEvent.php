@@ -33,7 +33,7 @@ class BeforeSynthesizeRoutesEvent extends Event
 	 *
 	 * @param array $fragments Reference to the fragments to alter.
 	 */
-	public function __construct(&$fragments)
+	public function __construct(array &$fragments)
 	{
 		$this->fragments = &$fragments;
 

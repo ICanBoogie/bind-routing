@@ -20,7 +20,7 @@ use ICanBoogie\Routing\RouteDispatcher;
 use function ICanBoogie\app;
 use function ICanBoogie\HTTP\get_dispatcher;
 
-class HooksTest extends \PHPUnit_Framework_TestCase
+class HooksTest extends \PHPUnit\Framework\TestCase
 {
 	/**
 	 * @var Application

@@ -34,7 +34,7 @@ trait ForwardUndefinedPropertiesToApplication
 	 *
 	 * @return mixed
 	 */
-	protected function last_chance_get($property, &$success)
+	protected function last_chance_get(string $property, bool &$success)
 	{
 		try
 		{

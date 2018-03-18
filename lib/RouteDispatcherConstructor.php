@@ -13,6 +13,7 @@ namespace ICanBoogie\Binding\Routing;
 
 use ICanBoogie\Application;
 use ICanBoogie\Binding\HTTP\AbstractDispatcherConstructor;
+use ICanBoogie\HTTP\Dispatcher;
 use ICanBoogie\Routing\RouteDispatcher;
 
 /**
@@ -30,7 +31,7 @@ class RouteDispatcherConstructor extends AbstractDispatcherConstructor
 	 *
 	 * @return RouteDispatcher
 	 */
-	public function __invoke(array $config)
+	public function __invoke(array $config): Dispatcher
 	{
 		return new RouteDispatcher($this->app->routes);
 	}
