@@ -13,30 +13,32 @@ namespace ICanBoogie\Binding\Routing;
 
 use ICanBoogie\Application;
 use ICanBoogie\HTTP\Request;
+use ICanBoogie\Routing\ControllerNotDefined;
+use ICanBoogie\Routing\PatternNotDefined;
 use ICanBoogie\Routing\RouteCollection;
 use ICanBoogie\Routing\RouteDefinition;
 use ICanBoogie\Routing\RouteDispatcher;
+use PHPUnit\Framework\TestCase;
 
 use function ICanBoogie\app;
 use function ICanBoogie\HTTP\get_dispatcher;
 
-class HooksTest extends \PHPUnit\Framework\TestCase
+class HooksTest extends TestCase
 {
 	/**
 	 * @var Application
 	 */
 	static private $app;
 
-	static public function setUpBeforeClass()
+	static public function setUpBeforeClass(): void
 	{
 		self::$app = app();
 	}
 
-	/**
-	 * @expectedException \ICanBoogie\Routing\PatternNotDefined
-	 */
 	public function test_should_throw_exception_on_empty_pattern()
 	{
+		$this->expectException(PatternNotDefined::class);
+
 		Hooks::synthesize_routes_config([
 
 			[
@@ -51,11 +53,10 @@ class HooksTest extends \PHPUnit\Framework\TestCase
 		]);
 	}
 
-	/**
-	 * @expectedException \ICanBoogie\Routing\ControllerNotDefined
-	 */
 	public function test_should_throw_exception_on_empty_controller()
 	{
+		$this->expectException(ControllerNotDefined::class);
+
 		Hooks::synthesize_routes_config([
 
 			[

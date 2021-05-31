@@ -23,7 +23,7 @@ class ApplicationBindingsTest extends \PHPUnit\Framework\TestCase
 	 */
 	static private $app;
 
-	static public function setupBeforeClass()
+	static public function setupBeforeClass(): void
 	{
 		self::$app = app();
 	}

@@ -11,16 +11,17 @@
 
 namespace ICanBoogie\Binding\Routing;
 
-use ICanBoogie\PropertyNotDefined;
 use ICanBoogie\Binding\Routing\ControllerTest\BoundController as Controller;
+use ICanBoogie\PropertyNotDefined;
+use PHPUnit\Framework\TestCase;
 
 use function ICanBoogie\app;
 
-class ControllerTest extends \PHPUnit\Framework\TestCase
+class ControllerTest extends TestCase
 {
 	static private $app;
 
-	static public function setupBeforeClass()
+	static public function setupBeforeClass(): void
 	{
 		self::$app = app();
 	}
@@ -60,8 +61,8 @@ class ControllerTest extends \PHPUnit\Framework\TestCase
 
 			$message = $e->getMessage();
 
-			$this->assertContains($property, $message);
-			$this->assertContains(get_class($controller), $message);
+			$this->assertStringContainsString($property, $message);
+			$this->assertStringContainsString(get_class($controller), $message);
 		}
 	}
 }
