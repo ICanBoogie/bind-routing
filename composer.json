@@ -8,7 +8,7 @@
 	],
 	"homepage": "https://icanboogie.org/",
 	"license": "BSD-3-Clause",
-	"version": "5.0",
+	"version": "6.0",
 	"authors": [
 		{
 			"name": "Olivier Laviale",
@@ -28,13 +28,13 @@
 	"prefer-stable": true,
 	"prefer-dist": true,
 	"require": {
-		"php": ">=7.2",
-		"icanboogie/icanboogie": "^5.0",
-		"icanboogie/bind-http": "^5.0",
-		"icanboogie/routing": "^5.0"
+		"php": ">=8.0",
+		"icanboogie/icanboogie": "^6.0",
+		"icanboogie/bind-http": "^6.0",
+		"icanboogie/routing": "^6.0"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "^8.5"
+		"phpunit/phpunit": "^9.5"
 	},
 	"autoload": {
 		"psr-4": {

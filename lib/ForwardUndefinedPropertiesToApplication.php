@@ -28,13 +28,8 @@ trait ForwardUndefinedPropertiesToApplication
 {
 	/**
 	 * Tries to get the undefined property from the application.
-	 *
-	 * @param string $property
-	 * @param bool $success
-	 *
-	 * @return mixed
 	 */
-	protected function last_chance_get(string $property, bool &$success)
+	protected function last_chance_get(string $property, bool &$success): mixed
 	{
 		try
 		{

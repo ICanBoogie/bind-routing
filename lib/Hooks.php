@@ -20,7 +20,7 @@ use ICanBoogie\Routing\RouteCollection;
 
 use function ICanBoogie\Routing\contextualize;
 
-class Hooks
+final class Hooks
 {
 	/*
 	 * Events
@@ -29,7 +29,7 @@ class Hooks
 	/**
 	 * Synthesize the `routes` config from `routes` fragments.
 	 *
-	 * @param array $fragments
+	 * @param array<string, array<string, array>> $fragments
 	 *
 	 * @return array
 	 *
@@ -65,10 +65,6 @@ class Hooks
 
 	/**
 	 * Returns the route collection.
-	 *
-	 * @param Application $app
-	 *
-	 * @return RouteCollection
 	 */
 	static public function get_routes(Application $app): RouteCollection
 	{
@@ -80,14 +76,8 @@ class Hooks
 
 	/**
 	 * Returns the contextualized URL of a route.
-	 *
-	 * @param Application $app
-	 * @param string|Route $route
-	 * @param array|object|null $values
-	 *
-	 * @return string
 	 */
-	static public function url_for(Application $app, $route, $values = null): string
+	static public function url_for(Application $app, string|Route $route, object|array $values = null): string
 	{
 		if (!$route instanceof Route)
 		{

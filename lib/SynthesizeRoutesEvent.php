@@ -19,14 +19,14 @@ use ICanBoogie\Event;
  * Third parties may use this event to alter the synthesized configuration before it is
  * returned by the synthesizer.
  */
-class SynthesizeRoutesEvent extends Event
+final class SynthesizeRoutesEvent extends Event
 {
 	/**
 	 * Reference to route definitions.
 	 *
 	 * @var array
 	 */
-	public $routes;
+	public array $routes;
 
 	/**
 	 * The event is constructed with the type `collect`.

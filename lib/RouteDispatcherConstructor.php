@@ -22,14 +22,7 @@ use ICanBoogie\Routing\RouteDispatcher;
 class RouteDispatcherConstructor extends AbstractDispatcherConstructor
 {
 	/**
-	 * @var Application
-	 */
-	protected $app;
-
-	/**
 	 * @inheritdoc
-	 *
-	 * @return RouteDispatcher
 	 */
 	public function __invoke(array $config): Dispatcher
 	{

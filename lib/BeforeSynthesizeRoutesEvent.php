@@ -23,10 +23,8 @@ class BeforeSynthesizeRoutesEvent extends Event
 {
 	/**
 	 * Reference to the configuration fragments.
-	 *
-	 * @var array
 	 */
-	public $fragments;
+	public array $fragments;
 
 	/**
 	 * The event is constructed with the type `routing.synthesize_routes:before`.
