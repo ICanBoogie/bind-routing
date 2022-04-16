@@ -69,18 +69,11 @@ final class Hooks
 		return $router ??= new Router($app->routes, new ResponderProvider\Mutable());
 	}
 
-	static public function get_url_generator(Application $app): UrlGenerator
-	{
-		static $url_generator;
-
-		return $url_generator ??= new UrlGenerator($app->routes);
-	}
-
 	/**
 	 * Returns the contextualized URL of a route.
 	 */
 	static public function url_for(Application $app, string|callable $predicate, object|array $params = null): string
 	{
-		return $app->url_generator->generate_url($predicate, $params);
+		return $app->container->get(UrlGenerator::class)->generate_url($predicate, $params);
 	}
 }

@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    public: true
+    autowire: true
+
+  ICanBoogie\Routing\RouteProvider:
+    factory: [ ICanBoogie\Binding\Routing\Hooks, get_routes ]
+
+  ICanBoogie\Routing\UrlGenerator: ~

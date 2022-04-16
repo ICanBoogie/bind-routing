@@ -11,8 +11,14 @@
 
 namespace ICanBoogie;
 
+use ICanBoogie\Routing\RouteProvider;
+
+use function var_dump;
+
 chdir(__DIR__);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-boot();
+$app = boot();
+
+//var_dump($app->container->get(RouteProvider::class));
