@@ -12,13 +12,11 @@
 namespace ICanBoogie\Binding\Routing;
 
 use ICanBoogie\Application;
-use ICanBoogie\Routing\ControllerNotDefined;
+use ICanBoogie\Routing\ResponderProvider;
 use ICanBoogie\Routing\Route;
-use ICanBoogie\Routing\RouteDefinition;
-use ICanBoogie\Routing\PatternNotDefined;
 use ICanBoogie\Routing\RouteCollection;
-
-use function ICanBoogie\Routing\contextualize;
+use ICanBoogie\Routing\Router;
+use ICanBoogie\Routing\UrlGenerator;
 
 final class Hooks
 {
@@ -29,13 +27,9 @@ final class Hooks
 	/**
 	 * Synthesize the `routes` config from `routes` fragments.
 	 *
-	 * @param array<string, array<string, array>> $fragments
+	 * @param array<string, Route[]> $fragments
 	 *
-	 * @return array
-	 *
-	 * @throws PatternNotDefined if a pattern is missing from a route definition.
-	 * @throws ControllerNotDefined if a controller is missing from a route definition and no
-	 * location is defined.
+	 * @return Route[]
 	 */
 	static public function synthesize_routes_config(array $fragments): array
 	{
@@ -43,14 +37,9 @@ final class Hooks
 
 		$routes = [];
 
-		foreach ($fragments as $pathname => $fragment)
-		{
-			foreach ($fragment as $id => $definition)
-			{
-				RouteDefinition::assert_is_valid($definition);
-				RouteDefinition::normalize($definition);
-
-				$routes[$id] = [ '__ORIGIN__' => $pathname ] + $definition;
+		foreach ($fragments as $fragment) {
+			foreach ($fragment as $route) {
+				$routes[] = $route;
 			}
 		}
 
@@ -70,22 +59,28 @@ final class Hooks
 	{
 		static $routes;
 
-		return $routes
-			?: $routes = new RouteCollection($app->configs['routes'] ?: [], RouteCollection::TRUSTED_DEFINITIONS);
+		return $routes ??= new RouteCollection($app->configs['routes']);
+	}
+
+	static public function get_router(Application $app): Router
+	{
+		static $router;
+
+		return $router ??= new Router($app->routes, new ResponderProvider\Mutable());
+	}
+
+	static public function get_url_generator(Application $app): UrlGenerator
+	{
+		static $url_generator;
+
+		return $url_generator ??= new UrlGenerator($app->routes);
 	}
 
 	/**
 	 * Returns the contextualized URL of a route.
 	 */
-	static public function url_for(Application $app, string|Route $route, object|array $values = null): string
+	static public function url_for(Application $app, string|callable $predicate, object|array $params = null): string
 	{
-		if (!$route instanceof Route)
-		{
-			$route = $app->routes[$route];
-		}
-
-		$url = $route->format($values);
-
-		return contextualize($url);
+		return $app->url_generator->generate_url($predicate, $params);
 	}
 }

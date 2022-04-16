@@ -14,8 +14,9 @@ namespace ICanBoogie\Binding\Routing;
 use ICanBoogie\Application;
 use ICanBoogie\Routing\RouteCollection;
 use ICanBoogie\Routing\RouteDispatcher;
+use PHPUnit\Framework\TestCase;
 
-class RoutingDispatcherConstructorTest extends \PHPUnit\Framework\TestCase
+class RoutingDispatcherConstructorTest extends TestCase
 {
 	public function test_construct()
 	{
@@ -26,14 +27,11 @@ class RoutingDispatcherConstructorTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf(RouteDispatcher::class, $dispatcher);
 	}
 
-	/**
-	 * @return Application
-	 */
-	private function mockApp()
+	private function mockApp(): Application
 	{
 		$app = $this->getMockBuilder(Application::class)
 			->disableOriginalConstructor()
-			->setMethods([ 'get_routes' ])
+			->addMethods([ 'get_routes' ])
 			->getMock();
 		$app
 			->expects($this->once())

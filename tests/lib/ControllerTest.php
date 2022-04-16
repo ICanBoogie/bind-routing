@@ -11,20 +11,30 @@
 
 namespace ICanBoogie\Binding\Routing;
 
+use ICanBoogie\Application;
 use ICanBoogie\Binding\Routing\ControllerTest\BoundController as Controller;
 use ICanBoogie\PropertyNotDefined;
 use PHPUnit\Framework\TestCase;
 
 use function ICanBoogie\app;
 
-class ControllerTest extends TestCase
+final class ControllerTest extends TestCase
 {
-	static private $app;
+	static private Application $app;
 
-	static public function setupBeforeClass(): void
+	static public function setUpBeforeClass(): void
 	{
+		parent::setUpBeforeClass();
+
 		self::$app = app();
 	}
+
+//	protected function setUp(): void
+//	{
+//		parent::setUp();
+//
+//		$this->markTestSkipped("Controller concept is deprecated");
+//	}
 
 	public function test_get_application_property()
 	{

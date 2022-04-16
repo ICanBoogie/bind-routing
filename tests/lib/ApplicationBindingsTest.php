@@ -13,18 +13,17 @@ namespace ICanBoogie\Binding\Routing;
 
 use ICanBoogie\Application;
 use ICanBoogie\Routing\RouteCollection;
-
+use PHPUnit\Framework\TestCase;
 use function ICanBoogie\app;
 
-class ApplicationBindingsTest extends \PHPUnit\Framework\TestCase
+final class ApplicationBindingsTest extends TestCase
 {
-	/**
-	 * @var Application
-	 */
-	static private $app;
+	static private Application $app;
 
-	static public function setupBeforeClass(): void
+	static public function setUpBeforeClass(): void
 	{
+		parent::setUpBeforeClass();
+
 		self::$app = app();
 	}
 

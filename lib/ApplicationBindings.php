@@ -11,17 +11,24 @@
 
 namespace ICanBoogie\Binding\Routing;
 
+use ICanBoogie\Routing\Route;
 use ICanBoogie\Routing\RouteCollection;
+use ICanBoogie\Routing\Router;
+use ICanBoogie\Routing\UrlGenerator;
 
 /**
  * {@link \ICanBoogie\Application} bindings.
  *
- * @method string url_for($route_or_route_id, $values = null) Returns the contextualized URL of a route.
+ * @method string url_for(Route|string $route_or_route_id, array|object $values = null) Returns the contextualized URL of a route.
  *
  * @property RouteCollection $routes
+ * @property Router $router
+ * @property UrlGenerator $url_generator
  *
- * @see \ICanBoogie\Binding\Routing\Hooks::url_for()
- * @see \ICanBoogie\Binding\Routing\Hooks::get_routes()
+ * @see Hooks::url_for()
+ * @see Hooks::get_routes()
+ * @see Hooks::get_router()
+ * @see Hooks::get_url_generator()
  */
 trait ApplicationBindings
 {

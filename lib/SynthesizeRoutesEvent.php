@@ -12,6 +12,7 @@
 namespace ICanBoogie\Binding\Routing;
 
 use ICanBoogie\Event;
+use ICanBoogie\Routing\Route;
 
 /**
  * Event class for the `routing.synthesize_routes` event.
@@ -21,22 +22,24 @@ use ICanBoogie\Event;
  */
 final class SynthesizeRoutesEvent extends Event
 {
+	public const TYPE = 'routing.synthesize_routes';
+
 	/**
 	 * Reference to route definitions.
 	 *
-	 * @var array
+	 * @var Route[]
 	 */
 	public array $routes;
 
 	/**
 	 * The event is constructed with the type `collect`.
 	 *
-	 * @param array $routes The route collection.
+	 * @param Route[] $routes The route collection.
 	 */
 	public function __construct(array &$routes)
 	{
 		$this->routes = &$routes;
 
-		parent::__construct(null, 'routing.synthesize_routes');
+		parent::__construct(null, self::TYPE);
 	}
 }

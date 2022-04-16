@@ -11,13 +11,16 @@
 
 namespace ICanBoogie\Binding\Routing;
 
-use ICanBoogie\Application;
 use ICanBoogie\Binding\HTTP\AbstractDispatcherConstructor;
 use ICanBoogie\HTTP\Dispatcher;
+use ICanBoogie\Routing\Responder\RouteResponder;
+use ICanBoogie\Routing\ResponderProvider\Mutable;
 use ICanBoogie\Routing\RouteDispatcher;
 
 /**
  * Construct a {@link RouteDispatcher} instance.
+ *
+ * @deprecated
  */
 class RouteDispatcherConstructor extends AbstractDispatcherConstructor
 {
@@ -26,6 +29,7 @@ class RouteDispatcherConstructor extends AbstractDispatcherConstructor
 	 */
 	public function __invoke(array $config): Dispatcher
 	{
-		return new RouteDispatcher($this->app->routes);
+		// TODO: Replace Mutable()
+		return new RouteDispatcher(new RouteResponder($this->app->routes, new Mutable()));
 	}
 }
