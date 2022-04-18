@@ -21,20 +21,20 @@ use ICanBoogie\Event;
  */
 class BeforeSynthesizeRoutesEvent extends Event
 {
+	public const TYPE = 'routing.synthesize_routes:before';
+
 	/**
 	 * Reference to the configuration fragments.
 	 */
 	public array $fragments;
 
 	/**
-	 * The event is constructed with the type `routing.synthesize_routes:before`.
-	 *
 	 * @param array $fragments Reference to the fragments to alter.
 	 */
 	public function __construct(array &$fragments)
 	{
 		$this->fragments = &$fragments;
 
-		parent::__construct(null, 'routing.synthesize_routes:before');
+		parent::__construct(null, self::TYPE);
 	}
 }
