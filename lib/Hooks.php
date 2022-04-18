@@ -12,11 +12,14 @@
 namespace ICanBoogie\Binding\Routing;
 
 use ICanBoogie\Application;
-use ICanBoogie\Routing\ResponderProvider;
+use ICanBoogie\Routing\ActionResponderProvider\Mutable;
 use ICanBoogie\Routing\Route;
 use ICanBoogie\Routing\RouteCollection;
 use ICanBoogie\Routing\Router;
 use ICanBoogie\Routing\UrlGenerator;
+use Throwable;
+
+use function ICanBoogie\emit;
 
 final class Hooks
 {
@@ -30,10 +33,12 @@ final class Hooks
 	 * @param array<string, Route[]> $fragments
 	 *
 	 * @return Route[]
+	 *
+	 * @throws Throwable
 	 */
 	static public function synthesize_routes_config(array $fragments): array
 	{
-		new BeforeSynthesizeRoutesEvent($fragments);
+		emit(new BeforeSynthesizeRoutesEvent($fragments));
 
 		$routes = [];
 
@@ -43,7 +48,7 @@ final class Hooks
 			}
 		}
 
-		new SynthesizeRoutesEvent($routes);
+		emit(new SynthesizeRoutesEvent($routes));
 
 		return $routes;
 	}
@@ -66,7 +71,7 @@ final class Hooks
 	{
 		static $router;
 
-		return $router ??= new Router($app->routes, new ResponderProvider\Mutable());
+		return $router ??= new Router($app->routes, new Mutable());
 	}
 
 	/**

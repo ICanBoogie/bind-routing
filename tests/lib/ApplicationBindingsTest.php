@@ -9,26 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace ICanBoogie\Binding\Routing;
+namespace Test\ICanBoogie\Binding\Routing;
 
-use ICanBoogie\Application;
 use ICanBoogie\Routing\RouteCollection;
 use PHPUnit\Framework\TestCase;
+
 use function ICanBoogie\app;
 
 final class ApplicationBindingsTest extends TestCase
 {
-	static private Application $app;
-
-	static public function setUpBeforeClass(): void
+	public function test_get_routes(): void
 	{
-		parent::setUpBeforeClass();
-
-		self::$app = app();
-	}
-
-	public function test_get_routes()
-	{
-		$this->assertInstanceOf(RouteCollection::class, self::$app->routes);
+		$this->assertInstanceOf(RouteCollection::class, app()->routes);
 	}
 }

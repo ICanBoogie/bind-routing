@@ -42,7 +42,7 @@
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"ICanBoogie\\Binding\\Routing\\": "tests/lib"
+			"Test\\ICanBoogie\\Binding\\Routing\\": "tests/lib"
 		},
 		"classmap": [
 			"tests/Application.php"

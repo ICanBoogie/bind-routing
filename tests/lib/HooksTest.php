@@ -9,41 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace ICanBoogie\Binding\Routing;
+namespace Test\ICanBoogie\Binding\Routing;
 
-use ICanBoogie\Application;
+use ICanBoogie\Binding\Routing\Hooks;
 use ICanBoogie\Routing\Route;
 use ICanBoogie\Routing\RouteCollection;
-use ICanBoogie\Routing\RouteDispatcher;
 use ICanBoogie\Routing\RouteProvider\ByUri;
 use PHPUnit\Framework\TestCase;
 
 use function ICanBoogie\app;
-use function ICanBoogie\HTTP\get_dispatcher;
 
 final class HooksTest extends TestCase
 {
-	static private Application $app;
-
-	static public function setUpBeforeClass(): void
-	{
-		parent::setUpBeforeClass();
-
-		self::$app = app();
-	}
-
-	public function test_route_dispatcher_registration()
-	{
-		$this->markTestSkipped();
-
-		$dispatcher = get_dispatcher();
-
-		$this->assertInstanceOf(RouteDispatcher::class, $dispatcher['routing']);
-	}
-
 	public function test_get_routes(): void
 	{
-		$app = self::$app;
+		$app = app();
 		$routes = Hooks::get_routes($app);
 		$this->assertInstanceOf(RouteCollection::class, $routes);
 		$this->assertSame($routes, Hooks::get_routes($app));
@@ -55,12 +35,12 @@ final class HooksTest extends TestCase
 		);
 	}
 
-	public function test_url_for()
+	public function test_url_for(): void
 	{
 		$route_id = 'test:route:' . uniqid();
 		$pattern = '/pattern/' . uniqid();
 
-		$app = self::$app;
+		$app = app();
 		$app->routes->add_routes(new Route($pattern, 'home', id: $route_id));
 
 		$this->assertEquals($pattern, $app->url_for($route_id));
