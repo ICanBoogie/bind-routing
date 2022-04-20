@@ -14,15 +14,10 @@ namespace ICanBoogie\Binding\Routing;
 use ICanBoogie\Event;
 
 /**
- * Event class for the `routing.synthesize_routes:before` event.
- *
- * Third parties may use this event to alter the configuration fragments before they are
- * synthesized.
+ * Listener may use this event to alter the configuration fragments before they are synthesized.
  */
 class BeforeSynthesizeRoutesEvent extends Event
 {
-	public const TYPE = 'routing.synthesize_routes:before';
-
 	/**
 	 * Reference to the configuration fragments.
 	 */
@@ -35,6 +30,6 @@ class BeforeSynthesizeRoutesEvent extends Event
 	{
 		$this->fragments = &$fragments;
 
-		parent::__construct(null, self::TYPE);
+		parent::__construct(null);
 	}
 }

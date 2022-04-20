@@ -13,8 +13,8 @@ namespace ICanBoogie\Binding\Routing;
 
 return [
 
-	'ICanBoogie\Application::lazy_get_routes'        => [ Hooks::class, 'get_routes' ],
-	'ICanBoogie\Application::lazy_get_router'        => [ Hooks::class, 'get_router'],
-	'ICanBoogie\Application::url_for'                => [ Hooks::class, 'url_for' ]
+	'ICanBoogie\Application::lazy_get_routes' => [ Hooks::class, 'get_routes' ],
+	'ICanBoogie\Application::lazy_get_router' => [ Hooks::class, 'get_router' ],
+	'ICanBoogie\Application::url_for' => [ Hooks::class, 'url_for' ]
 
 ];

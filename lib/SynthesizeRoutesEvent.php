@@ -15,15 +15,10 @@ use ICanBoogie\Event;
 use ICanBoogie\Routing\Route;
 
 /**
- * Event class for the `routing.synthesize_routes` event.
- *
- * Third parties may use this event to alter the synthesized configuration before it is
- * returned by the synthesizer.
+ * Listeners may use this event to alter the synthesized configuration before it is returned by the synthesizer.
  */
 final class SynthesizeRoutesEvent extends Event
 {
-	public const TYPE = 'routing.synthesize_routes';
-
 	/**
 	 * Reference to route definitions.
 	 *
@@ -40,6 +35,6 @@ final class SynthesizeRoutesEvent extends Event
 	{
 		$this->routes = &$routes;
 
-		parent::__construct(null, self::TYPE);
+		parent::__construct(null);
 	}
 }
