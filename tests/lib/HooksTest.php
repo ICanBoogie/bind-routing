@@ -18,6 +18,7 @@ use ICanBoogie\Routing\RouteProvider\ByUri;
 use PHPUnit\Framework\TestCase;
 
 use function ICanBoogie\app;
+use function implode;
 
 final class HooksTest extends TestCase
 {
@@ -32,6 +33,17 @@ final class HooksTest extends TestCase
 		$this->assertSame(
 			'home',
 			$app->routes->route_for_predicate(new ByUri('/'))->action
+		);
+
+		$actions = [];
+
+		foreach ($routes as $route) {
+			$actions[] = $route->action;
+		}
+
+		$this->assertEquals(
+			"api:ping home articles:list articles:new articles:create articles:show articles:edit articles:update articles:delete",
+			implode(' ', $actions)
 		);
 	}
 

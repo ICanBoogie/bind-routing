@@ -35,6 +35,8 @@ final class Hooks
 	 * @return Route[]
 	 *
 	 * @throws Throwable
+	 *
+	 * @deprecated
 	 */
 	static public function synthesize_routes_config(array $fragments): array
 	{
@@ -64,7 +66,7 @@ final class Hooks
 	{
 		static $routes;
 
-		return $routes ??= new RouteCollection($app->configs['routes']);
+		return $routes ??= $app->configs['routes'];
 	}
 
 	static public function get_router(Application $app): Router

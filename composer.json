@@ -55,7 +55,7 @@
 		"icanboogie": {
 			"config-path": "config",
 			"config-constructor": {
-				"routes": "ICanBoogie\\Binding\\Routing\\Hooks::synthesize_routes_config"
+				"routes": "ICanBoogie\\Binding\\Routing\\ConfigBuilder"
 			}
 		}
 	}

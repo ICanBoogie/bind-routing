@@ -1,10 +1,10 @@
 <?php
 
-namespace ICanBoogie\Routing;
+use ICanBoogie\Binding\Routing\ConfigBuilder;
 
-return [
+return function (ConfigBuilder $config) {
 
-	new Route('/', 'home'),
-	...RouteMaker::resource('articles'),
+	$config->route('/', 'home');
+	$config->resource('articles');
 
-];
+};
