@@ -1,3 +1,7 @@
+parameters:
+  # provided by the compiler pass
+  routing.action_responder.aliases: ~
+
 services:
   _defaults:
     public: true
@@ -7,20 +11,17 @@ services:
     class: Test\ICanBoogie\Binding\Routing\ArticleController
     tags:
     - { name: action_responder }
-    - { name: routing.controller, action: 'articles:home' }
-    - { name: routing.controller, action: 'articles:show' }
+    - { name: action_alias, action: 'articles:home' }
+    - { name: action_alias, action: 'articles:show' }
 
   controller.page:
     class: Test\ICanBoogie\Binding\Routing\PageController
     tags:
     - { name: action_responder }
-    - { name: routing.controller, action: 'page:about' }
+    - { name: action_alias, action: 'page:about' }
 
   ICanBoogie\Routing\ActionResponderProvider:
     class: ICanBoogie\Routing\ActionResponderProvider\Container
     arguments:
-      $container: !tagged_locator { tag: action_responder }
-      $aliases:
-        'page:about': 'controller.page'
-        'articles:home': 'controller.article'
-        'articles:show': 'controller.article'
+      - !tagged_locator { tag: action_responder }
+      - '%routing.action_responder.aliases%'
