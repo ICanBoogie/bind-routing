@@ -1,23 +1,22 @@
+parameters:
+  routing.action_responder.aliases: ~ # provided by the compiler pass
+
 services:
   _defaults:
-    public: true
     autowire: true
+
+  ICanBoogie\Routing\ActionResponderProvider:
+    class: ICanBoogie\Routing\ActionResponderProvider\Container
+    arguments:
+    - !tagged_locator { tag: action_responder }
+    - '%routing.action_responder.aliases%'
 
   ICanBoogie\Routing\RequestResponderProvider:
     tags:
     - { name: request_responder }
 
-  ICanBoogie\Routing\ActionResponderProvider:
-    class: ICanBoogie\Routing\ActionResponderProvider\Mutable
-
   ICanBoogie\Routing\RouteProvider:
     factory: [ ICanBoogie\Binding\Routing\Hooks, get_routes ]
 
-  ICanBoogie\Routing\UrlGenerator: ~
-
-# HTTP
-
-  ICanBoogie\HTTP\ResponderProvider:
-    class: ICanBoogie\HTTP\ResponderProvider\Chain
-    arguments:
-      $chain: !tagged_iterator { tag: request_responder }
+  ICanBoogie\Routing\UrlGenerator:
+    public: true

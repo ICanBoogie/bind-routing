@@ -1,7 +1,3 @@
-parameters:
-  # provided by the compiler pass
-  routing.action_responder.aliases: ~
-
 services:
   _defaults:
     public: true
@@ -19,9 +15,3 @@ services:
     tags:
     - { name: action_responder }
     - { name: action_alias, action: 'page:about' }
-
-  ICanBoogie\Routing\ActionResponderProvider:
-    class: ICanBoogie\Routing\ActionResponderProvider\Container
-    arguments:
-      - !tagged_locator { tag: action_responder }
-      - '%routing.action_responder.aliases%'
