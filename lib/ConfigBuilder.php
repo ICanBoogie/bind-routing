@@ -13,7 +13,6 @@ namespace ICanBoogie\Binding\Routing;
 
 use ICanBoogie\HTTP\RequestMethod;
 use ICanBoogie\Routing\Route;
-use ICanBoogie\Routing\RouteCollection;
 use ICanBoogie\Routing\RouteMaker;
 use ICanBoogie\Routing\RouteMaker\Options;
 use ICanBoogie\Routing\RouteProvider;
@@ -23,16 +22,16 @@ use ICanBoogie\Routing\RouteProvider;
  */
 final class ConfigBuilder implements \ICanBoogie\ConfigBuilder
 {
-	private RouteCollection $routes;
+	private RouteProvider\Mutable $routes;
 
 	public function __construct()
 	{
-		$this->routes = new RouteCollection();
+		$this->routes = new RouteProvider\Mutable();
 	}
 
 	public function build(): RouteProvider
 	{
-		return $this->routes;
+		return new RouteProvider\Immutable($this->routes);
 	}
 
 	/**

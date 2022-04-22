@@ -15,3 +15,6 @@ services:
     tags:
     - { name: action_responder }
     - { name: action_alias, action: 'page:about' }
+
+  test.route_provider:
+    alias: ICanBoogie\Routing\RouteProvider

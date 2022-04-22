@@ -11,7 +11,7 @@
 
 namespace Test\ICanBoogie\Binding\Routing;
 
-use ICanBoogie\Routing\RouteCollection;
+use ICanBoogie\Routing\RouteProvider;
 use PHPUnit\Framework\TestCase;
 
 use function ICanBoogie\app;
@@ -20,6 +20,6 @@ final class ApplicationBindingsTest extends TestCase
 {
 	public function test_get_routes(): void
 	{
-		$this->assertInstanceOf(RouteCollection::class, app()->routes);
+		$this->assertInstanceOf(RouteProvider\Immutable::class, app()->routes);
 	}
 }

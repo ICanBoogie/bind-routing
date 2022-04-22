@@ -12,8 +12,6 @@
 namespace Test\ICanBoogie\Binding\Routing;
 
 use ICanBoogie\Binding\Routing\Hooks;
-use ICanBoogie\Routing\Route;
-use ICanBoogie\Routing\RouteCollection;
 use ICanBoogie\Routing\RouteProvider\ByUri;
 use PHPUnit\Framework\TestCase;
 
@@ -26,7 +24,6 @@ final class HooksTest extends TestCase
 	{
 		$app = app();
 		$routes = Hooks::get_routes($app);
-		$this->assertInstanceOf(RouteCollection::class, $routes);
 		$this->assertSame($routes, Hooks::get_routes($app));
 		$this->assertSame($routes, $app->routes);
 
@@ -49,12 +46,6 @@ final class HooksTest extends TestCase
 
 	public function test_url_for(): void
 	{
-		$route_id = 'test:route:' . uniqid();
-		$pattern = '/pattern/' . uniqid();
-
-		$app = app();
-		$app->routes->add_routes(new Route($pattern, 'home', id: $route_id));
-
-		$this->assertEquals($pattern, $app->url_for($route_id));
+		$this->assertEquals('/articles/123', app()->url_for('articles:show', [ 'id' => 123 ]));
 	}
 }

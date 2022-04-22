@@ -13,7 +13,7 @@ namespace ICanBoogie\Binding\Routing;
 
 use ICanBoogie\Application;
 use ICanBoogie\PropertyNotDefined;
-use ICanBoogie\Routing\RouteCollection;
+use ICanBoogie\Routing\IterableRouteProvider;
 
 /**
  * Forwards undefined properties to the application.
@@ -22,7 +22,7 @@ use ICanBoogie\Routing\RouteCollection;
  * {@link \ICanBoogie\Accessor\AccessorTrait}.
  *
  * @property Application $app
- * @property-read RouteCollection $routes
+ * @property-read IterableRouteProvider $routes
  */
 trait ForwardUndefinedPropertiesToApplication
 {

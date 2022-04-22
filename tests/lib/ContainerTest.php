@@ -11,12 +11,20 @@
 
 namespace Test\ICanBoogie\Binding\Routing;
 
+use ICanBoogie\Routing\RouteProvider;
 use PHPUnit\Framework\TestCase;
 
 use function ICanBoogie\app;
 
 final class ContainerTest extends TestCase
 {
+	public function test_service(): void
+	{
+		$actual = app()->container->get('test.route_provider');
+
+		$this->assertInstanceOf(RouteProvider\Memoize::class, $actual);
+	}
+
 	public function test_parameter(): void
 	{
 		$param = 'routing.action_responder.aliases';

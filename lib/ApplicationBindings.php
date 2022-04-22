@@ -11,8 +11,8 @@
 
 namespace ICanBoogie\Binding\Routing;
 
+use ICanBoogie\Routing\IterableRouteProvider;
 use ICanBoogie\Routing\Route;
-use ICanBoogie\Routing\RouteCollection;
 use ICanBoogie\Routing\Router;
 use ICanBoogie\Routing\UrlGenerator;
 
@@ -21,7 +21,7 @@ use ICanBoogie\Routing\UrlGenerator;
  *
  * @method string url_for(Route|string $route_or_route_id, array|object $values = null) Returns the contextualized URL of a route.
  *
- * @property RouteCollection $routes
+ * @property IterableRouteProvider $routes
  * @property Router $router
  * @property UrlGenerator $url_generator
  *
