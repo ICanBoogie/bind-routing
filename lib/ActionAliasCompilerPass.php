@@ -14,20 +14,20 @@ namespace ICanBoogie\Binding\Routing;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-final class CompilerPass implements CompilerPassInterface
+/**
+ * Creates a mapping of action to alias, which is used to forward multiple actions to the same responder.
+ */
+final class ActionAliasCompilerPass implements CompilerPassInterface
 {
-	public const PARAM_ALIASES = 'routing.action_responder.aliases';
-	public const TAG_ACTION_ALIAS = 'action_alias';
-	public const KEY_ACTION = 'action';
+	public const PARAM = 'routing.action_responder.aliases';
+	public const TAG = 'action_alias';
+	public const TAG_KEY = 'action';
 
 	public function process(ContainerBuilder $container)
 	{
 		$this->process_action_alias($container);
 	}
 
-	/**
-	 * Creates a mapping of action to alias.
-	 */
 	private function process_action_alias(ContainerBuilder $container): void
 	{
 		/**
@@ -36,12 +36,12 @@ final class CompilerPass implements CompilerPassInterface
 		 */
 		$aliases = [];
 
-		foreach ($container->findTaggedServiceIds(self::TAG_ACTION_ALIAS) as $id => $tags) {
+		foreach ($container->findTaggedServiceIds(self::TAG) as $id => $tags) {
 			foreach ($tags as $tag) {
-				$aliases[$tag[self::KEY_ACTION]] = $id;
+				$aliases[$tag[self::TAG_KEY]] = $id;
 			}
 		}
 
-		$container->setParameter(self::PARAM_ALIASES, $aliases);
+		$container->setParameter(self::PARAM, $aliases);
 	}
 }

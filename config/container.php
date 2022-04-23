@@ -9,9 +9,8 @@
  * file that was distributed with this source code.
  */
 
-use ICanBoogie\Binding\Routing\CompilerPass;
+use ICanBoogie\Binding\Routing\ActionAliasCompilerPass;
 use ICanBoogie\Binding\SymfonyDependencyInjection\ConfigBuilder;
 
-return function (ConfigBuilder $config): void {
-	$config->add_compiler_pass(CompilerPass::class);
-};
+return fn(ConfigBuilder $config) => $config
+	->add_compiler_pass(ActionAliasCompilerPass::class);

@@ -24,5 +24,8 @@ services:
   ICanBoogie\Routing\RouteProvider\Memoize:
     decorates: ICanBoogie\Routing\IterableRouteProvider
 
+  ICanBoogie\Routing\UrlGenerator\UrlGeneratorWithRouteProvider: ~
+
   ICanBoogie\Routing\UrlGenerator:
+    alias: ICanBoogie\Routing\UrlGenerator\UrlGeneratorWithRouteProvider
     public: true

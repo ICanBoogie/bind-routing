@@ -34,6 +34,7 @@ final class ContainerTest extends TestCase
 			'articles:home' => 'controller.article',
 			'articles:show' => 'controller.article',
 			'page:about' => 'controller.page',
+			'api:ping' => 'ICanBoogie\Routing\PingController',
 		], $actual);
 	}
 }
