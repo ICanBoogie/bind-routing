@@ -25,6 +25,12 @@ echo $app->url_for('articles:show', $app->models['articles']->one);
 
 
 
+$$## Installation
+
+```bash
+composer require icanboogie/bind-routing
+```
+
 
 
 ## Defining routes using configuration fragments
@@ -44,14 +50,13 @@ namespace App;
 use ICanBoogie\Binding\Routing\ConfigBuilder;
 use ICanBoogie\Routing\RouteMaker;
 
-return function (ConfigBuilder $config): void {
-    $config->route('/', 'page:home')
-    $config->resource('articles', new Make\Options(
+return fn(ConfigBuilder $config) => $config
+    ->route('/', 'page:home')
+    ->resource('articles', new Make\Options(
         basics: [
             RouteMaker::ACTION_SHOW => new Make\Basics('/articles/:year-:month-:slug.html')
         ]
-    ))
-};
+    ));
 ```
 
 The following code demonstrates how to obtain a route collection from the `routes` configuration:
@@ -65,14 +70,6 @@ $routes = $app->configs['routes'];
 
 
 ----------
-
-
-
-## Installation
-
-```bash
-composer require icanboogie/bind-routing
-```
 
 
 

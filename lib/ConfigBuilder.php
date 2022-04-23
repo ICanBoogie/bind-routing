@@ -11,6 +11,7 @@
 
 namespace ICanBoogie\Binding\Routing;
 
+use ICanBoogie\Config\Builder;
 use ICanBoogie\HTTP\RequestMethod;
 use ICanBoogie\Routing\Route;
 use ICanBoogie\Routing\RouteMaker;
@@ -20,7 +21,7 @@ use ICanBoogie\Routing\RouteProvider;
 /**
  * A config builder for 'routes' fragments.
  */
-final class ConfigBuilder implements \ICanBoogie\ConfigBuilder
+final class ConfigBuilder implements Builder
 {
 	private RouteProvider\Mutable $routes;
 

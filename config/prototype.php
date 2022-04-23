@@ -9,12 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace ICanBoogie\Binding\Routing;
+use ICanBoogie\Application;
+use ICanBoogie\Binding\Prototype\ConfigBuilder;
+use ICanBoogie\Binding\Routing\Hooks;
 
-return [
-
-	'ICanBoogie\Application::lazy_get_routes' => [ Hooks::class, 'get_routes' ],
-	'ICanBoogie\Application::lazy_get_router' => [ Hooks::class, 'get_router' ],
-	'ICanBoogie\Application::url_for' => [ Hooks::class, 'url_for' ]
-
-];
+return fn(ConfigBuilder $config) => $config
+	->bind(Application::class, 'lazy_get_routes', [ Hooks::class, 'get_routes' ])
+	->bind(Application::class, 'lazy_get_router', [ Hooks::class, 'get_router' ])
+	->bind(Application::class, 'url_for', [ Hooks::class, 'url_for' ]);
