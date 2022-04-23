@@ -19,17 +19,17 @@ use function ICanBoogie\app;
 
 final class IntegrationTest extends TestCase
 {
-	public function test_route(): void
-	{
-		$this->markTestSkipped("The response is not returned, it is executed.");
+    public function test_route(): void
+    {
+        $this->markTestSkipped("The response is not returned, it is executed.");
 
-		$request = Request::from([
+        $request = Request::from([
 
-			Request::OPTION_METHOD => RequestMethod::METHOD_GET,
-			Request::OPTION_URI => '/articles/123',
+            Request::OPTION_METHOD => RequestMethod::METHOD_GET,
+            Request::OPTION_URI => '/articles/123',
 
-		]);
+        ]);
 
-		$response = (app())($request);
-	}
+        $response = (app())($request);
+    }
 }

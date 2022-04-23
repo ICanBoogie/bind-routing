@@ -8,5 +8,6 @@ use ICanBoogie\Routing\ControllerAbstract;
 
 abstract class BoundController extends ControllerAbstract
 {
-	use ControllerBindings, ForwardUndefinedPropertiesToApplication;
+    use ControllerBindings;
+    use ForwardUndefinedPropertiesToApplication;
 }

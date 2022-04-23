@@ -20,8 +20,8 @@ use ICanBoogie\Routing\RouteProvider;
  */
 final class ConfigBuilder extends RouteCollector implements Builder
 {
-	public function build(): RouteProvider
-	{
-		return $this->collect();
-	}
+    public function build(): RouteProvider
+    {
+        return $this->collect();
+    }
 }

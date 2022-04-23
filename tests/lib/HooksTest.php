@@ -20,32 +20,32 @@ use function implode;
 
 final class HooksTest extends TestCase
 {
-	public function test_get_routes(): void
-	{
-		$app = app();
-		$routes = Hooks::get_routes($app);
-		$this->assertSame($routes, Hooks::get_routes($app));
-		$this->assertSame($routes, $app->routes);
+    public function test_get_routes(): void
+    {
+        $app = app();
+        $routes = Hooks::get_routes($app);
+        $this->assertSame($routes, Hooks::get_routes($app));
+        $this->assertSame($routes, $app->routes);
 
-		$this->assertSame(
-			'home',
-			$app->routes->route_for_predicate(new ByUri('/'))->action
-		);
+        $this->assertSame(
+            'home',
+            $app->routes->route_for_predicate(new ByUri('/'))->action
+        );
 
-		$actions = [];
+        $actions = [];
 
-		foreach ($routes as $route) {
-			$actions[] = $route->action;
-		}
+        foreach ($routes as $route) {
+            $actions[] = $route->action;
+        }
 
-		$this->assertEquals(
-			"api:ping home articles:list articles:new articles:create articles:show articles:edit articles:update articles:delete",
-			implode(' ', $actions)
-		);
-	}
+        $this->assertEquals(
+            "api:ping home articles:list articles:new articles:create articles:show articles:edit articles:update articles:delete",
+            implode(' ', $actions)
+        );
+    }
 
-	public function test_url_for(): void
-	{
-		$this->assertEquals('/articles/123', app()->url_for('articles:show', [ 'id' => 123 ]));
-	}
+    public function test_url_for(): void
+    {
+        $this->assertEquals('/articles/123', app()->url_for('articles:show', [ 'id' => 123 ]));
+    }
 }

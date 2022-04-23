@@ -12,75 +12,42 @@
 namespace ICanBoogie\Binding\Routing;
 
 use ICanBoogie\Application;
-use ICanBoogie\Routing\ActionResponderProvider\Mutable;
 use ICanBoogie\Routing\IterableRouteProvider;
-use ICanBoogie\Routing\Route;
-use ICanBoogie\Routing\Router;
 use ICanBoogie\Routing\UrlGenerator;
-use Throwable;
-
-use function ICanBoogie\emit;
 
 final class Hooks
 {
-	/*
-	 * Events
-	 */
+    /*
+     * Prototypes
+     */
 
-	/**
-	 * Synthesize the `routes` config from `routes` fragments.
-	 *
-	 * @param array<string, Route[]> $fragments
-	 *
-	 * @return Route[]
-	 *
-	 * @throws Throwable
-	 *
-	 * @deprecated
-	 */
-	static public function synthesize_routes_config(array $fragments): array
-	{
-		emit(new BeforeSynthesizeRoutesEvent($fragments));
+    /**
+     * Returns the route collection.
+     */
+    public static function get_routes(Application $app): IterableRouteProvider
+    {
+        static $routes;
 
-		$routes = [];
+        return $routes ??= $app->configs['routes'];
+    }
 
-		foreach ($fragments as $fragment) {
-			foreach ($fragment as $route) {
-				$routes[] = $route;
-			}
-		}
-
-		emit(new SynthesizeRoutesEvent($routes));
-
-		return $routes;
-	}
-
-	/*
-	 * Prototypes
-	 */
-
-	/**
-	 * Returns the route collection.
-	 */
-	static public function get_routes(Application $app): IterableRouteProvider
-	{
-		static $routes;
-
-		return $routes ??= $app->configs['routes'];
-	}
-
-	static public function get_router(Application $app): Router
-	{
-		static $router;
-
-		return $router ??= new Router($app->routes, new Mutable());
-	}
-
-	/**
-	 * Returns the contextualized URL of a route.
-	 */
-	static public function url_for(Application $app, string|callable $predicate, object|array $params = null): string
-	{
-		return $app->container->get(UrlGenerator::class)->generate_url($predicate, $params);
-	}
+    /**
+     * Returns the contextualized URL of a route.
+     *
+     * @phpstan-param string|(callable(\ICanBoogie\Routing\Route): bool) $predicate_or_id_or_action
+     *
+     * @param array<string, mixed>|object|null $path_params
+     *     Parameters that reference placeholders in the route pattern.
+     * @param array<string, mixed>|object|null $query_params
+     *     Parameters for the query string.
+     */
+    public static function url_for(
+        Application $app,
+        string|callable $predicate_or_id_or_action,
+        array|object|null $path_params = null,
+        array|object|null $query_params = null,
+    ): string {
+        return $app->service_for_class(UrlGenerator::class)
+            ->generate_url($predicate_or_id_or_action, $path_params, $query_params);
+    }
 }

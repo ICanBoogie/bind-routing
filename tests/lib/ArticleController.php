@@ -17,8 +17,8 @@ use ICanBoogie\Routing\Route;
 
 class ArticleController extends ControllerAbstract
 {
-	protected function action(Request $request): string
-	{
-		return $request->context->get(Route::class)->action;
-	}
+    protected function action(Request $request): string
+    {
+        return $request->context->get(Route::class)->action;
+    }
 }

@@ -26,23 +26,20 @@ use ICanBoogie\Routing\IterableRouteProvider;
  */
 trait ForwardUndefinedPropertiesToApplication
 {
-	/**
-	 * Tries to get the undefined property from the application.
-	 */
-	protected function last_chance_get(string $property, bool &$success): mixed
-	{
-		try
-		{
-			$value = $this->app->$property;
-			$success = true;
+    /**
+     * Tries to get the undefined property from the application.
+     */
+    protected function last_chance_get(string $property, bool &$success): mixed
+    {
+        try {
+            $value = $this->app->$property;
+            $success = true;
 
-			return $value;
-		}
-		catch (PropertyNotDefined $e)
-		{
-			// We don't mind that the property is not defined by the app
-		}
+            return $value;
+        } catch (PropertyNotDefined $e) {
+            // We don't mind that the property is not defined by the app
+        }
 
-		return parent::last_chance_get($property, $success);
-	}
+        return parent::last_chance_get($property, $success);
+    }
 }

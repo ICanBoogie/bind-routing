@@ -19,29 +19,29 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 final class ActionAliasCompilerPass implements CompilerPassInterface
 {
-	public const PARAM = 'routing.action_responder.aliases';
-	public const TAG = 'action_alias';
-	public const TAG_KEY = 'action';
+    public const PARAM = 'routing.action_responder.aliases';
+    public const TAG = 'action_alias';
+    public const TAG_KEY = 'action';
 
-	public function process(ContainerBuilder $container)
-	{
-		$this->process_action_alias($container);
-	}
+    public function process(ContainerBuilder $container): void
+    {
+        $this->process_action_alias($container);
+    }
 
-	private function process_action_alias(ContainerBuilder $container): void
-	{
-		/**
-		 * @var array<string, string>
-		 *     Where _key_ is an action and _value_ an alias
-		 */
-		$aliases = [];
+    private function process_action_alias(ContainerBuilder $container): void
+    {
+        /**
+         * @var array<string, string>
+         *     Where _key_ is an action and _value_ an alias
+         */
+        $aliases = [];
 
-		foreach ($container->findTaggedServiceIds(self::TAG) as $id => $tags) {
-			foreach ($tags as $tag) {
-				$aliases[$tag[self::TAG_KEY]] = $id;
-			}
-		}
+        foreach ($container->findTaggedServiceIds(self::TAG) as $id => $tags) {
+            foreach ($tags as $tag) {
+                $aliases[$tag[self::TAG_KEY]] = $id;
+            }
+        }
 
-		$container->setParameter(self::PARAM, $aliases);
-	}
+        $container->setParameter(self::PARAM, $aliases);
+    }
 }

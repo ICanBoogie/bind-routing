@@ -18,8 +18,8 @@ use function ICanBoogie\app;
 
 final class ApplicationBindingsTest extends TestCase
 {
-	public function test_get_routes(): void
-	{
-		$this->assertInstanceOf(RouteProvider\Immutable::class, app()->routes);
-	}
+    public function test_get_routes(): void
+    {
+        $this->assertInstanceOf(RouteProvider\Immutable::class, app()->routes);
+    }
 }

@@ -20,40 +20,40 @@ use function ICanBoogie\app;
 
 final class ControllerTest extends TestCase
 {
-	public function test_get_application_property()
-	{
-		$controller = $this
-			->getMockBuilder(Controller::class)
-			->disableOriginalConstructor()
-			->getMockForAbstractClass();
+    public function test_get_application_property()
+    {
+        $controller = $this
+            ->getMockBuilder(Controller::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
 
-		/* @var $controller Controller */
+        /* @var $controller Controller */
 
-		$this->assertSame(app()->routes, $controller->routes);
-	}
+        $this->assertSame(app()->routes, $controller->routes);
+    }
 
-	public function test_last_chance_get_application_get_undefined()
-	{
-		$property = 'property' . uniqid();
+    public function test_last_chance_get_application_get_undefined()
+    {
+        $property = 'property' . uniqid();
 
-		$controller = $this
-			->getMockBuilder(Controller::class)
-			->disableOriginalConstructor()
-			->getMockForAbstractClass();
+        $controller = $this
+            ->getMockBuilder(Controller::class)
+            ->disableOriginalConstructor()
+            ->getMockForAbstractClass();
 
-		/* @var $controller Controller */
+        /* @var $controller Controller */
 
-		try {
-			$controller->$property;
+        try {
+            $controller->$property;
 
-			$this->fail('Expected PropertyNotDefined');
-		} catch (Throwable $e) {
-			$this->assertInstanceOf(PropertyNotDefined::class, $e);
+            $this->fail('Expected PropertyNotDefined');
+        } catch (Throwable $e) {
+            $this->assertInstanceOf(PropertyNotDefined::class, $e);
 
-			$message = $e->getMessage();
+            $message = $e->getMessage();
 
-			$this->assertStringContainsString($property, $message);
-			$this->assertStringContainsString(get_class($controller), $message);
-		}
-	}
+            $this->assertStringContainsString($property, $message);
+            $this->assertStringContainsString(get_class($controller), $message);
+        }
+    }
 }
