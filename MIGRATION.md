@@ -1,0 +1,33 @@
+# Migration
+
+## v5.x to v6.x
+
+### New features
+
+- `UrlTrait` and `UrlMethod` can be used to prototyped objects to add a `url()` method and a `$url`
+  property.
+
+    ```php
+    <?php
+
+    namespace ICanBoogie;
+
+    use ICanBoogie\Binding\Routing\Prototype\UrlTrait;
+
+    class Article extends Prototyped
+    {
+        use UrlTrait;
+
+        // …
+    }
+
+    $article = new Article;
+
+    echo $article->url;
+    ```
+
+### Backward Incompatible Changes
+
+### Deprecated Features
+
+### Other Changes

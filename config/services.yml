@@ -28,4 +28,6 @@ services:
 
   ICanBoogie\Routing\UrlGenerator:
     alias: ICanBoogie\Routing\UrlGenerator\UrlGeneratorWithRouteProvider
-    public: true
+
+  ICanBoogie\Binding\Routing\Prototype\UrlMethod:
+    public: true # so it can be used as a reference by prototypes

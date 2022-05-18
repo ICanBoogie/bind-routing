@@ -74,7 +74,7 @@ $routes = $app->configs['routes'];
 
 ## Continuous Integration
 
-The project is continuously tested by [GitHub actions](https://github.com/ICanBoogie/Inflector/actions).
+The project is continuously tested by [GitHub actions](https://github.com/ICanBoogie/bind-routing/actions).
 
 [![Tests](https://github.com/ICanBoogie/bind-routing/workflows/test/badge.svg?branch=master)](https://github.com/ICanBoogie/bind-routing/actions?query=workflow%3Atest)
 [![Static Analysis](https://github.com/ICanBoogie/bind-routing/workflows/static-analysis/badge.svg?branch=master)](https://github.com/ICanBoogie/bind-routing/actions?query=workflow%3Astatic-analysis)
@@ -84,8 +84,8 @@ The project is continuously tested by [GitHub actions](https://github.com/ICanBo
 
 ## Code of Conduct
 
-This project adheres to a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project and its
-community, you are expected to uphold this code.
+This project adheres to a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in
+this project and its community, you are expected to uphold this code.
 
 
 
