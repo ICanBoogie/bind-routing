@@ -20,6 +20,11 @@ use ICanBoogie\Routing\RouteProvider;
  */
 final class ConfigBuilder extends RouteCollector implements Builder
 {
+    public static function get_fragment_filename(): string
+    {
+        return 'routes';
+    }
+
     public function build(): RouteProvider
     {
         return $this->collect();
