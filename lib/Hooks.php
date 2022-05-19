@@ -24,6 +24,6 @@ final class Hooks
     {
         static $routes;
 
-        return $routes ??= $app->configs[RouteProvider::class];
+        return $routes ??= $app->configs->config_for_class(RouteProvider::class);
     }
 }
