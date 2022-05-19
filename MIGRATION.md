@@ -30,4 +30,9 @@
 
 ### Deprecated Features
 
+- Removed `Application::url_for()` prototype method. Request the service implementing `UrlGenerator`
+  instead.
+
 ### Other Changes
+
+N/A

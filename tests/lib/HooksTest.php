@@ -43,9 +43,4 @@ final class HooksTest extends TestCase
             implode(' ', $actions)
         );
     }
-
-    public function test_url_for(): void
-    {
-        $this->assertEquals('/articles/123', app()->url_for('articles:show', [ 'id' => 123 ]));
-    }
 }

@@ -15,4 +15,4 @@ use ICanBoogie\Binding\Routing\Hooks;
 
 return fn(ConfigBuilder $config) => $config
 	->bind(Application::class, 'lazy_get_routes', [ Hooks::class, 'get_routes' ])
-	->bind(Application::class, 'url_for', [ Hooks::class, 'url_for' ]);
+;
