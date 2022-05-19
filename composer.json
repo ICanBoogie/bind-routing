@@ -56,7 +56,7 @@
 		"icanboogie": {
 			"config-path": "config",
 			"config-constructor": {
-				"routes": "ICanBoogie\\Binding\\Routing\\ConfigBuilder"
+				"ICanBoogie\\Routing\\RouteProvider": "ICanBoogie\\Binding\\Routing\\ConfigBuilder"
 			}
 		}
 	}
