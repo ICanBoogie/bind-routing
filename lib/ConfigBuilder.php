@@ -17,6 +17,8 @@ use ICanBoogie\Routing\RouteProvider;
 
 /**
  * A config builder for 'routes' fragments.
+ *
+ * @implements Builder<RouteProvider>
  */
 final class ConfigBuilder extends RouteCollector implements Builder
 {

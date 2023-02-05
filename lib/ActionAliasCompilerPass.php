@@ -31,7 +31,7 @@ final class ActionAliasCompilerPass implements CompilerPassInterface
     private function process_action_alias(ContainerBuilder $container): void
     {
         /**
-         * @var array<string, string>
+         * @var array<string, string> $aliases
          *     Where _key_ is an action and _value_ an alias
          */
         $aliases = [];

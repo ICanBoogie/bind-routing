@@ -12,7 +12,6 @@
 namespace ICanBoogie\Binding\Routing;
 
 use ICanBoogie\Application;
-use ICanBoogie\Routing\IterableRouteProvider;
 use ICanBoogie\Routing\RouteProvider;
 
 final class Hooks
@@ -20,7 +19,7 @@ final class Hooks
     /**
      * Returns the route collection.
      */
-    public static function get_routes(Application $app): IterableRouteProvider
+    public static function get_routes(Application $app): RouteProvider
     {
         static $routes;
 

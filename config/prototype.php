@@ -14,5 +14,4 @@ use ICanBoogie\Binding\Prototype\ConfigBuilder;
 use ICanBoogie\Binding\Routing\Hooks;
 
 return fn(ConfigBuilder $config) => $config
-	->bind(Application::class, 'lazy_get_routes', [ Hooks::class, 'get_routes' ])
-;
+    ->bind(Application::class, 'get_routes', [ Hooks::class, 'get_routes' ]);
