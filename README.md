@@ -7,19 +7,20 @@
 
 The **icanboogie/bind-routing** package binds [icanboogie/routing][] to [ICanBoogie][].
 
-The package adds the getter `routes` to the [Application][] instance, a `url_for()` method that
-creates URLs, and a synthesizer for the `routes` configuration fragments.
+The package adds the getter `routes` to the [Application][] instance, and an autoconfig for `routes` fragments.
 
 ```php
 <?php
 
 namespace ICanBoogie;
 
+use ICanBoogie\Routing\RouteProvider\ByAction;
+
 require 'vendor/autoload.php';
 
 $app = boot();
 
-echo $app->url_for('articles:show', $app->models['articles']->one);
+$route = $app->routes->route_for_predicate(new ByAction('articles:show'));
 ```
 
 
@@ -63,7 +64,11 @@ The following code demonstrates how to obtain a route collection from the `route
 ```php
 <?php
 
-$routes = $app->configs['routes'];
+namespace ICanBoogie;
+
+/** @var Application $app */
+
+$routes = $app->configs->config_for_class(Routing\RouteProvider::class);
 ```
 
 

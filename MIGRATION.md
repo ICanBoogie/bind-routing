@@ -1,6 +1,6 @@
 # Migration
 
-## v5.x to v6.x
+## v5.x to v6.0
 
 ### New Requirements
 
@@ -8,8 +8,7 @@ None
 
 ### New features
 
-- `UrlTrait` and `UrlMethod` can be used to prototyped objects to add a `url()` method and a `$url`
-  property.
+- `UrlTrait` and `UrlMethod` can be used to prototyped objects to add a `url()` method and a `$url` property.
 
     ```php
     <?php
@@ -32,13 +31,12 @@ None
 
 ### Backward Incompatible Changes
 
-None
+- Because `ControllerAbstract` no longer extends `Prototyped` and services are now expected to be provided through the constructor, `ControllerBindings` and `ForwardUndefinedPropertiesToApplication` have been removed.
 
 ### Deprecated Features
 
-- Removed `Application::url_for()` prototype method. Request the service implementing `UrlGenerator`
-  instead.
+- Removed `Application::url_for()` prototype method. Request the service implementing `UrlGenerator` instead.
 
 ### Other Changes
 
-None
+- Compatible with PHP 8.2+

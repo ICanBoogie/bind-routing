@@ -9,16 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Test\ICanBoogie\Binding\Routing;
+namespace Test\ICanBoogie\Binding\Routing\Acme;
 
 use ICanBoogie\HTTP\Request;
+use ICanBoogie\HTTP\Response;
 use ICanBoogie\Routing\ControllerAbstract;
 use ICanBoogie\Routing\Route;
 
-class ArticleController extends ControllerAbstract
+final class PageController extends ControllerAbstract
 {
-    protected function action(Request $request): string
+    protected function action(Request $request): Response
     {
-        return $request->context->get(Route::class)->action;
+        return new Response($request->context->get(Route::class)->action);
     }
 }

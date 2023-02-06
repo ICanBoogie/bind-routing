@@ -4,14 +4,14 @@ services:
     autowire: true
 
   controller.article:
-    class: Test\ICanBoogie\Binding\Routing\ArticleController
+    class: Test\ICanBoogie\Binding\Routing\Acme\ArticleController
     tags:
     - { name: action_responder }
     - { name: action_alias, action: 'articles:home' }
     - { name: action_alias, action: 'articles:show' }
 
   controller.page:
-    class: Test\ICanBoogie\Binding\Routing\PageController
+    class: Test\ICanBoogie\Binding\Routing\Acme\PageController
     tags:
     - { name: action_responder }
     - { name: action_alias, action: 'page:about' }

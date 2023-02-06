@@ -29,7 +29,7 @@ final class HooksTest extends TestCase
 
         $this->assertSame(
             'home',
-            $app->routes->route_for_predicate(new ByUri('/'))->action
+            $app->routes->route_for_predicate(new ByUri('/'))?->action
         );
 
         $actions = [];
