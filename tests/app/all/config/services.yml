@@ -16,5 +16,11 @@ services:
     - { name: action_responder }
     - { name: action_alias, action: 'page:about' }
 
+  test.action_responder_provider:
+    alias: ICanBoogie\Routing\ActionResponderProvider
+
   test.route_provider:
     alias: ICanBoogie\Routing\RouteProvider
+
+  test.url_generator:
+    alias: ICanBoogie\Routing\UrlGenerator

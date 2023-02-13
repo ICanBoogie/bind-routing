@@ -4,7 +4,7 @@
 
 ### New Requirements
 
-None
+PHP 8.1+
 
 ### New features
 
@@ -32,11 +32,12 @@ None
 ### Backward Incompatible Changes
 
 - Because `ControllerAbstract` no longer extends `Prototyped` and services are now expected to be provided through the constructor, `ControllerBindings` and `ForwardUndefinedPropertiesToApplication` have been removed.
+- Removed `ApplicationBindings`. Removed `Application::url_for()` and `Application::get_routes()` prototype methods. Request the services `UrlGenerator` and `RouteProvider` instead.
 
 ### Deprecated Features
 
-- Removed `Application::url_for()` prototype method. Request the service implementing `UrlGenerator` instead.
+None
 
 ### Other Changes
 
-- Compatible with PHP 8.2+
+None

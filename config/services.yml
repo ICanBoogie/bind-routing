@@ -15,14 +15,13 @@ services:
     tags:
     - { name: request_responder }
 
-  ICanBoogie\Routing\IterableRouteProvider:
-    factory: [ ICanBoogie\Binding\Routing\Hooks, get_routes ]
-
   ICanBoogie\Routing\RouteProvider:
-    alias: ICanBoogie\Routing\IterableRouteProvider
+    factory: [ '@ICanBoogie\ConfigProvider', config_for_class ]
+    arguments:
+    - ICanBoogie\Routing\RouteProvider
 
   ICanBoogie\Routing\RouteProvider\Memoize:
-    decorates: ICanBoogie\Routing\IterableRouteProvider
+    decorates: ICanBoogie\Routing\RouteProvider
 
   ICanBoogie\Routing\UrlGenerator\UrlGeneratorWithRouteProvider: ~
 

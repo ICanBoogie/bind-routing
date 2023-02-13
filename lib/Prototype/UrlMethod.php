@@ -18,8 +18,6 @@ use ICanBoogie\Routing\UrlGenerator;
 use function basename;
 use function ICanBoogie\pluralize;
 use function ICanBoogie\underscore;
-use function str_replace;
-use function var_dump;
 
 final class UrlMethod
 {

@@ -7,22 +7,6 @@
 
 The **icanboogie/bind-routing** package binds [icanboogie/routing][] to [ICanBoogie][].
 
-The package adds the getter `routes` to the [Application][] instance, and an autoconfig for `routes` fragments.
-
-```php
-<?php
-
-namespace ICanBoogie;
-
-use ICanBoogie\Routing\RouteProvider\ByAction;
-
-require 'vendor/autoload.php';
-
-$app = boot();
-
-$route = $app->routes->route_for_predicate(new ByAction('articles:show'));
-```
-
 
 
 #### Installation
@@ -68,7 +52,7 @@ namespace ICanBoogie;
 
 /** @var Application $app */
 
-$routes = $app->configs->config_for_class(Routing\RouteProvider::class);
+$routes = $app->config_for_class(Routing\RouteProvider::class);
 ```
 
 
