@@ -8,6 +8,8 @@ PHP 8.1+
 
 ### New features
 
+- Added the console command `routes:list` (with alias `routes`).
+
 - `UrlTrait` and `UrlMethod` can be used to prototyped objects to add a `url()` method and a `$url` property.
 
     ```php

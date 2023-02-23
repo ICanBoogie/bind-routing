@@ -30,3 +30,13 @@ services:
 
   ICanBoogie\Binding\Routing\Prototype\UrlMethod:
     public: true # so it can be used as a reference by prototypes
+
+  # Console
+
+  console.command.routes.list:
+    class: ICanBoogie\Binding\Routing\Console\ListRoutesCommand
+    arguments:
+      $style: '%console.style.table%'
+    tags:
+    - { name: console.command, command: 'routes' }
+    - { name: console.command, command: 'routes:list' }
