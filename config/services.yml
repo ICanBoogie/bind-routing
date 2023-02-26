@@ -33,10 +33,18 @@ services:
 
   # Console
 
-  console.command.routes.list:
+  console.command.routing.routes:
     class: ICanBoogie\Binding\Routing\Console\ListRoutesCommand
     arguments:
       $style: '%console.style.table%'
     tags:
     - { name: console.command, command: 'routes' }
-    - { name: console.command, command: 'routes:list' }
+    - { name: console.command, command: 'routing:routes' }
+
+  console.command.routing.actions:
+    class: ICanBoogie\Binding\Routing\Console\ListActionsCommand
+    arguments:
+      $aliases: '%routing.action_responder.aliases%'
+      $style: '%console.style.table%'
+    tags:
+    - { name: console.command, command: 'routing:actions' }
