@@ -3,6 +3,7 @@
 namespace ICanBoogie\Binding\Routing\Console;
 
 use ICanBoogie\HTTP\RequestMethod;
+use ICanBoogie\HTTP\Responder;
 use ICanBoogie\Routing\RouteProvider;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -20,8 +21,13 @@ final class ListRoutesCommand extends Command
 {
     protected static $defaultDescription = "List routes";
 
+    /**
+     * @param array<string, class-string<Responder>> $aliases
+     *     Where _key_ is an action and _value_ a responder class.
+     */
     public function __construct(
         private readonly RouteProvider $config,
+        private readonly array $aliases,
         private readonly string $style,
     ) {
         parent::__construct();
@@ -36,12 +42,13 @@ final class ListRoutesCommand extends Command
                 self::render_methods($route->methods),
                 $route->pattern,
                 $route->action,
-                $route->id
+                $route->id,
+                $this->aliases[$route->action] ?? "",
             ];
         }
 
         $table = new Table($output);
-        $table->setHeaders([ 'Methods', 'Pattern', 'Action', 'Id' ]);
+        $table->setHeaders([ 'Methods', 'Pattern', 'Action', 'Id', 'Responder' ]);
         $table->setRows($rows);
         $table->setStyle($this->style);
         $table->render();

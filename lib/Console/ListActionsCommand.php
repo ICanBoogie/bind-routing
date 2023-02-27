@@ -17,6 +17,7 @@ final class ListActionsCommand extends Command
 
     /**
      * @param array<string, class-string<Responder>> $aliases
+     *     Where _key_ is an action and _value_ a responder class.
      */
     public function __construct(
         private readonly array $aliases,

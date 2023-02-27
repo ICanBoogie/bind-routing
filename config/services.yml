@@ -36,6 +36,7 @@ services:
   console.command.routing.routes:
     class: ICanBoogie\Binding\Routing\Console\ListRoutesCommand
     arguments:
+      $aliases: '%routing.action_responder.aliases%'
       $style: '%console.style.table%'
     tags:
     - { name: console.command, command: 'routes' }
