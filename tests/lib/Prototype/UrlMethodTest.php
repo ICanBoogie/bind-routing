@@ -13,6 +13,8 @@ namespace Test\ICanBoogie\Binding\Routing\Prototype;
 
 use ICanBoogie\Routing\RouteMaker;
 use PHPUnit\Framework\TestCase;
+use Test\ICanBoogie\Binding\Routing\Acme\Article;
+use Test\ICanBoogie\Binding\Routing\Acme\DanceSession;
 
 final class UrlMethodTest extends TestCase
 {
@@ -22,5 +24,9 @@ final class UrlMethodTest extends TestCase
 
         $this->assertEquals("/articles/2022-11-hello-world", $article->url);
         $this->assertEquals("/articles?order=-date", $article->url(RouteMaker::ACTION_LIST, [ 'order' => '-date' ]));
+
+        $dance_session = new DanceSession('inspiring-plum');
+
+        $this->assertEquals('/dance-sessions/inspiring-plum.html', $dance_session->url);;
     }
 }

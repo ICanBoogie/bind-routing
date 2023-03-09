@@ -16,6 +16,7 @@ use ICanBoogie\Routing\RouteMaker;
 use ICanBoogie\Routing\UrlGenerator;
 
 use function basename;
+use function ICanBoogie\hyphenate;
 use function ICanBoogie\pluralize;
 use function ICanBoogie\underscore;
 
@@ -53,7 +54,7 @@ final class UrlMethod
 
     private function make_action(object $caller, string $unqualified_action): string
     {
-        $base = basename(underscore($caller::class));
+        $base = basename(hyphenate($caller::class));
 
         return pluralize($base) . Route::ACTION_SEPARATOR . $unqualified_action;
     }

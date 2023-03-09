@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Test\ICanBoogie\Binding\Routing\Prototype;
+namespace Test\ICanBoogie\Binding\Routing\Acme;
 
 use ICanBoogie\Binding\Routing\Prototype\UrlTrait;
 use ICanBoogie\Prototyped;
 
-class Article extends Prototyped
+final class Article extends Prototyped
 {
     use UrlTrait;
 

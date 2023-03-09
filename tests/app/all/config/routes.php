@@ -15,6 +15,7 @@ use ICanBoogie\Routing\RouteMaker as Make;
 
 return fn(ConfigBuilder $config) => $config
     ->route('/', 'home')
+    ->get('/dance-sessions/:slug.html', 'dance-sessions:show')
     ->resource(
         'articles',
         options: new Make\Options(

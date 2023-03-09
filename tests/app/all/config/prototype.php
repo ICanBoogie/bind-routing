@@ -13,9 +13,11 @@ namespace ICanBoogie;
 
 use ICanBoogie\Binding\Prototype\ConfigBuilder;
 use ICanBoogie\Binding\Routing\Prototype\UrlMethod;
-use Test\ICanBoogie\Binding\Routing\Prototype\Article;
+use Test\ICanBoogie\Binding\Routing\Acme\Article;
+use Test\ICanBoogie\Binding\Routing\Acme\DanceSession;
 
 use function ICanBoogie\Service\ref;
 
 return fn(ConfigBuilder $config) => $config
-    ->bind(Article::class, UrlMethod::METHOD, ref(UrlMethod::class));
+    ->bind(Article::class, UrlMethod::METHOD, ref(UrlMethod::class))
+    ->bind(DanceSession::class, UrlMethod::METHOD, ref(UrlMethod::class));
