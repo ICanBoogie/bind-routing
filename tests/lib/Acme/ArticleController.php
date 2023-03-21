@@ -12,10 +12,12 @@
 namespace Test\ICanBoogie\Binding\Routing\Acme;
 
 use ICanBoogie\Binding\Routing\Action;
+use ICanBoogie\Binding\Routing\ActionResponder;
 use ICanBoogie\HTTP\Request;
 use ICanBoogie\Routing\ControllerAbstract;
 use ICanBoogie\Routing\Route;
 
+#[ActionResponder]
 final class ArticleController extends ControllerAbstract
 {
     #[Action('articles:show')]

@@ -19,15 +19,30 @@ use function substr;
 
 final class AttributeCompilerPass implements CompilerPassInterface
 {
+    private const TAG_ACTION_RESPONDER = 'action_responder';
     private const CONTROLLER_SUFFIX = 'Controller';
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!class_exists(Attributes::class)) {
             return;
         }
 
+        $this->process_action_responders($container);
         $this->process_actions($container);
+    }
+
+    /**
+     * Configures tag `{ name: action_responder }` from classes with the attribute {@link ActionResponder}.
+     */
+    private function process_action_responders(ContainerBuilder $container): void
+    {
+        $target_classes = Attributes::findTargetClasses(ActionResponder::class);
+
+        foreach ($target_classes as $class) {
+            $definition = $container->findDefinition($class->name);
+            $definition->addTag(self::TAG_ACTION_RESPONDER);
+        }
     }
 
     /**

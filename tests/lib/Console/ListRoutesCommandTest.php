@@ -7,7 +7,6 @@ use ICanBoogie\Console\Test\CommandTestCase;
 
 final class ListRoutesCommandTest extends CommandTestCase
 {
-
     public static function provideExecute(): array
     {
         return [

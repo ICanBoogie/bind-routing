@@ -76,7 +76,16 @@ services:
       - { name: action_alias, action: 'articles:show' }
 ```
 
-Alternatively, you can add the `Action` attribute to your action methods:
+Alternatively, you can add the `ActionResponder` and `Action` attributes:
+
+```yaml
+services:
+  _defaults:
+    autowire: true
+
+  App\Presentation\HTTP\Controller\ArticleController:
+      shared: false
+```
 
 ```php
 <?php
@@ -84,7 +93,9 @@ Alternatively, you can add the `Action` attribute to your action methods:
 namespace App\Presentation\HTTP\Controller;
 
 use ICanBoogie\Binding\Routing\Action;
+use ICanBoogie\Binding\Routing\ActionResponder;
 
+#[ActionResponder]
 final class ArticleController
 {
     // ...

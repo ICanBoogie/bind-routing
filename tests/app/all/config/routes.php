@@ -14,7 +14,7 @@ use ICanBoogie\HTTP\RequestMethod;
 use ICanBoogie\Routing\RouteMaker as Make;
 
 return fn(ConfigBuilder $config) => $config
-    ->route('/', 'home')
+    ->route('/', 'pages:home')
     ->get('/dance-sessions/:slug.html', 'dance-sessions:show')
     ->resource(
         'articles',

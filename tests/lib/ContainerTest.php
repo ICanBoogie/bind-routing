@@ -17,9 +17,7 @@ use ICanBoogie\Routing\RouteProvider;
 use ICanBoogie\Routing\UrlGenerator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-
 use Test\ICanBoogie\Binding\Routing\Acme\ArticleController;
-
 use Test\ICanBoogie\Binding\Routing\Acme\PageController;
 
 use function ICanBoogie\app;
@@ -62,8 +60,36 @@ final class ContainerTest extends TestCase
             'articles:home' => ArticleController::class,
             'articles:show' => ArticleController::class,
             'articles:create' => ArticleController::class,
-            'page:about' => PageController::class,
+            'pages:about' => PageController::class,
             'api:ping' => PingController::class,
         ], $actual);
+    }
+
+    /**
+     * @dataProvider provide_responder_provider
+     *
+     * @param class-string $expected_class
+     */
+    public function test_responder_provider(string $action, string $expected_class): void
+    {
+        $responder_provider = app()->service_for_id('test.action_responder_provider', ActionResponderProvider::class);
+        $responder = $responder_provider->responder_for_action($action);
+
+        $this->assertInstanceOf($expected_class, $responder);
+    }
+
+    /**
+     * @return array<array{ string, class-string }>
+     */
+    public static function provide_responder_provider(): array
+    {
+        return [
+
+            [ 'articles:home', ArticleController::class ],
+            [ 'articles:show', ArticleController::class ],
+            [ 'articles:create', ArticleController::class ],
+            [ 'pages:about', PageController::class ],
+
+        ];
     }
 }

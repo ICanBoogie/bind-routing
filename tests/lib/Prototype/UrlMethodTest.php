@@ -27,6 +27,6 @@ final class UrlMethodTest extends TestCase
 
         $dance_session = new DanceSession('inspiring-plum');
 
-        $this->assertEquals('/dance-sessions/inspiring-plum.html', $dance_session->url);;
+        $this->assertEquals('/dance-sessions/inspiring-plum.html', $dance_session->url);
     }
 }
