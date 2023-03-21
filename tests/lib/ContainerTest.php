@@ -40,7 +40,7 @@ final class ContainerTest extends TestCase
     /**
      * @return array<array{ string, class-string }>
      */
-    public function provide_service(): array
+    public static function provide_service(): array
     {
         return [
 

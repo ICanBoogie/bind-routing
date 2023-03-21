@@ -3,6 +3,7 @@
 namespace ICanBoogie\Binding\Routing\Console;
 
 use ICanBoogie\HTTP\Responder;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,10 +12,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Lists routes defined with Autoconfig.
  */
+#[AsCommand('routing:actions', "List routes")]
 final class ListActionsCommand extends Command
 {
-    protected static $defaultDescription = "List routes";
-
     /**
      * @param array<string, class-string<Responder>> $aliases
      *     Where _key_ is an action and _value_ a responder class.
