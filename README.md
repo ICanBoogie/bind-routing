@@ -55,6 +55,54 @@ namespace ICanBoogie;
 $routes = $app->config_for_class(Routing\RouteProvider::class);
 ```
 
+### Matching routes with controllers
+
+Routes have no idea of the controller to use, to match a route with a controller, you need to tag
+the controller with the actions that it supports.
+
+The following example demonstrates how `ArticleControler` is configured to handle the actions
+`articles:show` and `articles:list`.
+
+```yaml
+services:
+  _defaults:
+    autowire: true
+
+  App\Presentation\HTTP\Controller\ArticleController:
+      shared: false
+      tags:
+      - { name: action_responder }
+      - { name: action_alias, action: 'articles:list' }
+      - { name: action_alias, action: 'articles:show' }
+```
+
+Alternatively, you can add the `Action` attribute to your action methods:
+
+```php
+<?php
+
+namespace App\Presentation\HTTP\Controller;
+
+use ICanBoogie\Binding\Routing\Action;
+
+final class ArticleController
+{
+    // ...
+
+    #[Action]
+    private function list(): void
+    {
+        // ...
+    }
+
+    #[Action]
+    private function show(): void
+    {
+        // ...
+    }
+}
+```
+
 
 
 ----------

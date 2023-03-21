@@ -11,14 +11,22 @@
 
 namespace Test\ICanBoogie\Binding\Routing\Acme;
 
+use ICanBoogie\Binding\Routing\Action;
 use ICanBoogie\HTTP\Request;
 use ICanBoogie\Routing\ControllerAbstract;
 use ICanBoogie\Routing\Route;
 
 final class ArticleController extends ControllerAbstract
 {
+    #[Action('articles:show')]
+    #[Action('articles:create')]
     protected function action(Request $request): string
     {
         return $request->context->get(Route::class)->action;
+    }
+
+    #[Action]
+    protected function home(): void
+    {
     }
 }

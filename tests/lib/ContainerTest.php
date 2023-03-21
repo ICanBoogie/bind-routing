@@ -61,6 +61,7 @@ final class ContainerTest extends TestCase
         $this->assertEquals([
             'articles:home' => ArticleController::class,
             'articles:show' => ArticleController::class,
+            'articles:create' => ArticleController::class,
             'page:about' => PageController::class,
             'api:ping' => PingController::class,
         ], $actual);
