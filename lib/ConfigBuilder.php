@@ -1,19 +1,25 @@
 <?php
 
-/*
- * This file is part of the ICanBoogie package.
- *
- * (c) Olivier Laviale <olivier.laviale@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace ICanBoogie\Binding\Routing;
 
+use ICanBoogie\Binding\Routing\Attribute\Connect;
+use ICanBoogie\Binding\Routing\Attribute\Delete;
+use ICanBoogie\Binding\Routing\Attribute\Get;
+use ICanBoogie\Binding\Routing\Attribute\Head;
+use ICanBoogie\Binding\Routing\Attribute\Options;
+use ICanBoogie\Binding\Routing\Attribute\Patch;
+use ICanBoogie\Binding\Routing\Attribute\Post;
+use ICanBoogie\Binding\Routing\Attribute\Put;
+use ICanBoogie\Binding\Routing\Attribute\Route;
+use ICanBoogie\Binding\Routing\Attribute\Trace;
 use ICanBoogie\Config\Builder;
 use ICanBoogie\Routing\RouteCollector;
 use ICanBoogie\Routing\RouteProvider;
+use LogicException;
+use olvlvl\ComposerAttributeCollector\Attributes;
+
+use function class_exists;
+use function sprintf;
 
 /**
  * A config builder for 'routes' fragments.
@@ -30,5 +36,51 @@ final class ConfigBuilder extends RouteCollector implements Builder
     public function build(): RouteProvider
     {
         return $this->collect();
+    }
+
+    /**
+     * Builds configuration from the {@link Route} attribute.
+     *
+     * @return $this
+     */
+    public function from_attributes(): self
+    {
+        if (!class_exists(Attributes::class)) {
+            throw new LogicException(
+                sprintf(
+                    "Unable to build from attributes, the class %s is not available",
+                    Attributes::class
+                )
+            );
+        }
+
+        $target_methods = [
+            ...Attributes::findTargetMethods(Get::class),
+            ...Attributes::findTargetMethods(Head::class),
+            ...Attributes::findTargetMethods(Post::class),
+            ...Attributes::findTargetMethods(Put::class),
+            ...Attributes::findTargetMethods(Delete::class),
+            ...Attributes::findTargetMethods(Connect::class),
+            ...Attributes::findTargetMethods(Options::class),
+            ...Attributes::findTargetMethods(Trace::class),
+            ...Attributes::findTargetMethods(Patch::class),
+            ...Attributes::findTargetMethods(Route::class),
+        ];
+
+        foreach ($target_methods as $method) {
+            /** @var Route $attribute */
+            $attribute = $method->attribute;
+            $action = $attribute->action
+                ?? ActionResolver::resolve_action($method->class, $method->name);
+
+            $this->route(
+                pattern: $attribute->pattern,
+                action:  $action,
+                methods:  $attribute->methods,
+                id:  $attribute->id
+            );
+        }
+
+        return $this;
     }
 }

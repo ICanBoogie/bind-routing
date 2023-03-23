@@ -76,7 +76,21 @@ services:
       - { name: action_alias, action: 'articles:show' }
 ```
 
-Alternatively, you can add the `ActionResponder` and `Action` attributes:
+## Using PHP 8.0 attributes
+
+Alternatively, you can use attributes:
+
+```php
+<?php
+
+// config/routes.php
+
+namespace App;
+
+use ICanBoogie\Binding\Routing\ConfigBuilder;
+
+return fn(ConfigBuilder $config) => $config->from_attributes();
+```
 
 ```yaml
 services:
@@ -92,7 +106,7 @@ services:
 
 namespace App\Presentation\HTTP\Controller;
 
-use ICanBoogie\Binding\Routing\Action;
+use ICanBoogie\Binding\Routing\Attribute\Get;
 use ICanBoogie\Binding\Routing\ActionResponder;
 
 #[ActionResponder]
@@ -100,14 +114,14 @@ final class ArticleController
 {
     // ...
 
-    #[Action]
+    #[Get('/articles.html')]
     private function list(): void
     {
         // ...
     }
 
-    #[Action]
-    private function show(): void
+    #[Get('/articles/:id.html')]
+    private function show($id): void
     {
         // ...
     }

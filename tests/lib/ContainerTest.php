@@ -18,6 +18,7 @@ use ICanBoogie\Routing\UrlGenerator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Test\ICanBoogie\Binding\Routing\Acme\ArticleController;
+use Test\ICanBoogie\Binding\Routing\Acme\ImageController;
 use Test\ICanBoogie\Binding\Routing\Acme\PageController;
 
 use function ICanBoogie\app;
@@ -57,9 +58,14 @@ final class ContainerTest extends TestCase
         $actual = app()->service_for_id('service_container', ContainerInterface::class)->getParameter($param);
 
         $this->assertEquals([
-            'articles:home' => ArticleController::class,
+            'articles:list' => ArticleController::class,
             'articles:show' => ArticleController::class,
             'articles:create' => ArticleController::class,
+            'images:list' => ImageController::class,
+            'images:show' => ImageController::class,
+            'images:create' => ImageController::class,
+            'images:update' => ImageController::class,
+            'images:delete' => ImageController::class,
             'pages:about' => PageController::class,
             'api:ping' => PingController::class,
         ], $actual);
@@ -85,10 +91,12 @@ final class ContainerTest extends TestCase
     {
         return [
 
-            [ 'articles:home', ArticleController::class ],
+            [ 'articles:list', ArticleController::class ],
             [ 'articles:show', ArticleController::class ],
             [ 'articles:create', ArticleController::class ],
             [ 'pages:about', PageController::class ],
+            [ 'images:list', ImageController::class ],
+            [ 'images:show', ImageController::class ],
 
         ];
     }

@@ -11,8 +11,9 @@
 
 namespace Test\ICanBoogie\Binding\Routing\Acme;
 
-use ICanBoogie\Binding\Routing\Action;
 use ICanBoogie\Binding\Routing\ActionResponder;
+use ICanBoogie\Binding\Routing\Attribute\Get;
+use ICanBoogie\Binding\Routing\Attribute\Post;
 use ICanBoogie\HTTP\Request;
 use ICanBoogie\Routing\ControllerAbstract;
 use ICanBoogie\Routing\Route;
@@ -20,15 +21,19 @@ use ICanBoogie\Routing\Route;
 #[ActionResponder]
 final class ArticleController extends ControllerAbstract
 {
-    #[Action('articles:show')]
-    #[Action('articles:create')]
+    #[Post('/articles', 'articles:create')]
     protected function action(Request $request): string
     {
         return $request->context->get(Route::class)->action;
     }
 
-    #[Action]
-    protected function home(): void
+    #[Get('/articles')]
+    protected function list(): void
+    {
+    }
+
+    #[Get('/articles/<year:\d{4}>-<month:\d{2}>-:slug')]
+    protected function show(): void
     {
     }
 }

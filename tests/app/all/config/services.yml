@@ -10,6 +10,8 @@ services:
 #    - { name: action_alias, action: 'articles:home' }
 #    - { name: action_alias, action: 'articles:show' }
 
+  Test\ICanBoogie\Binding\Routing\Acme\ImageController: ~
+
   Test\ICanBoogie\Binding\Routing\Acme\PageController:
     tags:
     - { name: action_responder }
