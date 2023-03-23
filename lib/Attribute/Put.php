@@ -10,8 +10,8 @@ final class Put extends Route
 {
     public function __construct(
         string $pattern,
-        string|null $action = null,
-        string|null $id = null,
+        ?string $action = null,
+        ?string $id = null,
     ) {
         parent::__construct($pattern, $action, RequestMethod::METHOD_PUT, $id);
     }

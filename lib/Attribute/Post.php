@@ -9,9 +9,9 @@ use ICanBoogie\HTTP\RequestMethod;
 final class Post extends Route
 {
     public function __construct(
-        string $pattern,
-        string|null $action = null,
-        string|null $id = null,
+        string $pattern = '',
+        ?string $action = null,
+        ?string $id = null,
     ) {
         parent::__construct($pattern, $action, RequestMethod::METHOD_POST, $id);
     }

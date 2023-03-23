@@ -3,7 +3,6 @@
 namespace ICanBoogie\Binding\Routing;
 
 use ICanBoogie\HTTP\RequestMethod;
-
 use ICanBoogie\Routing\RouteMaker;
 use RuntimeException;
 

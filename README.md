@@ -17,12 +17,78 @@ composer require icanboogie/bind-routing
 
 
 
+## Defining routes using attributes
+
+The easiest way to define routes is to use routing attributes such as [Route][] or [Get][] to tag your controller actions.
+
+The following examples demonstrates how the [Route][] attribute can be used on a class to prefix the actions of a controller.
+
+```php
+<?php
+
+namespace App\Presentation\HTTP
+
+use ICanBoogie\Accessor\AccessorTrait;
+use ICanBoogie\Binding\Routing\ActionResponder;
+use ICanBoogie\Binding\Routing\Attribute\Get;
+use ICanBoogie\Binding\Routing\Attribute\Route;
+use ICanBoogie\Routing\ControllerAbstract;
+
+#[ActionResponder]
+#[Route('/skills')]
+final SkillController extends ControllerAbstract
+{
+    use AccessorTrait;
+
+    #[Get]
+    private function list(): void
+    {
+        // …
+    }
+
+    #[Get('/:slug')]
+    private function show(string $slug): void
+    {
+        // …
+    }
+
+    #[Post]
+    private function create(): void
+    {
+        // …
+    }
+}
+```
+
+This would be the container configuration:
+
+```yaml
+services:
+  _defaults:
+    autowire: true
+
+  App\Presentation\HTTP\SkillController:
+      shared: false
+```
+
+Using the `from_attributes()` method, the config builder can collect all these attributes to configure itself.
+
+```php
+<?php
+// app/all/config/routes.php
+
+namespace App;
+
+use ICanBoogie\Binding\Routing\ConfigBuilder;
+
+return fn(ConfigBuilder $config) => $config->from_attributes();
+```
+
 ## Defining routes using configuration fragments
 
-The most efficient way to define routes is through `routes` configuration fragments.
+Alternatively, you can configure routes manually using  `routes` configuration fragments.
 
-The following example demonstrates how to define routes, resource routes. The pattern of the
-`articles:show` route is overridden to use _year_, _month_ and _slug_.
+The following example demonstrates how to define routes, resource routes. The pattern of the `articles:show` route is overridden to use _year_, _month_ and _slug_.
 
 ```php
 <?php
@@ -76,58 +142,6 @@ services:
       - { name: action_alias, action: 'articles:show' }
 ```
 
-## Using PHP 8.0 attributes
-
-Alternatively, you can use attributes:
-
-```php
-<?php
-
-// config/routes.php
-
-namespace App;
-
-use ICanBoogie\Binding\Routing\ConfigBuilder;
-
-return fn(ConfigBuilder $config) => $config->from_attributes();
-```
-
-```yaml
-services:
-  _defaults:
-    autowire: true
-
-  App\Presentation\HTTP\Controller\ArticleController:
-      shared: false
-```
-
-```php
-<?php
-
-namespace App\Presentation\HTTP\Controller;
-
-use ICanBoogie\Binding\Routing\Attribute\Get;
-use ICanBoogie\Binding\Routing\ActionResponder;
-
-#[ActionResponder]
-final class ArticleController
-{
-    // ...
-
-    #[Get('/articles.html')]
-    private function list(): void
-    {
-        // ...
-    }
-
-    #[Get('/articles/:id.html')]
-    private function show($id): void
-    {
-        // ...
-    }
-}
-```
-
 
 
 ----------
@@ -167,3 +181,5 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 [icanboogie/icanboogie]:       https://github.com/ICanBoogie/ICanBoogie
 [icanboogie/routing]:          https://github.com/ICanBoogie/Routing
 [Application]:                 https://icanboogie.org/docs/4.0/the-application-class
+[Route]: lib/Attribute/Route.php
+[Get]: lib/Attribute/Get.php

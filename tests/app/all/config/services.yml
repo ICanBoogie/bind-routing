@@ -11,6 +11,7 @@ services:
 #    - { name: action_alias, action: 'articles:show' }
 
   Test\ICanBoogie\Binding\Routing\Acme\ImageController: ~
+  Test\ICanBoogie\Binding\Routing\Acme\SkillController: ~
 
   Test\ICanBoogie\Binding\Routing\Acme\PageController:
     tags:

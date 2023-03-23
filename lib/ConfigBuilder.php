@@ -17,6 +17,7 @@ use ICanBoogie\Routing\RouteCollector;
 use ICanBoogie\Routing\RouteProvider;
 use LogicException;
 use olvlvl\ComposerAttributeCollector\Attributes;
+use olvlvl\ComposerAttributeCollector\TargetMethod;
 
 use function class_exists;
 use function sprintf;
@@ -54,6 +55,9 @@ final class ConfigBuilder extends RouteCollector implements Builder
             );
         }
 
+        $route_by_class = $this->build_route_by_class();
+
+        /** @var TargetMethod<Route>[] $target_methods */
         $target_methods = [
             ...Attributes::findTargetMethods(Get::class),
             ...Attributes::findTargetMethods(Head::class),
@@ -68,13 +72,15 @@ final class ConfigBuilder extends RouteCollector implements Builder
         ];
 
         foreach ($target_methods as $method) {
-            /** @var Route $attribute */
+            $prefix = $route_by_class[$method->class]->pattern ?? '';
+
             $attribute = $method->attribute;
+            $pattern = $prefix . $attribute->pattern;
             $action = $attribute->action
                 ?? ActionResolver::resolve_action($method->class, $method->name);
 
             $this->route(
-                pattern: $attribute->pattern,
+                pattern: $pattern,
                 action:  $action,
                 methods:  $attribute->methods,
                 id:  $attribute->id
@@ -82,5 +88,19 @@ final class ConfigBuilder extends RouteCollector implements Builder
         }
 
         return $this;
+    }
+
+    /**
+     * @return array<class-string, Route>
+     */
+    private function build_route_by_class(): array
+    {
+        $by_class = [];
+
+        foreach (Attributes::findTargetClasses(Route::class) as $target_class) {
+            $by_class[$target_class->name] = $target_class->attribute;
+        }
+
+        return $by_class;
     }
 }

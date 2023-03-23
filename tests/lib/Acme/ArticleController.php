@@ -18,6 +18,10 @@ use ICanBoogie\HTTP\Request;
 use ICanBoogie\Routing\ControllerAbstract;
 use ICanBoogie\Routing\Route;
 
+/**
+ * This use case demonstrates how HTTP method attribute can be used on any function, especially when the action is
+ * specified. There's also a more complex type of URL pattern for the `show` action.
+ */
 #[ActionResponder]
 final class ArticleController extends ControllerAbstract
 {
@@ -33,7 +37,7 @@ final class ArticleController extends ControllerAbstract
     }
 
     #[Get('/articles/<year:\d{4}>-<month:\d{2}>-:slug')]
-    protected function show(): void
+    protected function show(int $year, int $month, string $slug): void
     {
     }
 }

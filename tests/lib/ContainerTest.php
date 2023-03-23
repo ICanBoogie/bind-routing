@@ -20,6 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Test\ICanBoogie\Binding\Routing\Acme\ArticleController;
 use Test\ICanBoogie\Binding\Routing\Acme\ImageController;
 use Test\ICanBoogie\Binding\Routing\Acme\PageController;
+use Test\ICanBoogie\Binding\Routing\Acme\SkillController;
 
 use function ICanBoogie\app;
 
@@ -66,6 +67,11 @@ final class ContainerTest extends TestCase
             'images:create' => ImageController::class,
             'images:update' => ImageController::class,
             'images:delete' => ImageController::class,
+            'skills:list' => SkillController::class,
+            'skills:show' => SkillController::class,
+            'skills:create' => SkillController::class,
+            'skills:update' => SkillController::class,
+            'skills:delete' => SkillController::class,
             'pages:about' => PageController::class,
             'api:ping' => PingController::class,
         ], $actual);
@@ -97,6 +103,8 @@ final class ContainerTest extends TestCase
             [ 'pages:about', PageController::class ],
             [ 'images:list', ImageController::class ],
             [ 'images:show', ImageController::class ],
+            [ 'skills:show', SkillController::class ],
+            [ 'skills:create', SkillController::class ],
 
         ];
     }
