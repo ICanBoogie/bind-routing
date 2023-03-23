@@ -2,24 +2,17 @@
 
 namespace ICanBoogie\Binding\Routing;
 
-use ICanBoogie\Binding\Routing\Attribute\Connect;
-use ICanBoogie\Binding\Routing\Attribute\Delete;
-use ICanBoogie\Binding\Routing\Attribute\Get;
-use ICanBoogie\Binding\Routing\Attribute\Head;
-use ICanBoogie\Binding\Routing\Attribute\Options;
-use ICanBoogie\Binding\Routing\Attribute\Patch;
-use ICanBoogie\Binding\Routing\Attribute\Post;
-use ICanBoogie\Binding\Routing\Attribute\Put;
 use ICanBoogie\Binding\Routing\Attribute\Route;
-use ICanBoogie\Binding\Routing\Attribute\Trace;
 use ICanBoogie\Config\Builder;
 use ICanBoogie\Routing\RouteCollector;
 use ICanBoogie\Routing\RouteProvider;
 use LogicException;
 use olvlvl\ComposerAttributeCollector\Attributes;
+use olvlvl\ComposerAttributeCollector\TargetClass;
 use olvlvl\ComposerAttributeCollector\TargetMethod;
 
 use function class_exists;
+use function ICanBoogie\iterable_to_dictionary;
 use function sprintf;
 
 /**
@@ -56,20 +49,7 @@ final class ConfigBuilder extends RouteCollector implements Builder
         }
 
         $route_by_class = $this->build_route_by_class();
-
-        /** @var TargetMethod<Route>[] $target_methods */
-        $target_methods = [
-            ...Attributes::findTargetMethods(Get::class),
-            ...Attributes::findTargetMethods(Head::class),
-            ...Attributes::findTargetMethods(Post::class),
-            ...Attributes::findTargetMethods(Put::class),
-            ...Attributes::findTargetMethods(Delete::class),
-            ...Attributes::findTargetMethods(Connect::class),
-            ...Attributes::findTargetMethods(Options::class),
-            ...Attributes::findTargetMethods(Trace::class),
-            ...Attributes::findTargetMethods(Patch::class),
-            ...Attributes::findTargetMethods(Route::class),
-        ];
+        $target_methods = $this->get_target_methods();
 
         foreach ($target_methods as $method) {
             $prefix = $route_by_class[$method->class]->pattern ?? '';
@@ -81,9 +61,9 @@ final class ConfigBuilder extends RouteCollector implements Builder
 
             $this->route(
                 pattern: $pattern,
-                action:  $action,
-                methods:  $attribute->methods,
-                id:  $attribute->id
+                action: $action,
+                methods: $attribute->methods,
+                id: $attribute->id
             );
         }
 
@@ -91,16 +71,25 @@ final class ConfigBuilder extends RouteCollector implements Builder
     }
 
     /**
+     * @return array<TargetMethod<Route>>
+     */
+    private function get_target_methods(): array
+    {
+        /** @phpstan-ignore-next-line */
+        return Attributes::filterTargetMethods(
+            Attributes::predicateForAttributeInstanceOf(Route::class)
+        );
+    }
+
+    /**
      * @return array<class-string, Route>
      */
     private function build_route_by_class(): array
     {
-        $by_class = [];
-
-        foreach (Attributes::findTargetClasses(Route::class) as $target_class) {
-            $by_class[$target_class->name] = $target_class->attribute;
-        }
-
-        return $by_class;
+        return iterable_to_dictionary(
+            Attributes::findTargetClasses(Route::class),
+            fn(TargetClass $t): string => $t->name,
+            fn(TargetClass $t): Route => $t->attribute,
+        );
     }
 }

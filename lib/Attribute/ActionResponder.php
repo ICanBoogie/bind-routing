@@ -1,6 +1,6 @@
 <?php
 
-namespace ICanBoogie\Binding\Routing;
+namespace ICanBoogie\Binding\Routing\Attribute;
 
 use Attribute;
 

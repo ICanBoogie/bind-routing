@@ -11,7 +11,6 @@
 
 namespace Test\ICanBoogie\Binding\Routing\Acme;
 
-use ICanBoogie\Binding\Routing\ActionResponder;
 use ICanBoogie\Binding\Routing\Attribute\Get;
 use ICanBoogie\Binding\Routing\Attribute\Post;
 use ICanBoogie\HTTP\Request;
@@ -22,7 +21,6 @@ use ICanBoogie\Routing\Route;
  * This use case demonstrates how HTTP method attribute can be used on any function, especially when the action is
  * specified. There's also a more complex type of URL pattern for the `show` action.
  */
-#[ActionResponder]
 final class ArticleController extends ControllerAbstract
 {
     #[Post('/articles', 'articles:create')]
