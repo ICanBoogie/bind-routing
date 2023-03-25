@@ -19,9 +19,9 @@ composer require icanboogie/bind-routing
 
 ## Defining routes using attributes
 
-The easiest way to define routes is to use routing attributes such as [Route][] or [Get][] to tag your controller actions. Using any of these tags on a controller triggers the tagging of the controller as an action responder, so you don't have to use the [ActionResponder][] attribute.
+The easiest way to define routes is to use routing attributes such as [Route][] or [Get][] to tag your controller and actions. Using any of these tags triggers the registration of the controller as a service (if it is not already registered), and the tagging with `action_responder` and `action_alias`.
 
-The following example demonstrates how the [Route][] attribute can be used on a class to specify a prefix for all the actions of a controller. The [Get][] and [Post][] attributes are used to tag actions. If left undefined, the action is inferred from the controller class and the method name.
+The following example demonstrates how the [Route][] attribute can be used at the class level to specify a prefix for all the actions of a controller. The [Get][] and [Post][] attributes are used to tag actions. If left undefined, the action is inferred from the controller class and the method name.
 
 ```php
 <?php
@@ -58,18 +58,7 @@ final SkillController extends ControllerAbstract
 }
 ```
 
-This would be the container configuration:
-
-```yaml
-services:
-  _defaults:
-    autowire: true
-
-  App\Presentation\HTTP\SkillController:
-      shared: false
-```
-
-Using the `from_attributes()` method, the config builder can collect all these attributes to configure itself.
+Using the `from_attributes()` method, the config builder can collect these attributes to configure itself.
 
 ```php
 <?php
@@ -82,9 +71,11 @@ use ICanBoogie\Binding\Routing\ConfigBuilder;
 return fn(ConfigBuilder $config) => $config->from_attributes();
 ```
 
+
+
 ## Defining routes using configuration fragments
 
-Alternatively, you can configure routes manually using  `routes` configuration fragments.
+Alternatively, you can configure routes manually using  `routes` configuration fragments, but you will have to register the service and tag it with `action_responder` and `action_alias`.
 
 The following example demonstrates how to define routes, resource routes. The pattern of the `articles:show` route is overridden to use _year_, _month_ and _slug_.
 

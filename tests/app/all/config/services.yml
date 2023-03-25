@@ -3,15 +3,17 @@ services:
     public: true
     autowire: true
 
-  Test\ICanBoogie\Binding\Routing\Acme\ArticleController:
-# We use attributes for these
+# Because they use route attributes, these controllers are registered automatically and tagged with 'action_responder'
+# and 'action_alias'.
+#
+#  Test\ICanBoogie\Binding\Routing\Acme\ArticleController:
 #    tags:
 #    - { name: action_responder }
 #    - { name: action_alias, action: 'articles:home' }
 #    - { name: action_alias, action: 'articles:show' }
-
-  Test\ICanBoogie\Binding\Routing\Acme\ImageController: ~
-  Test\ICanBoogie\Binding\Routing\Acme\SkillController: ~
+#
+#  Test\ICanBoogie\Binding\Routing\Acme\ImageController: ~
+#  Test\ICanBoogie\Binding\Routing\Acme\SkillController: ~
 
   Test\ICanBoogie\Binding\Routing\Acme\PageController:
     tags:
