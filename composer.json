@@ -36,7 +36,7 @@
     },
     "require-dev": {
         "icanboogie/console": "^6.0",
-        "olvlvl/composer-attribute-collector": "dev-main as 1.2",
+        "olvlvl/composer-attribute-collector": "^2.0",
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^10.0"
     },
@@ -62,6 +62,11 @@
             "config-constructor": {
                 "ICanBoogie\\Routing\\RouteProvider": "ICanBoogie\\Binding\\Routing\\ConfigBuilder"
             }
+        },
+        "composer-attribute-collector": {
+            "include": [
+                "tests/lib"
+            ]
         }
     }
 }
