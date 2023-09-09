@@ -11,7 +11,7 @@ The **icanboogie/bind-routing** package binds [ICanBoogie/Routing][] to [ICanBoo
 
 #### Installation
 
-```bash
+```shell
 composer require icanboogie/bind-routing
 ```
 
@@ -19,7 +19,7 @@ composer require icanboogie/bind-routing
 
 ## Defining routes using attributes
 
-The easiest way to define routes is to use routing attributes such as [Route][] or [Get][] to tag your controller and actions. Using any of these tags triggers the registration of the controller as a service (if it is not already registered), and the tagging with `action_responder` and `action_alias`.
+The easiest way to define routes is to use attributes such as [Route][] or [Get][] to tag your controller and actions. Using any of these tags triggers the registration of the controller as a service (if it is not already registered), and the tagging with `action_responder` and `action_alias`.
 
 The following example demonstrates how the [Route][] attribute can be used at the class level to specify a prefix for all the actions of a controller. The [Get][] and [Post][] attributes are used to tag actions. If left undefined, the action is inferred from the controller class and the method name.
 
@@ -58,7 +58,7 @@ final SkillController extends ControllerAbstract
 }
 ```
 
-Using the `from_attributes()` method, the config builder can collect these attributes to configure itself.
+Use the `use_attributes()` method to configure the builder using attributes:
 
 ```php
 <?php
@@ -68,7 +68,7 @@ namespace App;
 
 use ICanBoogie\Binding\Routing\ConfigBuilder;
 
-return fn(ConfigBuilder $config) => $config->from_attributes();
+return fn(ConfigBuilder $config) => $config->use_attributes();
 ```
 
 

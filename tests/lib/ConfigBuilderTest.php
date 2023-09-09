@@ -13,7 +13,7 @@ final class ConfigBuilderTest extends TestCase
     public function test_from_route_attribute(): void
     {
         $config = (new ConfigBuilder())
-            ->from_attributes()
+            ->use_attributes()
             ->build();
 
         $route_for_action = fn(string $action)

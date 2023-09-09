@@ -33,16 +33,16 @@ final class ConfigBuilder extends RouteCollector implements Builder
     }
 
     /**
-     * Builds configuration from the {@link Route} attribute.
+     * Configures using {@link Route} attributes.
      *
      * @return $this
      */
-    public function from_attributes(): self
+    public function use_attributes(): self
     {
         if (!class_exists(Attributes::class)) {
             throw new LogicException(
                 sprintf(
-                    "Unable to build from attributes, the class %s is not available",
+                    "Unable configure using attributes, the class %s is not available",
                     Attributes::class
                 )
             );
