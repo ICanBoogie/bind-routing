@@ -11,18 +11,44 @@
 
 namespace ICanBoogie\Binding\Routing\Prototype;
 
+use ICanBoogie\Binding\Prototype\ConfigBuilder;
 use ICanBoogie\Routing\Route;
 use ICanBoogie\Routing\RouteMaker;
 use ICanBoogie\Routing\UrlGenerator;
+use olvlvl\ComposerAttributeCollector\Attributes;
+use RuntimeException;
 
 use function basename;
 use function ICanBoogie\hyphenate;
 use function ICanBoogie\pluralize;
-use function ICanBoogie\underscore;
+use function ICanBoogie\Service\ref;
 
 final class UrlMethod
 {
     public const METHOD = 'url';
+
+    /**
+     * Automatically binds the 'url' method using attributes.
+     */
+    public static function bind(ConfigBuilder $config): ConfigBuilder
+    {
+        class_exists(Attributes::class)
+        or throw new RuntimeException(
+            sprintf(
+                "The class '%s' is not available, is the package '%s' installed?",
+                Attributes::class,
+                'olvlvl/composer-attribute-collector'
+            )
+        );
+
+        $targets = Attributes::findTargetMethods(UrlGetter::class);
+
+        foreach ($targets as $target) {
+            $config->bind($target->class, self::METHOD, ref(self::class));
+        }
+
+        return $config;
+    }
 
     public function __construct(
         private readonly UrlGenerator $generator

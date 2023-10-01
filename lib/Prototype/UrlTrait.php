@@ -20,6 +20,7 @@ use ICanBoogie\Routing\RouteMaker;
  */
 trait UrlTrait
 {
+    #[UrlGetter]
     protected function get_url(): string
     {
         return $this->url();

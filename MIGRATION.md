@@ -10,26 +10,41 @@ PHP 8.1+
 
 - Added the console command `routes:routes` (with alias `routes`), and `routing:actions`.
 
-- `UrlTrait` and `UrlMethod` can be used to prototyped objects to add a `url()` method and a `$url` property.
+#### UrlTrait
 
-    ```php
-    <?php
+`UrlTrait` can be used with prototyped objects to add a `url()` method and a `$url` property. The binding uses the `UrlMethod` service to generate the urls.
 
-    namespace ICanBoogie;
+```php
+<?php
 
-    use ICanBoogie\Binding\Routing\Prototype\UrlTrait;
+namespace ICanBoogie;
 
-    class Article extends Prototyped
-    {
-        use UrlTrait;
+use ICanBoogie\Binding\Routing\Prototype\UrlTrait;
 
-        // …
-    }
+class Article extends Prototyped
+{
+    use UrlTrait;
 
-    $article = new Article;
+    // …
+}
 
-    echo $article->url;
-    ```
+$article = new Article;
+
+echo $article->url;
+```
+
+The prototype bindings can be inferred from the `UrlGetter` attribute (defined by `UrlTrait`) if `olvlvl/composer-attribute-collector` is available.
+
+```php
+<?php
+
+// config/prototype.php
+
+use ICanBoogie\Binding\Prototype\ConfigBuilder;
+use ICanBoogie\Binding\Routing\Prototype\UrlMethod;
+
+return fn(ConfigBuilder $config) => UrlMethod::bind($config);
+```
 
 ### Backward Incompatible Changes
 

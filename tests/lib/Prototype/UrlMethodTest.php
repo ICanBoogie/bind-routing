@@ -11,13 +11,36 @@
 
 namespace Test\ICanBoogie\Binding\Routing\Prototype;
 
+use ICanBoogie\Binding\Prototype\ConfigBuilder;
+use ICanBoogie\Binding\Routing\Prototype\UrlMethod;
 use ICanBoogie\Routing\RouteMaker;
 use PHPUnit\Framework\TestCase;
 use Test\ICanBoogie\Binding\Routing\Acme\Article;
 use Test\ICanBoogie\Binding\Routing\Acme\DanceSession;
 
+use function ICanBoogie\Service\ref;
+
 final class UrlMethodTest extends TestCase
 {
+    public function test_bind(): void
+    {
+        $config = new ConfigBuilder();
+
+        UrlMethod::bind($config);
+
+        $actual = $config->build()->bindings;
+        $expected = [
+            Article::class => [
+                UrlMethod::METHOD => ref(UrlMethod::class)
+            ],
+            DanceSession::class => [
+                UrlMethod::METHOD => ref(UrlMethod::class)
+            ],
+        ];
+
+        $this->assertEquals($expected, $actual);
+    }
+
     public function test_url(): void
     {
         $article = new Article(2022, 11, "hello-world");
