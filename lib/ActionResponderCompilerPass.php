@@ -17,7 +17,7 @@ use function ICanBoogie\iterable_to_groups;
 use function in_array;
 
 /**
- * Registers controller services, and set the tags 'action_responder' and 'action_alias' according to attributes.
+ * Registers controller services and set the tags 'action_responder' and 'action_alias' according to attributes.
  */
 final class ActionResponderCompilerPass implements CompilerPassInterface
 {

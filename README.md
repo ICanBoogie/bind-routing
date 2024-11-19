@@ -1,9 +1,8 @@
 # bind-routing
 
-[![Packagist](https://img.shields.io/packagist/v/icanboogie/bind-routing.svg)](https://packagist.org/packages/icanboogie/bind-routing)
-[![Code Quality](https://img.shields.io/scrutinizer/g/ICanBoogie/bind-routing.svg)](https://scrutinizer-ci.com/g/ICanBoogie/bind-routing)
-[![Code Coverage](https://img.shields.io/coveralls/ICanBoogie/bind-routing.svg)](https://coveralls.io/r/ICanBoogie/bind-routing)
-[![Downloads](https://img.shields.io/packagist/dt/icanboogie/bind-routing.svg)](https://packagist.org/packages/icanboogie/bind-routing)
+[![Release](https://img.shields.io/packagist/v/icanboogie/<name>.svg)](https://packagist.org/packages/icanboogie/<name>)
+[![Code Coverage](https://coveralls.io/repos/github/ICanBoogie/<Name>/badge.svg?branch=6.0)](https://coveralls.io/r/ICanBoogie/<Name>?branch=6.0)
+[![Downloads](https://img.shields.io/packagist/dt/icanboogie/<name>.svg)](https://packagist.org/packages/icanboogie/<name>)
 
 The **icanboogie/bind-routing** package binds [ICanBoogie/Routing][] to [ICanBoogie][]. It provides infrastructure to configure routes and responders, a trait to get URLs from objects, and commands to list routes and actions.
 
@@ -143,30 +142,24 @@ $routes = $app->config_for_class(Routing\RouteProvider::class);
 
 ## Continuous Integration
 
-The project is continuously tested by [GitHub actions](https://github.com/ICanBoogie/bind-routing/actions).
+The project is continuously tested by [GitHub actions](https://github.com/ICanBoogie/<Name>/actions).
 
-[![Tests](https://github.com/ICanBoogie/bind-routing/workflows/test/badge.svg)](https://github.com/ICanBoogie/bind-routing/actions?query=workflow%3Atest)
-[![Static Analysis](https://github.com/ICanBoogie/bind-routing/workflows/static-analysis/badge.svg)](https://github.com/ICanBoogie/bind-routing/actions?query=workflow%3Astatic-analysis)
-[![Code Style](https://github.com/ICanBoogie/bind-routing/workflows/code-style/badge.svg)](https://github.com/ICanBoogie/bind-routing/actions?query=workflow%3Acode-style)
+[![Tests](https://github.com/ICanBoogie/<Name>/actions/workflows/test.yml/badge.svg?branch=6.0)](https://github.com/ICanBoogie/<Name>/actions/workflows/test.yml)
+[![Static Analysis](https://github.com/ICanBoogie/<Name>/actions/workflows/static-analysis.yml/badge.svg?branch=6.0)](https://github.com/ICanBoogie/<Name>/actions/workflows/static-analysis.yml)
+[![Code Style](https://github.com/ICanBoogie/<Name>/actions/workflows/code-style.yml/badge.svg?branch=6.0)](https://github.com/ICanBoogie/<Name>/actions/workflows/code-style.yml)
 
 
 
 ## Code of Conduct
 
 This project adheres to a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in
-this project and its community, you are expected to uphold this code.
+this project and its community, you're expected to uphold this code.
 
 
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-
-
-## License
-
-**icanboogie/bind-routing** is released under the [BSD-3-Clause](LICENSE).
+See [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 
 

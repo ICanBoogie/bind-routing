@@ -17,7 +17,7 @@ final class ListActionsCommandTest extends CommandTestCase
                 [],
                 [
                     'api:ping',
-                    'ICanBoogie\Routing\PingController',
+                    'ICanBoogie\Responder\PingResponder',
                 ],
             ],
 

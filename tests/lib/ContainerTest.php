@@ -12,9 +12,10 @@
 namespace Test\ICanBoogie\Binding\Routing;
 
 use ICanBoogie\Routing\ActionResponderProvider;
-use ICanBoogie\Routing\PingController;
+use ICanBoogie\Responder\PingResponder;
 use ICanBoogie\Routing\RouteProvider;
 use ICanBoogie\Routing\UrlGenerator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Test\ICanBoogie\Binding\Routing\Acme\ArticleController;
@@ -27,11 +28,10 @@ use function ICanBoogie\app;
 final class ContainerTest extends TestCase
 {
     /**
-     * @dataProvider provide_service
-     *
      * @param class-string $class
      * @param class-string $concrete_class
      */
+    #[DataProvider('provide_service')]
     public function test_service(string $id, string $class, string $concrete_class): void
     {
         $actual = app()->service_for_id($id, $class);
@@ -73,15 +73,14 @@ final class ContainerTest extends TestCase
             'skills:update' => SkillController::class,
             'skills:delete' => SkillController::class,
             'pages:about' => PageController::class,
-            'api:ping' => PingController::class,
+            'api:ping' => PingResponder::class,
         ], $actual);
     }
 
     /**
-     * @dataProvider provide_responder_provider
-     *
      * @param class-string $expected_class
      */
+    #[DataProvider('provide_responder_provider')]
     public function test_responder_provider(string $action, string $expected_class): void
     {
         $responder_provider = app()->service_for_id('test.action_responder_provider', ActionResponderProvider::class);

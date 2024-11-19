@@ -1,26 +1,16 @@
 <?php
 
-/*
- * This file is part of the ICanBoogie package.
- *
- * (c) Olivier Laviale <olivier.laviale@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace ICanBoogie\Binding\Routing\Prototype;
 
 use ICanBoogie\Binding\Prototype\ConfigBuilder;
 use ICanBoogie\Routing\Route;
 use ICanBoogie\Routing\RouteMaker;
 use ICanBoogie\Routing\UrlGenerator;
+use ICanBoogie\StaticInflector;
 use olvlvl\ComposerAttributeCollector\Attributes;
 use RuntimeException;
 
 use function basename;
-use function ICanBoogie\hyphenate;
-use function ICanBoogie\pluralize;
 use function ICanBoogie\Service\ref;
 
 final class UrlMethod
@@ -75,13 +65,14 @@ final class UrlMethod
 
         $key = $caller::class . Route::ACTION_SEPARATOR . $unqualified_action;
 
+        // @phpstan-ignore-next-line
         return $cache[$key] ??= self::make_action($caller, $unqualified_action);
     }
 
     private function make_action(object $caller, string $unqualified_action): string
     {
-        $base = basename(hyphenate($caller::class));
+        $base = basename(StaticInflector::hyphenate($caller::class));
 
-        return pluralize($base) . Route::ACTION_SEPARATOR . $unqualified_action;
+        return StaticInflector::pluralize($base) . Route::ACTION_SEPARATOR . $unqualified_action;
     }
 }

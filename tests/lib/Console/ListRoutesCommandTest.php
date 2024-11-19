@@ -16,11 +16,11 @@ final class ListRoutesCommandTest extends CommandTestCase
                 ListRoutesCommand::class,
                 [],
                 [
-                    'ANY',
+                    'GET',
                     '/api/ping',
                     'api:ping',
                     ' ',
-                    'ICanBoogie\Routing\PingController',
+                    'ICanBoogie\Responder\PingResponder',
                 ],
             ],
 

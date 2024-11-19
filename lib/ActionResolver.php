@@ -4,10 +4,9 @@ namespace ICanBoogie\Binding\Routing;
 
 use ICanBoogie\HTTP\RequestMethod;
 use ICanBoogie\Routing\RouteMaker;
+use ICanBoogie\StaticInflector;
 use RuntimeException;
 
-use function ICanBoogie\hyphenate;
-use function ICanBoogie\pluralize;
 use function in_array;
 use function strlen;
 use function strrpos;
@@ -46,7 +45,7 @@ final class ActionResolver
             $unqualified_class = substr($unqualified_class, 0, -strlen(self::CONTROLLER_SUFFIX));
         }
 
-        $base = pluralize(hyphenate($unqualified_class));
+        $base = StaticInflector::pluralize(StaticInflector::hyphenate($unqualified_class));
 
         return "$base:$name";
     }

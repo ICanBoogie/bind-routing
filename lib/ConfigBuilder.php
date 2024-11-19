@@ -86,6 +86,7 @@ final class ConfigBuilder extends RouteCollector implements Builder
      */
     private function build_route_by_class(): array
     {
+        // @phpstan-ignore-next-line
         return iterable_to_dictionary(
             Attributes::findTargetClasses(Route::class),
             fn(TargetClass $t): string => $t->name,
