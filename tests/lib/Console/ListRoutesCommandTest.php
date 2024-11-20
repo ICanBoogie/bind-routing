@@ -17,10 +17,10 @@ final class ListRoutesCommandTest extends CommandTestCase
                 [],
                 [
                     'GET',
-                    '/api/ping',
-                    'api:ping',
+                    '/images.html',
+                    'images:list',
                     ' ',
-                    'ICanBoogie\Responder\PingResponder',
+                    'Test\ICanBoogie\Binding\Routing\Acme\ImageController',
                 ],
             ],
 

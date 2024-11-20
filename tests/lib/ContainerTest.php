@@ -73,7 +73,6 @@ final class ContainerTest extends TestCase
             'skills:update' => SkillController::class,
             'skills:delete' => SkillController::class,
             'pages:about' => PageController::class,
-            'api:ping' => PingResponder::class,
         ], $actual);
     }
 

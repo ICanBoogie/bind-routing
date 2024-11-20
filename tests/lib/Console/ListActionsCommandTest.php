@@ -16,8 +16,8 @@ final class ListActionsCommandTest extends CommandTestCase
                 ListActionsCommand::class,
                 [],
                 [
-                    'api:ping',
-                    'ICanBoogie\Responder\PingResponder',
+                    'pages:about',
+                    'Test\ICanBoogie\Binding\Routing\Acme\PageController',
                 ],
             ],
 
