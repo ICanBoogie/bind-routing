@@ -1,8 +1,8 @@
 # bind-routing
 
-[![Release](https://img.shields.io/packagist/v/icanboogie/<name>.svg)](https://packagist.org/packages/icanboogie/<name>)
-[![Code Coverage](https://coveralls.io/repos/github/ICanBoogie/<Name>/badge.svg?branch=6.0)](https://coveralls.io/r/ICanBoogie/<Name>?branch=6.0)
-[![Downloads](https://img.shields.io/packagist/dt/icanboogie/<name>.svg)](https://packagist.org/packages/icanboogie/<name>)
+[![Release](https://img.shields.io/packagist/v/icanboogie/bind-rounting.svg)](https://packagist.org/packages/icanboogie/bind-rounting)
+[![Code Coverage](https://coveralls.io/repos/github/ICanBoogie/bind-rounting/badge.svg?branch=6.0)](https://coveralls.io/r/ICanBoogie/bind-rounting?branch=6.0)
+[![Downloads](https://img.shields.io/packagist/dt/icanboogie/bind-rounting.svg)](https://packagist.org/packages/icanboogie/bind-rounting)
 
 The **icanboogie/bind-routing** package binds [ICanBoogie/Routing][] to [ICanBoogie][]. It provides infrastructure to configure routes and responders, a trait to get URLs from objects, and commands to list routes and actions.
 
@@ -27,13 +27,13 @@ The following example demonstrates how the [Route][] attribute can be used at th
 
 namespace App\Presentation\HTTP
 
-use ICanBoogie\Accessor\AccessorTrait;use ICanBoogie\Binding\Routing\Attribute\Get;use ICanBoogie\Binding\Routing\Attribute\Route;use ICanBoogie\Routing\ControllerAbstract;
+use ICanBoogie\Binding\Routing\Attribute\Get;
+use ICanBoogie\Binding\Routing\Attribute\Route;
+use ICanBoogie\Routing\ControllerAbstract;
 
 #[Route('/skills')]
 final SkillController extends ControllerAbstract
 {
-    use AccessorTrait;
-
     // This will create a 'GET /skills' route with 'skills:list' action
     #[Get]
     private function list(): void
@@ -142,11 +142,11 @@ $routes = $app->config_for_class(Routing\RouteProvider::class);
 
 ## Continuous Integration
 
-The project is continuously tested by [GitHub actions](https://github.com/ICanBoogie/<Name>/actions).
+The project is continuously tested by [GitHub actions](https://github.com/ICanBoogie/bind-rounting/actions).
 
-[![Tests](https://github.com/ICanBoogie/<Name>/actions/workflows/test.yml/badge.svg?branch=6.0)](https://github.com/ICanBoogie/<Name>/actions/workflows/test.yml)
-[![Static Analysis](https://github.com/ICanBoogie/<Name>/actions/workflows/static-analysis.yml/badge.svg?branch=6.0)](https://github.com/ICanBoogie/<Name>/actions/workflows/static-analysis.yml)
-[![Code Style](https://github.com/ICanBoogie/<Name>/actions/workflows/code-style.yml/badge.svg?branch=6.0)](https://github.com/ICanBoogie/<Name>/actions/workflows/code-style.yml)
+[![Tests](https://github.com/ICanBoogie/bind-rounting/actions/workflows/test.yml/badge.svg?branch=6.0)](https://github.com/ICanBoogie/bind-rounting/actions/workflows/test.yml)
+[![Static Analysis](https://github.com/ICanBoogie/bind-rounting/actions/workflows/static-analysis.yml/badge.svg?branch=6.0)](https://github.com/ICanBoogie/bind-rounting/actions/workflows/static-analysis.yml)
+[![Code Style](https://github.com/ICanBoogie/bind-rounting/actions/workflows/code-style.yml/badge.svg?branch=6.0)](https://github.com/ICanBoogie/bind-rounting/actions/workflows/code-style.yml)
 
 
 

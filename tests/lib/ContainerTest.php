@@ -1,18 +1,8 @@
 <?php
 
-/*
- * This file is part of the ICanBoogie package.
- *
- * (c) Olivier Laviale <olivier.laviale@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Test\ICanBoogie\Binding\Routing;
 
 use ICanBoogie\Routing\ActionResponderProvider;
-use ICanBoogie\Responder\PingResponder;
 use ICanBoogie\Routing\RouteProvider;
 use ICanBoogie\Routing\UrlGenerator;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -46,7 +36,11 @@ final class ContainerTest extends TestCase
     {
         return [
 
-            [ 'test.action_responder_provider', ActionResponderProvider::class, ActionResponderProvider\Container::class ],
+            [
+                'test.action_responder_provider',
+                ActionResponderProvider::class,
+                ActionResponderProvider\Container::class,
+            ],
             [ 'test.route_provider', RouteProvider::class, RouteProvider\Memoize::class ],
             [ 'test.url_generator', UrlGenerator::class, UrlGenerator\UrlGeneratorWithRouteProvider::class ],
 

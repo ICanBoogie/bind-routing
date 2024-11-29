@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Lists routes defined with Autoconfig.
  */
-#[AsCommand('routing:actions', "List routes")]
+#[AsCommand('routing:actions', "List route actions")]
 final class ListActionsCommand extends Command
 {
     /**

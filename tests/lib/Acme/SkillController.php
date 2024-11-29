@@ -11,7 +11,7 @@ use ICanBoogie\Routing\Controller\ActionTrait;
 use ICanBoogie\Routing\ControllerAbstract;
 
 /**
- * This use case demonstrates how the {@link Route} attribute can be used to prefix HTTP methods.
+ * This use case demonstrates how the {@see Route} attribute can be used to prefix HTTP methods.
  */
 #[Route('/skills')]
 final class SkillController extends ControllerAbstract

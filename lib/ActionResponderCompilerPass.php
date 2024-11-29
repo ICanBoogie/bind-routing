@@ -48,7 +48,7 @@ final class ActionResponderCompilerPass implements CompilerPassInterface
     }
 
     /**
-     * Registers controllers with the class attributes {@link Route} or {@link ActionResponder}.
+     * Registers controllers with the class attributes {@see Route} or {@see ActionResponder}.
      *
      * @param array<class-string, iterable<TargetMethod<Route>>> $target_methods_by_class
      */

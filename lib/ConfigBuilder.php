@@ -33,7 +33,7 @@ final class ConfigBuilder extends RouteCollector implements Builder
     }
 
     /**
-     * Configures using {@link Route} attributes.
+     * Configures using {@see Route} attributes.
      *
      * @return $this
      */
