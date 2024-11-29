@@ -1,16 +1,5 @@
 ---
 services:
-  app82:
-    build:
-      context: .
-      args:
-        PHP_VERSION: "8.2"
-    environment:
-      PHP_IDE_CONFIG: 'serverName=icanboogie-bind-routing'
-    volumes:
-      - .:/app:delegated
-      - ~/.composer:/root/.composer:delegated
-    working_dir: /app
   app84:
     build:
       context: .

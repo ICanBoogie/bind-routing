@@ -10,9 +10,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 final class ActionAliasCompilerPass implements CompilerPassInterface
 {
-    public const PARAM = 'routing.action_responder.aliases';
-    public const TAG = 'action_alias';
-    public const TAG_KEY = 'action';
+    public const string PARAM = 'routing.action_responder.aliases';
+    public const string TAG = 'action_alias';
+    public const string TAG_KEY = 'action';
 
     public function process(ContainerBuilder $container): void
     {

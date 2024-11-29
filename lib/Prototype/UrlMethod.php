@@ -15,7 +15,7 @@ use function ICanBoogie\Service\ref;
 
 final class UrlMethod
 {
-    public const METHOD = 'url';
+    public const string METHOD = 'url';
 
     /**
      * Automatically binds the 'url' method using attributes.

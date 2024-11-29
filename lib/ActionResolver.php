@@ -15,8 +15,8 @@ use function substr;
 
 final class ActionResolver
 {
-    private const CONTROLLER_SUFFIX = 'Controller';
-    private const ACTIONS = [
+    private const string CONTROLLER_SUFFIX = 'Controller';
+    private const array ACTIONS = [
 
         RouteMaker::ACTION_LIST,
         RouteMaker::ACTION_NEW,

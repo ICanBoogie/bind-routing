@@ -26,8 +26,8 @@ use function strtoupper;
 #[AsCommand('routing:routes|routes', "List routes")]
 final class ListRoutesCommand extends Command
 {
-    private const OPT_MATCHES_URI = 'matches-uri';
-    private const OPT_MATCHES_METHOD = 'matches-method';
+    private const string OPT_MATCHES_URI = 'matches-uri';
+    private const string OPT_MATCHES_METHOD = 'matches-method';
 
     /**
      * @param array<string, class-string<Responder>> $aliases
