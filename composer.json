@@ -33,12 +33,12 @@
   "require": {
     "php": ">=8.4",
     "icanboogie/icanboogie": "^7.0",
-    "icanboogie/inflector": "^3.0",
+    "icanboogie/inflector": "^4.0",
     "icanboogie/routing": "^7.0"
   },
   "require-dev": {
     "icanboogie/console": "^7.0",
-    "olvlvl/composer-attribute-collector": "^2.1",
+    "olvlvl/composer-attribute-collector": "^3.0",
     "phpstan/phpstan": "^2.0",
     "phpunit/phpunit": "^11.4"
   },

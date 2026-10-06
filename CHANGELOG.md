@@ -1,6 +1,30 @@
 # CHANGELOG
 
-## v5.x to v6.0
+## v7.0
+
+### New Requirements
+
+- PHP 8.4+
+- icanboogie/inflector 4.0+
+
+### New features
+
+None
+
+### Backward Incompatible Changes
+
+None
+
+### Deprecated Features
+
+None
+
+### Other Changes
+
+None
+
+
+## v6.0
 
 ### New Requirements
 
@@ -58,3 +82,27 @@ None
 ### Other Changes
 
 None
+
+<!--
+
+### New Requirements
+
+None
+
+### New features
+
+None
+
+### Backward Incompatible Changes
+
+None
+
+### Deprecated Features
+
+None
+
+### Other Changes
+
+None
+
+-->
