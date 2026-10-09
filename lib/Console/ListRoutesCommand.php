@@ -81,7 +81,7 @@ final class ListRoutesCommand extends Command
 
             $rows[] = [
                 self::render_methods($route->methods),
-                $route->pattern,
+                (string) $route->pattern,
                 $route->action,
                 $route->id,
                 $this->aliases[$route->action] ?? "",
@@ -93,6 +93,8 @@ final class ListRoutesCommand extends Command
 
             return Command::FAILURE;
         }
+
+        usort($rows, fn ($a, $b) => $a[1] <=> $b[1]);
 
         $table = new Table($output);
         $table->setHeaders([ 'Methods', 'Pattern', 'Action', 'Id', 'Responder' ]);

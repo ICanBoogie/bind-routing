@@ -21,7 +21,7 @@ None
 
 ### Other Changes
 
-None
+- Sort Actions and Routes in console
 
 
 ## v6.0

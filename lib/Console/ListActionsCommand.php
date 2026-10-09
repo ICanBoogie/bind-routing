@@ -37,6 +37,8 @@ final class ListActionsCommand extends Command
             ];
         }
 
+        usort($rows, fn ($a, $b) => $a[0] <=> $b[0]);
+
         $table = new Table($output);
         $table->setHeaders([ 'Action', 'Responder' ]);
         $table->setRows($rows);
