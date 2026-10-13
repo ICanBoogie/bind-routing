@@ -20,8 +20,8 @@ final class ListRoutesCommandTest extends CommandTestCase
                     '/images.html',
                     'images:list',
                     ' ',
-                    'Test\ICanBoogie\Binding\Routing\Acme\ImageController',
                 ],
+                '/ImageController::list\s*\|/',
             ],
 
         ];

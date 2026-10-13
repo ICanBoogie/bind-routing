@@ -11,31 +11,32 @@
 
 namespace Test\ICanBoogie\Binding\Routing\Acme;
 
-use ICanBoogie\Binding\Routing\Attribute\Get;
-use ICanBoogie\Binding\Routing\Attribute\Post;
-use ICanBoogie\HTTP\Request;
-use ICanBoogie\Routing\ControllerAbstract;
-use ICanBoogie\Routing\Route;
+use ICanBoogie\HTTP\Response;
+use ICanBoogie\Routing\Attribute\Get;
+use ICanBoogie\Routing\Attribute\Post;
+use ICanBoogie\Routing\Attribute\Prefix;
 
 /**
- * This use case demonstrates how HTTP method attribute can be used on any function, especially when the action is
+ * This use case demonstrates how HTTP method attribute can be used on any method, especially when the action is
  * specified. There's also a more complex type of URL pattern for the `show` action.
  */
-final class ArticleController extends ControllerAbstract
+final class ArticleController
 {
-    #[Post('/articles', 'articles:create')]
-    protected function action(Request $request): string
+    #[Post('/articles', action: 'articles:create')]
+    public function store(): Response
     {
-        return $request->context->get(Route::class)->action;
+        return new Response('articles:create');
     }
 
     #[Get('/articles')]
-    protected function list(): void
+    public function list(): Response
     {
+        return new Response('articles:list');
     }
 
     #[Get('/articles/<year:\d{4}>-<month:\d{2}>-:slug')]
-    protected function show(int $year, int $month, string $slug): void
+    public function show(int $year, int $month, string $slug): Response
     {
+        return new Response("articles:show $year-$month-$slug");
     }
 }

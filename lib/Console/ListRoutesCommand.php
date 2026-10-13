@@ -4,7 +4,7 @@ namespace ICanBoogie\Binding\Routing\Console;
 
 use ICanBoogie\HTTP\RequestMethod;
 use ICanBoogie\HTTP\Responder;
-use ICanBoogie\Routing\RouteProvider;
+use ICanBoogie\Routing\Config;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -14,6 +14,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use function array_map;
+use function ICanBoogie\shorten;
 use function implode;
 use function is_array;
 use function is_null;
@@ -31,10 +32,10 @@ final class ListRoutesCommand extends Command
 
     /**
      * @param array<string, class-string<Responder>> $aliases
-     *     Where _key_ is an action and _value_ a responder class.
+     *     Where _key_ is an action and _value_ a responder class, for controllers tagged with `action_responder`.
      */
     public function __construct(
-        private readonly RouteProvider $config,
+        private readonly Config $config,
         private readonly array $aliases,
         private readonly string $style,
     ) {
@@ -70,7 +71,7 @@ final class ListRoutesCommand extends Command
 
         $rows = [];
 
-        foreach ($this->config as $route) {
+        foreach ($this->config->routes as $route) {
             if ($matches_uri && !$route->pattern->matches($matches_uri)) {
                 continue;
             }
@@ -81,10 +82,18 @@ final class ListRoutesCommand extends Command
 
             $rows[] = [
                 self::render_methods($route->methods),
-                (string) $route->pattern,
+                (string)$route->pattern,
                 $route->action,
                 $route->id,
-                $this->aliases[$route->action] ?? "",
+                shorten(
+                    HandlerResolver::resolve(
+                        $route->action,
+                        $this->config,
+                        $this->aliases
+                    ),
+                    length: 36,
+                    position: 0
+                ),
             ];
         }
 
@@ -94,10 +103,10 @@ final class ListRoutesCommand extends Command
             return Command::FAILURE;
         }
 
-        usort($rows, fn ($a, $b) => $a[1] <=> $b[1]);
+        usort($rows, fn($a, $b) => $a[1] <=> $b[1]);
 
         $table = new Table($output);
-        $table->setHeaders([ 'Methods', 'Pattern', 'Action', 'Id', 'Responder' ]);
+        $table->setHeaders([ 'Methods', 'Pattern', 'Action', 'Id', 'Controller' ]);
         $table->setRows($rows);
         $table->setStyle($this->style);
         $table->render();

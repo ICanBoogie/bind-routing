@@ -18,46 +18,47 @@ composer require icanboogie/bind-routing
 
 ## Defining routes using attributes
 
-The easiest way to define routes is to use attributes such as [Route][] or [Get][] to tag your controller and actions. Using any of these tags triggers the registration of the controller as a service (if it is not already registered), and the tagging with `action_responder` and `action_alias`.
-
-The following example demonstrates how the [Route][] attribute can be used at the class level to specify a prefix for all the actions of a controller. The [Get][] and [Post][] attributes are used to tag actions. If left undefined, the action is inferred from the controller class and the method name.
+Routes are defined by controllers, with the attributes of [icanboogie/routing][] such as `Get` or `Post`. The class
+attribute `Prefix` defines the prefixes shared by the methods. If left undefined, the action is inferred from the
+controller class and the method name (`SkillController::show` is `skills:show`).
 
 ```php
 <?php
 
-namespace App\Presentation\HTTP
+namespace App\Presentation\HTTP;
 
-use ICanBoogie\Accessor\AccessorTrait;use ICanBoogie\Binding\Routing\Attribute\Get;use ICanBoogie\Binding\Routing\Attribute\Route;use ICanBoogie\Routing\ControllerAbstract;
+use ICanBoogie\HTTP\Response;
+use ICanBoogie\Routing\Attribute\Get;
+use ICanBoogie\Routing\Attribute\Post;
+use ICanBoogie\Routing\Attribute\Prefix;
 
-#[Route('/skills')]
-final SkillController extends ControllerAbstract
+#[Prefix(route: '/skills')]
+final class SkillController
 {
-    use AccessorTrait;
-
     // This will create a 'GET /skills' route with 'skills:list' action
     #[Get]
-    private function list(): void
+    public function list(): Response
     {
         // …
     }
 
     // This will create a 'GET /skills/:slug' route with 'skills:show' action
     #[Get('/:slug')]
-    private function show(string $slug): void
+    public function show(string $slug): Response
     {
         // …
     }
 
     // This will create a 'POST /skills' route with 'skills:create' action
     #[Post]
-    private function create(): void
+    public function create(): Response
     {
         // …
     }
 }
 ```
 
-Use the `use_attributes()` method to configure the builder using attributes:
+Controllers are discovered with [olvlvl/composer-attribute-collector][], and registered as shared services:
 
 ```php
 <?php
@@ -66,44 +67,43 @@ Use the `use_attributes()` method to configure the builder using attributes:
 namespace App;
 
 use ICanBoogie\Binding\Routing\ConfigBuilder;
+use ICanBoogie\Routing\CacheStrategy;
 
-return fn(ConfigBuilder $config) => $config->use_attributes();
+return fn(ConfigBuilder $config) => $config
+    ->discover_controllers()
+    // Meant for production, use CacheStrategy::MEMOIZE in development.
+    ->cache_strategy(CacheStrategy::COMPILE);
 ```
 
-
-
-## Defining routes using configuration fragments
-
-Alternatively, you can configure routes manually using  `routes` configuration fragments, but you will have to register the service and tag it with `action_responder` and `action_alias`.
-
-The following example demonstrates how to define routes, resource routes. The pattern of the `articles:show` route is overridden to use _year_, _month_ and _slug_.
+Use `add_controller()` to add a controller by hand, with an optional route builder instead of attributes. Such a
+controller must be tagged with `routing.controller`, so it can be obtained from the container:
 
 ```php
 <?php
 
-// config/routes.php
-
-namespace App;
-
 use ICanBoogie\Binding\Routing\ConfigBuilder;
-use ICanBoogie\Routing\RouteMaker;
+use ICanBoogie\Routing\RouteBuilder;
 
 return fn(ConfigBuilder $config) => $config
-    ->route('/', 'page:home')
-    ->resource('articles', new Make\Options(
-        basics: [
-            RouteMaker::ACTION_SHOW => new Make\Basics('/articles/:year-:month-:slug.html')
-        ]
-    ));
+    ->add_controller(ContactController::class, fn(RouteBuilder $r) => $r
+        ->get('/contact.html', 'new')
+        ->post('/contact.html', 'create'));
 ```
 
-### Matching routes with controllers
+```yaml
+services:
+  App\Presentation\HTTP\ContactController:
+    tags: [ routing.controller ]
+```
 
-Routes have no idea of the controller to use, to match a route with a controller, you need to tag
-the controller with the actions that it supports.
+In development, use `CacheStrategy::MEMOIZE`.
 
-The following example demonstrates how `ArticleControler` is configured to handle the actions
-`articles:show` and `articles:list`.
+
+
+## Legacy controllers
+
+Controllers extending `ControllerAbstract` still work, but they have to be registered and tagged with
+`action_responder` and `action_alias`, their routes have to be provided separately:
 
 ```yaml
 services:
@@ -131,7 +131,8 @@ namespace ICanBoogie;
 
 /** @var Application $app */
 
-$routes = $app->config_for_class(Routing\RouteProvider::class);
+$config = $app->config_for_class(Routing\Config::class);
+$routes = $config->routes;
 ```
 
 
@@ -165,6 +166,6 @@ See [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 [ICanBoogie]: https://icanboogie.org/
 [ICanBoogie/Routing]: https://github.com/ICanBoogie/Routing
-[Route]: lib/Attribute/Route.php
-[Get]: lib/Attribute/Get.php
 [ActionResponder]: lib/Attribute/ActionResponder.php
+[icanboogie/routing]: https://github.com/ICanBoogie/Routing
+[olvlvl/composer-attribute-collector]: https://github.com/olvlvl/composer-attribute-collector

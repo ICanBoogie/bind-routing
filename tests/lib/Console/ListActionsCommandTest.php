@@ -16,9 +16,9 @@ final class ListActionsCommandTest extends CommandTestCase
                 ListActionsCommand::class,
                 [],
                 [
-                    'pages:about',
-                    'Test\ICanBoogie\Binding\Routing\Acme\PageController',
+                    'images:list',
                 ],
+                '/ImageController::list\s*\|/',
             ],
 
         ];

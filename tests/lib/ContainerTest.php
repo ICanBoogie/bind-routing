@@ -1,24 +1,17 @@
 <?php
 
-/*
- * This file is part of the ICanBoogie package.
- *
- * (c) Olivier Laviale <olivier.laviale@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Test\ICanBoogie\Binding\Routing;
 
 use ICanBoogie\Routing\ActionResponderProvider;
-use ICanBoogie\Responder\PingResponder;
+use ICanBoogie\Routing\Config;
+use ICanBoogie\Routing\MethodResponder;
 use ICanBoogie\Routing\RouteProvider;
 use ICanBoogie\Routing\UrlGenerator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Test\ICanBoogie\Binding\Routing\Acme\ArticleController;
+use Test\ICanBoogie\Binding\Routing\Acme\DanceSessionController;
 use Test\ICanBoogie\Binding\Routing\Acme\ImageController;
 use Test\ICanBoogie\Binding\Routing\Acme\PageController;
 use Test\ICanBoogie\Binding\Routing\Acme\SkillController;
@@ -46,8 +39,8 @@ final class ContainerTest extends TestCase
     {
         return [
 
-            [ 'test.action_responder_provider', ActionResponderProvider::class, ActionResponderProvider\Container::class ],
-            [ 'test.route_provider', RouteProvider::class, RouteProvider\Memoize::class ],
+            [ 'test.action_responder_provider', ActionResponderProvider::class, ActionResponderProvider\Chain::class ],
+            [ 'test.route_provider', RouteProvider::class, RouteProvider\Compiled::class ],
             [ 'test.url_generator', UrlGenerator::class, UrlGenerator\UrlGeneratorWithRouteProvider::class ],
 
         ];
@@ -58,10 +51,18 @@ final class ContainerTest extends TestCase
         $param = 'routing.action_responder.aliases';
         $actual = app()->service_for_id('service_container', ContainerInterface::class)->getParameter($param);
 
+        $this->assertEquals([ 'pages:about' => PageController::class ], $actual);
+    }
+
+    public function test_config(): void
+    {
+        $config = app()->config_for_class(Config::class);
+
         $this->assertEquals([
+            'articles:create' => ArticleController::class,
             'articles:list' => ArticleController::class,
             'articles:show' => ArticleController::class,
-            'articles:create' => ArticleController::class,
+            'dance-sessions:show' => DanceSessionController::class,
             'images:list' => ImageController::class,
             'images:show' => ImageController::class,
             'images:create' => ImageController::class,
@@ -72,11 +73,11 @@ final class ContainerTest extends TestCase
             'skills:create' => SkillController::class,
             'skills:update' => SkillController::class,
             'skills:delete' => SkillController::class,
-            'pages:about' => PageController::class,
-        ], $actual);
+        ], $config->controller_by_action);
     }
 
     /**
+     * @param non-empty-string $action
      * @param class-string $expected_class
      */
     #[DataProvider('provide_responder_provider')]
@@ -95,14 +96,14 @@ final class ContainerTest extends TestCase
     {
         return [
 
-            [ 'articles:list', ArticleController::class ],
-            [ 'articles:show', ArticleController::class ],
-            [ 'articles:create', ArticleController::class ],
+            [ 'articles:list', MethodResponder::class ],
+            [ 'articles:show', MethodResponder::class ],
+            [ 'articles:create', MethodResponder::class ],
             [ 'pages:about', PageController::class ],
-            [ 'images:list', ImageController::class ],
-            [ 'images:show', ImageController::class ],
-            [ 'skills:show', SkillController::class ],
-            [ 'skills:create', SkillController::class ],
+            [ 'images:list', MethodResponder::class ],
+            [ 'images:show', MethodResponder::class ],
+            [ 'skills:show', MethodResponder::class ],
+            [ 'skills:create', MethodResponder::class ],
 
         ];
     }

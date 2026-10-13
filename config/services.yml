@@ -5,23 +5,32 @@ services:
   _defaults:
     autowire: true
 
-  ICanBoogie\Routing\ActionResponderProvider:
-    class: ICanBoogie\Routing\ActionResponderProvider\Container
+  # Responders of the controllers tagged with 'action_responder'.
+  ICanBoogie\Routing\ActionResponderProvider\Container:
     arguments:
     - !tagged_locator { tag: action_responder }
     - '%routing.action_responder.aliases%'
+
+  ICanBoogie\Routing\ActionResponderProvider:
+    factory: [ ICanBoogie\Binding\Routing\ServiceFactory, action_responder_provider ]
+    arguments:
+    - '@ICanBoogie\Routing\Config'
+    - !tagged_locator { tag: routing.controller } # tagged by ControllerCompilerPass
+    - '@ICanBoogie\Routing\ActionResponderProvider\Container'
 
   ICanBoogie\Routing\RequestResponderProvider:
     tags:
     - { name: request_responder }
 
-  ICanBoogie\Routing\RouteProvider:
+  ICanBoogie\Routing\Config:
     factory: [ '@ICanBoogie\ConfigProvider', config_for_class ]
     arguments:
-    - ICanBoogie\Routing\RouteProvider
+      $class: ICanBoogie\Routing\Config
 
-  ICanBoogie\Routing\RouteProvider\Memoize:
-    decorates: ICanBoogie\Routing\RouteProvider
+  ICanBoogie\Routing\RouteProvider:
+    factory: [ ICanBoogie\Binding\Routing\ServiceFactory, route_provider ]
+    arguments:
+    - '@ICanBoogie\Routing\Config'
 
   ICanBoogie\Routing\UrlGenerator\UrlGeneratorWithRouteProvider: ~
 
@@ -36,6 +45,7 @@ services:
   ICanBoogie\Binding\Routing\Console\ListRoutesCommand:
     class: ICanBoogie\Binding\Routing\Console\ListRoutesCommand
     arguments:
+      $config: '@ICanBoogie\Routing\Config'
       $aliases: '%routing.action_responder.aliases%'
       $style: '%console.style.table%'
     tags:
@@ -44,6 +54,7 @@ services:
   ICanBoogie\Binding\Routing\Console\ListActionsCommand:
     class: ICanBoogie\Binding\Routing\Console\ListActionsCommand
     arguments:
+      $config: '@ICanBoogie\Routing\Config'
       $aliases: '%routing.action_responder.aliases%'
       $style: '%console.style.table%'
     tags:

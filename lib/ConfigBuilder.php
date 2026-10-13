@@ -2,95 +2,85 @@
 
 namespace ICanBoogie\Binding\Routing;
 
-use ICanBoogie\Binding\Routing\Attribute\Route;
+use Closure;
 use ICanBoogie\Config\Builder;
-use ICanBoogie\Routing\RouteCollector;
-use ICanBoogie\Routing\RouteProvider;
+use ICanBoogie\Routing\CacheStrategy;
+use ICanBoogie\Routing\Config;
+use ICanBoogie\Routing\ConfigBuilder as RoutingConfigBuilder;
+use ICanBoogie\Routing\Exception\ConfigNotValid;
+use ICanBoogie\Routing\RouteBuilder;
 use LogicException;
-use olvlvl\ComposerAttributeCollector\Attributes;
-use olvlvl\ComposerAttributeCollector\TargetClass;
-use olvlvl\ComposerAttributeCollector\TargetMethod;
-
-use function class_exists;
-use function ICanBoogie\iterable_to_dictionary;
-use function sprintf;
 
 /**
  * A config builder for 'routes' fragments.
  *
- * @implements Builder<RouteProvider>
+ * It wraps {@see RoutingConfigBuilder} to make it a config builder. The cache strategy is up to the configuration
+ * file: use {@see CacheStrategy::COMPILE} in production, the configuration is cached as a PHP file, so the work is
+ * done once, when the configuration is built, and not by every request, and {@see CacheStrategy::MEMOIZE} in
+ * development.
+ *
+ * @implements Builder<Config>
  */
-final class ConfigBuilder extends RouteCollector implements Builder
+final readonly class ConfigBuilder implements Builder
 {
     public static function get_fragment_filename(): string
     {
         return 'routes';
     }
 
-    public function build(): RouteProvider
+    private RoutingConfigBuilder $builder;
+
+    public function __construct()
     {
-        return $this->collect();
+        $this->builder = new RoutingConfigBuilder();
+    }
+
+    public function build(): Config
+    {
+        return $this->builder->build();
     }
 
     /**
-     * Configures using {@link Route} attributes.
+     * @param class-string $controller
+     * @param (Closure(RouteBuilder): mixed)|null $route_builder
      *
      * @return $this
+     *
+     * @throws ConfigNotValid
+     *
+     * @see RoutingConfigBuilder::add_controller()
      */
-    public function use_attributes(): self
+    public function add_controller(string $controller, ?Closure $route_builder = null): self
     {
-        if (!class_exists(Attributes::class)) {
-            throw new LogicException(
-                sprintf(
-                    "Unable configure using attributes, the class %s is not available",
-                    Attributes::class
-                )
-            );
-        }
-
-        $route_by_class = $this->build_route_by_class();
-        $target_methods = $this->get_target_methods();
-
-        foreach ($target_methods as $method) {
-            $prefix = $route_by_class[$method->class]->pattern ?? '';
-
-            $attribute = $method->attribute;
-            $pattern = $prefix . $attribute->pattern;
-            $action = $attribute->action
-                ?? ActionResolver::resolve_action($method->class, $method->name);
-
-            $this->route(
-                pattern: $pattern,
-                action: $action,
-                methods: $attribute->methods,
-                id: $attribute->id
-            );
-        }
+        $this->builder->add_controller($controller, $route_builder);
 
         return $this;
     }
 
     /**
-     * @return array<TargetMethod<Route>>
+     * @return $this
+     *
+     * @throws ConfigNotValid
+     * @throws LogicException if the attribute collector is not available.
+     *
+     * @see RoutingConfigBuilder::discover_controllers()
      */
-    private function get_target_methods(): array
+    public function discover_controllers(): self
     {
-        /** @phpstan-ignore-next-line */
-        return Attributes::filterTargetMethods(
-            Attributes::predicateForAttributeInstanceOf(Route::class)
-        );
+        $this->builder->discover_controllers();
+
+        return $this;
     }
 
     /**
-     * @return array<class-string, Route>
+     * @return $this
+     *
+     * @see RoutingConfigBuilder::cache_strategy()
      */
-    private function build_route_by_class(): array
+    public function cache_strategy(CacheStrategy $strategy): self
     {
-        // @phpstan-ignore-next-line
-        return iterable_to_dictionary(
-            Attributes::findTargetClasses(Route::class),
-            fn(TargetClass $t): string => $t->name,
-            fn(TargetClass $t): Route => $t->attribute,
-        );
+        $this->builder->cache_strategy($strategy);
+
+        return $this;
     }
 }

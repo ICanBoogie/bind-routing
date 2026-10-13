@@ -2,50 +2,52 @@
 
 namespace Test\ICanBoogie\Binding\Routing\Acme;
 
-use ICanBoogie\Binding\Routing\Attribute\Delete;
-use ICanBoogie\Binding\Routing\Attribute\Get;
-use ICanBoogie\Binding\Routing\Attribute\Post;
-use ICanBoogie\Binding\Routing\Attribute\Put;
-use ICanBoogie\Binding\Routing\Attribute\Route;
-use ICanBoogie\Routing\Controller\ActionTrait;
-use ICanBoogie\Routing\ControllerAbstract;
+use ICanBoogie\HTTP\Response;
+use ICanBoogie\Routing\Attribute\Delete;
+use ICanBoogie\Routing\Attribute\Get;
+use ICanBoogie\Routing\Attribute\Post;
+use ICanBoogie\Routing\Attribute\Prefix;
+use ICanBoogie\Routing\Attribute\Put;
 
 /**
- * This use case demonstrates how the {@link Route} attribute can be used to prefix HTTP methods.
+ * This use case demonstrates how the {@see Prefix} attribute can be used to prefix HTTP methods.
  */
-#[Route('/skills')]
-final class SkillController extends ControllerAbstract
+#[Prefix(pattern: '/skills')]
+final class SkillController
 {
-    use ActionTrait;
-
     /**
      * This should create a route with pattern `/skills`.
      */
     #[Get]
-    protected function list(): void
+    public function list(): Response
     {
+        return new Response();
     }
 
     /**
      * This should create a route with pattern `/skills/:slug.html`.
      */
     #[Get('/:slug.html')]
-    protected function show(string $slug): void
+    public function show(string $slug): Response
     {
+        return new Response();
     }
 
     #[Post]
-    protected function create(): void
+    public function create(): Response
     {
+        return new Response();
     }
 
     #[Put('/:id')]
-    protected function update(int $id): void
+    public function update(int $id): Response
     {
+        return new Response();
     }
 
     #[Delete('/:id')]
-    protected function delete(int $id): void
+    public function delete(int $id): Response
     {
+        return new Response();
     }
 }
