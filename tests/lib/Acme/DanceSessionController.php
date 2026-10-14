@@ -7,7 +7,7 @@ use ICanBoogie\Routing\Attribute\Get;
 
 final class DanceSessionController
 {
-    #[Get('/dance-sessions/:slug.html', 'dance-sessions:show')]
+    #[Get('/dance-sessions/:slug.html', 'dance-session:show')]
     public function show(string $slug): Response
     {
         return new Response();

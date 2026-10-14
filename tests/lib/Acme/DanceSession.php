@@ -4,8 +4,9 @@ namespace Test\ICanBoogie\Binding\Routing\Acme;
 
 use ICanBoogie\Binding\Routing\Prototype\UrlTrait;
 use ICanBoogie\Prototyped;
+use olvlvl\ComposerAttributeCollector\InheritsAttributes;
 
-#[NoopAttribute]
+#[InheritsAttributes]
 final class DanceSession extends Prototyped
 {
     use UrlTrait;

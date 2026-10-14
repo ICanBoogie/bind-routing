@@ -1,11 +1,10 @@
 # CHANGELOG
 
-## v7.0
+## v7.0.0
 
 ### New Requirements
 
 - PHP 8.4+
-- icanboogie/inflector 4.0+
 
 ### New features
 
@@ -30,6 +29,10 @@
   level `#[Route('/prefix')]` becomes `#[Prefix(route: '/prefix')]`.
 - Removed `ActionResolver` and `ActionResponderCompilerPass`. The action is now inferred by
   `ICanBoogie\Routing\ActionResolver`: the method name is used as is.
+- The `url` prototype method no longer pluralizes the name of the model to find the action: it uses
+  `ICanBoogie\Routing\ActionResolver`, as for controllers, and `Article::$url` is the route `article:show`, not
+  `articles:show`. Name the action of the controller accordingly. The package no longer requires
+  `icanboogie/inflector`.
 - Controllers using the attributes are stateless (not `ControllerAbstract`), they no longer get tagged with
   `action_responder` and `action_alias` automatically. Legacy controllers must be tagged by hand.
 
@@ -42,7 +45,7 @@ None
 - Sort Actions and Routes in console
 
 
-## v6.0
+## v6.0.0
 
 ### New Requirements
 

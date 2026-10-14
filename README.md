@@ -1,8 +1,8 @@
 # bind-routing
 
-[![Release](https://img.shields.io/packagist/v/icanboogie/bind-rounting.svg)](https://packagist.org/packages/icanboogie/bind-rounting)
-[![Code Coverage](https://coveralls.io/repos/github/ICanBoogie/bind-rounting/badge.svg?branch=6.0)](https://coveralls.io/r/ICanBoogie/bind-rounting?branch=6.0)
-[![Downloads](https://img.shields.io/packagist/dt/icanboogie/bind-rounting.svg)](https://packagist.org/packages/icanboogie/bind-rounting)
+[![Release](https://img.shields.io/packagist/v/icanboogie/bind-routing.svg)](https://packagist.org/packages/icanboogie/bind-routing)
+[![Code Coverage](https://coveralls.io/repos/github/ICanBoogie/bind-routing/badge.svg?branch=7.0)](https://coveralls.io/r/ICanBoogie/bind-routing?branch=7.0)
+[![Downloads](https://img.shields.io/packagist/dt/icanboogie/bind-routing.svg)](https://packagist.org/packages/icanboogie/bind-routing)
 
 The **icanboogie/bind-routing** package binds [ICanBoogie/Routing][] to [ICanBoogie][]. It provides infrastructure to configure routes and responders, a trait to get URLs from objects, and commands to list routes and actions.
 
@@ -143,11 +143,11 @@ $routes = $config->routes;
 
 ## Continuous Integration
 
-The project is continuously tested by [GitHub actions](https://github.com/ICanBoogie/bind-rounting/actions).
+The project is continuously tested by [GitHub actions](https://github.com/ICanBoogie/bind-routing/actions).
 
-[![Tests](https://github.com/ICanBoogie/bind-rounting/actions/workflows/test.yml/badge.svg?branch=6.0)](https://github.com/ICanBoogie/bind-rounting/actions/workflows/test.yml)
-[![Static Analysis](https://github.com/ICanBoogie/bind-rounting/actions/workflows/static-analysis.yml/badge.svg?branch=6.0)](https://github.com/ICanBoogie/bind-rounting/actions/workflows/static-analysis.yml)
-[![Code Style](https://github.com/ICanBoogie/bind-rounting/actions/workflows/code-style.yml/badge.svg?branch=6.0)](https://github.com/ICanBoogie/bind-rounting/actions/workflows/code-style.yml)
+[![Tests](https://github.com/ICanBoogie/bind-routing/actions/workflows/test.yml/badge.svg?branch=7.0)](https://github.com/ICanBoogie/bind-routing/actions/workflows/test.yml)
+[![Static Analysis](https://github.com/ICanBoogie/bind-routing/actions/workflows/static-analysis.yml/badge.svg?branch=7.0)](https://github.com/ICanBoogie/bind-routing/actions/workflows/static-analysis.yml)
+[![Code Style](https://github.com/ICanBoogie/bind-routing/actions/workflows/code-style.yml/badge.svg?branch=7.0)](https://github.com/ICanBoogie/bind-routing/actions/workflows/code-style.yml)
 
 
 

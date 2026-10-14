@@ -16,7 +16,7 @@ final class ListActionsCommandTest extends CommandTestCase
                 ListActionsCommand::class,
                 [],
                 [
-                    'images:list',
+                    'image:list',
                 ],
                 '/ImageController::list\s*\|/',
             ],

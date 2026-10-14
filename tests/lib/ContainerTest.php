@@ -60,19 +60,19 @@ final class ContainerTest extends TestCase
 
         $this->assertEquals([
             'articles:create' => ArticleController::class,
-            'articles:list' => ArticleController::class,
-            'articles:show' => ArticleController::class,
-            'dance-sessions:show' => DanceSessionController::class,
-            'images:list' => ImageController::class,
-            'images:show' => ImageController::class,
-            'images:create' => ImageController::class,
-            'images:update' => ImageController::class,
-            'images:delete' => ImageController::class,
-            'skills:list' => SkillController::class,
-            'skills:show' => SkillController::class,
-            'skills:create' => SkillController::class,
-            'skills:update' => SkillController::class,
-            'skills:delete' => SkillController::class,
+            'article:list' => ArticleController::class,
+            'article:show' => ArticleController::class,
+            'dance-session:show' => DanceSessionController::class,
+            'image:list' => ImageController::class,
+            'image:show' => ImageController::class,
+            'image:create' => ImageController::class,
+            'image:update' => ImageController::class,
+            'image:delete' => ImageController::class,
+            'skill:list' => SkillController::class,
+            'skill:show' => SkillController::class,
+            'skill:create' => SkillController::class,
+            'skill:update' => SkillController::class,
+            'skill:delete' => SkillController::class,
         ], $config->controller_by_action);
     }
 
@@ -96,14 +96,14 @@ final class ContainerTest extends TestCase
     {
         return [
 
-            [ 'articles:list', MethodResponder::class ],
-            [ 'articles:show', MethodResponder::class ],
+            [ 'article:list', MethodResponder::class ],
+            [ 'article:show', MethodResponder::class ],
             [ 'articles:create', MethodResponder::class ],
             [ 'pages:about', PageController::class ],
-            [ 'images:list', MethodResponder::class ],
-            [ 'images:show', MethodResponder::class ],
-            [ 'skills:show', MethodResponder::class ],
-            [ 'skills:create', MethodResponder::class ],
+            [ 'image:list', MethodResponder::class ],
+            [ 'image:show', MethodResponder::class ],
+            [ 'skill:show', MethodResponder::class ],
+            [ 'skill:create', MethodResponder::class ],
 
         ];
     }

@@ -3,14 +3,13 @@
 namespace ICanBoogie\Binding\Routing\Prototype;
 
 use ICanBoogie\Binding\Prototype\ConfigBuilder;
+use ICanBoogie\Routing\ActionResolver;
 use ICanBoogie\Routing\Route;
 use ICanBoogie\Routing\RouteMaker;
 use ICanBoogie\Routing\UrlGenerator;
-use ICanBoogie\StaticInflector;
 use olvlvl\ComposerAttributeCollector\Attributes;
 use RuntimeException;
 
-use function basename;
 use function ICanBoogie\Service\ref;
 
 final class UrlMethod
@@ -46,6 +45,7 @@ final class UrlMethod
     }
 
     /**
+     * @param non-empty-string $unqualified_action
      * @param array<string, mixed>|object|null $query_params
      *     Parameters for the query string.
      */
@@ -59,6 +59,11 @@ final class UrlMethod
         return $this->generator->generate_url($action, $caller, $query_params);
     }
 
+    /**
+     * @param non-empty-string $unqualified_action
+     *
+     * @return non-empty-string
+     */
     private function resolve_action(object $caller, string $unqualified_action): string
     {
         static $cache = [];
@@ -69,10 +74,16 @@ final class UrlMethod
         return $cache[$key] ??= self::make_action($caller, $unqualified_action);
     }
 
+    /**
+     * The action is inferred the way the routing does for controllers, the model `Article` is
+     * `article:show`.
+     *
+     * @param non-empty-string $unqualified_action
+     *
+     * @return non-empty-string
+     */
     private function make_action(object $caller, string $unqualified_action): string
     {
-        $base = basename(StaticInflector::hyphenate($caller::class));
-
-        return StaticInflector::pluralize($base) . Route::ACTION_SEPARATOR . $unqualified_action;
+        return ActionResolver::resolve($caller::class, $unqualified_action);
     }
 }

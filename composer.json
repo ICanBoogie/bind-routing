@@ -7,8 +7,7 @@
     "icanboogie"
   ],
   "homepage": "https://icanboogie.org/",
-  "license": "MIT",
-  "version": "7.0",
+  "license": "BSD-3-Clause",
   "authors": [
     {
       "name": "Olivier Laviale",
@@ -22,6 +21,9 @@
     "source": "https://github.com/ICanBoogie/bind-routing"
   },
   "config": {
+    "platform": {
+      "php": "8.4.1"
+    },
     "sort-packages": true,
     "allow-plugins": {
       "icanboogie/autoconfig": true,
@@ -33,14 +35,14 @@
   "require": {
     "php": ">=8.4",
     "icanboogie/icanboogie": "^7.0",
-    "icanboogie/inflector": "^4.0",
     "icanboogie/routing": "^7.0"
   },
   "require-dev": {
+    "composer/pcre": "^3.2",
     "icanboogie/console": "^7.0",
     "olvlvl/composer-attribute-collector": "^3.0",
-    "phpstan/phpstan": "^2.0",
-    "phpunit/phpunit": "^11.4"
+    "phpstan/phpstan": "^2.3",
+    "phpunit/phpunit": "^13.4"
   },
   "autoload": {
     "psr-4": {
@@ -59,7 +61,7 @@
     "icanboogie": {
       "config-path": "config",
       "config-constructor": {
-        "ICanBoogie\\Routing\\Config": "ICanBoogie\\Binding\\Routing\\ConfigBuilder"
+        "ICanBoogie\\Routing\\Config": "ICanBoogie\\Routing\\ConfigBuilder"
       }
     },
     "composer-attribute-collector": {

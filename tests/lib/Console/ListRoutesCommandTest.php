@@ -18,7 +18,7 @@ final class ListRoutesCommandTest extends CommandTestCase
                 [
                     'GET',
                     '/images.html',
-                    'images:list',
+                    'image:list',
                     ' ',
                 ],
                 '/ImageController::list\s*\|/',
