@@ -8,8 +8,8 @@
 
 ### New features
 
-- Adapted to the new routing config. `ConfigBuilder` wraps `ICanBoogie\Routing\ConfigBuilder` and builds a
-  `ICanBoogie\Routing\Config`: use `add_controller()`, `discover_controllers()` and `cache_strategy()`. Use
+- Adapted to the new routing config. `ICanBoogie\Routing\ConfigBuilder` builds a
+  `ICanBoogie\Routing\Config`: use `add_controller()`, `enable_discovery()` and `cache_strategy()`. Use
   `CacheStrategy::COMPILE` in production, so the config can be cached as a PHP file, and `CacheStrategy::MEMOIZE` in
   development.
 - The services `ICanBoogie\Routing\Config` and `ICanBoogie\Routing\RouteProvider` (`Config::$routes`) are provided.
@@ -21,6 +21,8 @@
 
 ### Backward Incompatible Changes
 
+- Removed `ICanBoogie\Binding\Routing\ConfigBuilder`; `routes` fragments now receive `ICanBoogie\Routing\ConfigBuilder`, which
+  implements `ICanBoogie\Config\Builder`.
 - `ConfigBuilder` no longer extends `RouteCollector`: `route()`, `get()`, `resource()`, `use_attributes()` etc. are
   gone. Routes are defined by controllers.
 - The configuration is a `Config` instead of a `RouteProvider`; the `routes` fragment builder is registered for
@@ -43,6 +45,7 @@ None
 ### Other Changes
 
 - Sort Actions and Routes in console
+- Require `composer/pcre` ^3.2 for development, to avoid the PHP 8.4 deprecations of the older versions that `composer/class-map-generator` allows.
 
 
 ## v6.0.0

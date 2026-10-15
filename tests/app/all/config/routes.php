@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-use ICanBoogie\Binding\Routing\ConfigBuilder;
+use ICanBoogie\Routing\ConfigBuilder;
 use ICanBoogie\Routing\CacheStrategy;
 
 return fn(ConfigBuilder $config) => $config
-    ->discover_controllers()
+    ->enable_discovery()
     ->cache_strategy(CacheStrategy::COMPILE);

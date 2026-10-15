@@ -66,11 +66,11 @@ Controllers are discovered with [olvlvl/composer-attribute-collector][], and reg
 
 namespace App;
 
-use ICanBoogie\Binding\Routing\ConfigBuilder;
+use ICanBoogie\Routing\ConfigBuilder;
 use ICanBoogie\Routing\CacheStrategy;
 
 return fn(ConfigBuilder $config) => $config
-    ->discover_controllers()
+    ->enable_discovery()
     // Meant for production, use CacheStrategy::MEMOIZE in development.
     ->cache_strategy(CacheStrategy::COMPILE);
 ```
@@ -81,7 +81,7 @@ controller must be tagged with `routing.controller`, so it can be obtained from 
 ```php
 <?php
 
-use ICanBoogie\Binding\Routing\ConfigBuilder;
+use ICanBoogie\Routing\ConfigBuilder;
 use ICanBoogie\Routing\RouteBuilder;
 
 return fn(ConfigBuilder $config) => $config
