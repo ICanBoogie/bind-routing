@@ -21,6 +21,7 @@
 
 ### Backward Incompatible Changes
 
+- `UrlMethod::bind()` takes an `ICanBoogie\Prototype\ConfigBuilder`, since `ICanBoogie\Binding\Prototype\ConfigBuilder` is gone.
 - Removed `ICanBoogie\Binding\Routing\ConfigBuilder`; `routes` fragments now receive `ICanBoogie\Routing\ConfigBuilder`, which
   implements `ICanBoogie\Config\Builder`.
 - `ConfigBuilder` no longer extends `RouteCollector`: `route()`, `get()`, `resource()`, `use_attributes()` etc. are
@@ -88,7 +89,7 @@ The prototype bindings can be inferred from the `UrlGetter` attribute (defined b
 
 // config/prototype.php
 
-use ICanBoogie\Binding\Prototype\ConfigBuilder;
+use ICanBoogie\Prototype\ConfigBuilder;
 use ICanBoogie\Binding\Routing\Prototype\UrlMethod;
 
 return fn(ConfigBuilder $config) => UrlMethod::bind($config);

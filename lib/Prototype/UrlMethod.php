@@ -2,7 +2,7 @@
 
 namespace ICanBoogie\Binding\Routing\Prototype;
 
-use ICanBoogie\Binding\Prototype\ConfigBuilder;
+use ICanBoogie\Prototype\ConfigBuilder;
 use ICanBoogie\Routing\ActionResolver;
 use ICanBoogie\Routing\Route;
 use ICanBoogie\Routing\RouteMaker;

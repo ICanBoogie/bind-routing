@@ -11,7 +11,7 @@
 
 namespace Test\ICanBoogie\Binding\Routing\Prototype;
 
-use ICanBoogie\Binding\Prototype\ConfigBuilder;
+use ICanBoogie\Prototype\ConfigBuilder;
 use ICanBoogie\Binding\Routing\Prototype\UrlMethod;
 use ICanBoogie\Routing\RouteMaker;
 use PHPUnit\Framework\TestCase;
