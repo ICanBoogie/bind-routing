@@ -17,6 +17,14 @@ services:
     - '@ICanBoogie\Routing\Config'
     - !tagged_locator { tag: routing.controller } # tagged by ControllerCompilerPass
     - '@ICanBoogie\Routing\ActionResponderProvider\Container'
+    - '@ICanBoogie\Routing\MiddlewareCollection'
+
+  # The middleware wrapping the responders. The first one is the closest to the endpoint, use the `priority` of the
+  # tag to order them, the highest first. Services implementing `Middleware` are tagged when autoconfigured, see
+  # `MiddlewareCompilerPass`.
+  ICanBoogie\Routing\MiddlewareCollection:
+    arguments:
+      $middleware: !tagged_iterator { tag: routing.middleware }
 
   ICanBoogie\Routing\RequestResponderProvider:
     tags:

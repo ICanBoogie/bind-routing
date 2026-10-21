@@ -100,6 +100,51 @@ In development, use `CacheStrategy::MEMOIZE`.
 
 
 
+## Middleware
+
+Middleware, see [icanboogie/routing][], wraps the responders, e.g. to require authentication. A
+service implementing `ICanBoogie\Routing\Middleware` is tagged with `routing.middleware` when it is
+registered with `autoconfigure: true`, and collected by the
+`ICanBoogie\Routing\MiddlewareCollection` service, which wraps the responders provided by the
+`ActionResponderProvider` service. There is nothing else to configure:
+
+```php
+<?php
+
+namespace App\Presentation\HTTP;
+
+use ICanBoogie\HTTP\Responder;
+use ICanBoogie\Routing\Middleware;
+
+final class RequireAuthentication implements Middleware
+{
+    public function responder(Responder $next): Responder
+    {
+        // …
+    }
+}
+```
+
+```yaml
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Presentation\HTTP\RequireAuthentication: ~
+```
+
+Without `autoconfigure`, tag the service with `routing.middleware` yourself. The first middleware is the closest to the
+endpoint, each following one wraps the previous. Order them with the `priority` of the tag, the highest first:
+
+```yaml
+services:
+  App\Presentation\HTTP\RequireAuthentication:
+    tags: [ { name: routing.middleware, priority: 10 } ]
+```
+
+
+
 ## Legacy controllers
 
 Controllers extending `ControllerAbstract` still work, but they have to be registered and tagged with

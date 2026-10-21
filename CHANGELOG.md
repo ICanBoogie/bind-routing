@@ -15,9 +15,11 @@
 - The services `ICanBoogie\Routing\Config` and `ICanBoogie\Routing\RouteProvider` (`Config::$routes`) are provided.
 - `ControllerCompilerPass` registers the controllers found through `ICanBoogie\Routing\Attribute\Route` as shared
   services. A controller added without attributes must be tagged with `routing.controller`.
-- The `ActionResponderProvider` service is a `Chain` of `FromConfig` and the legacy provider, which responds for
-  controllers tagged with `action_responder`.
-- `routing:routes` and `routing:actions` list the controllers of the config.
+- The `ActionResponderProvider` service is a `WithMiddleware` around a `Chain` of `FromConfig` and the legacy provider,
+  which responds for controllers tagged with `action_responder`.
+- Added the `ICanBoogie\Routing\MiddlewareCollection` service, which collects the services tagged with
+  `routing.middleware` and wraps the responders. `MiddlewareCompilerPass` tags the services implementing
+  `ICanBoogie\Routing\Middleware` when they are autoconfigured, so an application only has to register its middleware.- `routing:routes` and `routing:actions` list the controllers of the config.
 
 ### Backward Incompatible Changes
 

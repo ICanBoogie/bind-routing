@@ -5,6 +5,7 @@ namespace Test\ICanBoogie\Binding\Routing;
 use ICanBoogie\Routing\ActionResponderProvider;
 use ICanBoogie\Routing\Config;
 use ICanBoogie\Routing\MethodResponder;
+use ICanBoogie\Routing\MiddlewareCollection;
 use ICanBoogie\Routing\RouteProvider;
 use ICanBoogie\Routing\UrlGenerator;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -14,6 +15,8 @@ use Test\ICanBoogie\Binding\Routing\Acme\ArticleController;
 use Test\ICanBoogie\Binding\Routing\Acme\DanceSessionController;
 use Test\ICanBoogie\Binding\Routing\Acme\ImageController;
 use Test\ICanBoogie\Binding\Routing\Acme\PageController;
+use Test\ICanBoogie\Binding\Routing\Acme\PriorityResponder;
+use Test\ICanBoogie\Binding\Routing\Acme\ProbeResponder;
 use Test\ICanBoogie\Binding\Routing\Acme\SkillController;
 
 use function ICanBoogie\app;
@@ -39,7 +42,12 @@ final class ContainerTest extends TestCase
     {
         return [
 
-            [ 'test.action_responder_provider', ActionResponderProvider::class, ActionResponderProvider\Chain::class ],
+            [
+                'test.action_responder_provider',
+                ActionResponderProvider::class,
+                ActionResponderProvider\WithMiddleware::class
+            ],
+            [ 'test.middleware_collection', MiddlewareCollection::class, MiddlewareCollection::class ],
             [ 'test.route_provider', RouteProvider::class, RouteProvider\Compiled::class ],
             [ 'test.url_generator', UrlGenerator::class, UrlGenerator\UrlGeneratorWithRouteProvider::class ],
 
@@ -86,7 +94,33 @@ final class ContainerTest extends TestCase
         $responder_provider = app()->service_for_id('test.action_responder_provider', ActionResponderProvider::class);
         $responder = $responder_provider->responder_for_action($action);
 
-        $this->assertInstanceOf($expected_class, $responder);
+        // The responders are wrapped by the middleware, `ProbeMiddleware` is autoconfigured.
+        $this->assertInstanceOf(ProbeResponder::class, $responder);
+        $this->assertInstanceOf(PriorityResponder::class, $responder->next);
+        $this->assertInstanceOf($expected_class, $responder->next->next);
+    }
+
+    /**
+     * `PriorityMiddleware` is autoconfigured and tagged by hand, it wraps the responder once: the highest priority is
+     * the closest to the endpoint, and `ProbeMiddleware`, with the default priority, wraps it.
+     */
+    public function test_middleware_wraps_once(): void
+    {
+        $responder_provider = app()->service_for_id('test.action_responder_provider', ActionResponderProvider::class);
+        $responder = $responder_provider->responder_for_action('pages:about');
+
+        $this->assertInstanceOf(ProbeResponder::class, $responder);
+        $this->assertInstanceOf(PriorityResponder::class, $responder->next);
+        $this->assertNotInstanceOf(PriorityResponder::class, $responder->next->next);
+    }
+
+    public function test_responder_provider_has_no_responder_for_an_unknown_action(): void
+    {
+        $responder_provider = app()->service_for_id('test.action_responder_provider', ActionResponderProvider::class);
+
+        $actual = $responder_provider->responder_for_action('unknown:action');
+
+        $this->assertNull($actual);
     }
 
     /**

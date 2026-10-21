@@ -1,10 +1,22 @@
+# yaml-language-server: $schema=../../../../vendor/symfony/dependency-injection/Loader/schema/services.schema.json
 services:
   _defaults:
     public: true
     autowire: true
+    autoconfigure: true
 
 # Controllers with route attributes are discovered, they don't need to be registered. PageController is a legacy
 # responder, it is tagged.
+
+# Middleware is not tagged, it's autoconfigured.
+
+  Test\ICanBoogie\Binding\Routing\Acme\ProbeMiddleware: ~
+
+  # Autoconfigured and tagged, the service ends up with two `routing.middleware` tags. The highest priority is the
+  # closest to the endpoint.
+  Test\ICanBoogie\Binding\Routing\Acme\PriorityMiddleware:
+    tags:
+    - { name: routing.middleware, priority: 10 }
 
   Test\ICanBoogie\Binding\Routing\Acme\PageController:
     tags:
@@ -13,6 +25,9 @@ services:
 
   test.action_responder_provider:
     alias: ICanBoogie\Routing\ActionResponderProvider
+
+  test.middleware_collection:
+    alias: ICanBoogie\Routing\MiddlewareCollection
 
   test.route_provider:
     alias: ICanBoogie\Routing\RouteProvider
